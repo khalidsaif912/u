@@ -121,7 +121,6 @@ body {
 .badges { display: none !important; }
 
 /* ====== المودالات ====== */
-/* النوافذ المنبثقة */
 .modal-backdrop {
   position: fixed;
   inset: 0;
@@ -130,7 +129,7 @@ body {
   display: none;
   align-items: center;
   justify-content: center;
-  z-index: 200; /* فوق كل العناصر */
+  z-index: 200;
 }
 .modal-backdrop.active { display: flex !important; }
 
@@ -143,26 +142,22 @@ body {
   box-shadow: 0 10px 30px rgba(0,0,0,0.5);
   animation: popIn 0.25s ease;
 }
-
 .modal h3 {
   margin: 0 0 16px;
   font-size: 20px;
   text-align: center;
   color: var(--accent);
 }
-
 .modal p {
   text-align: center;
   color: var(--muted);
   margin-bottom: 18px;
 }
-
 .modal .actions {
   display: flex;
   gap: 12px;
   justify-content: center;
 }
-
 .modal .btn {
   flex: 1;
   padding: 12px 16px;
@@ -170,7 +165,6 @@ body {
   border-radius: 12px;
   font-weight: bold;
 }
-
 .modal .btn-danger {
   background: linear-gradient(135deg, #e74c3c, #b93a2d);
   color: #fff;
