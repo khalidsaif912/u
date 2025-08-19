@@ -34,19 +34,36 @@
       border-radius:16px; padding: 8px 16px; box-shadow: 0 6px 20px rgba(0,0,0,0.25);
       position: relative; user-select: none; border: 1px solid rgba(255, 255, 255, 0.1);
     }
-    .card-body { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; }
-    .score-area { 
-      display: flex; 
-      align-items: center; 
-      justify-content: center; 
-      position: relative;
-    }
-    .score-card {
-      background-color: rgba(0,0,0,0.2); border-radius: 8px; padding: 12px 8px;
-      font-size: 36px; font-weight: 900; text-align: center; width: 60px;
-      border: 1px solid rgba(255,255,255,0.1); box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
-      cursor: pointer; position: relative; z-index: 1;
-    }
+  .card-body { 
+    display: grid; 
+    grid-template-columns: 1fr auto 1fr; 
+    align-items: center; 
+    gap: 12px; 
+  }
+
+    /* الهامش بين الرقم وحد البطاقة */
+  .score-area { 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    position: relative;
+    margin: 0 10px; /* نفس التباعد الجانبي للميداليات */
+  }
+
+  .score-card {
+    background-color: rgba(0,0,0,0.2); 
+    border-radius: 8px; 
+    padding: 12px 8px;
+    font-size: 36px; 
+    font-weight: 900; 
+    text-align: center; 
+    width: 60px;
+    border: 1px solid rgba(255,255,255,0.1); 
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+    cursor: pointer; 
+    position: relative; 
+    z-index: 1;
+  }
     .arrow-group { 
       position: absolute; 
       top: 0; 
@@ -73,8 +90,19 @@
     }
     .center-col { text-align: center; }
     .emoji { font-size: 52px; line-height: 1; cursor: pointer; }
-    .name { margin-top:8px; font-weight:bold; font-size:18px; direction: ltr; text-align: center; unicode-bidi: plaintext; }
-    .badges { display: flex; justify-content: space-between; gap: 8px; margin-top: 12px; font-size: 28px; min-height: 32px; padding: 0 10px; }
+
+ .name { 
+    margin-top:8px; 
+    font-weight:bold; 
+    font-size:18px; 
+    direction: ltr; 
+    text-align: center; 
+    unicode-bidi: plaintext; 
+
+  /* نشيل الميداليات والكؤوس من أسفل الاسم */
+  .badges { 
+    display: none !important; 
+  }
     .modal-backdrop{ position:fixed; inset:0; background:rgba(0,0,0,.45); backdrop-filter: blur(5px); display:none; align-items:center; justify-content:center; z-index:110; }
     .modal{ width:min(92vw,560px); background:#151935; border:1px solid #2a3257; border-radius:18px; padding:18px; }
     .modal h3{ margin:0 0 16px; text-align: center; }
