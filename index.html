@@ -92,10 +92,12 @@
 
 .emoji {
   position: relative;
-  width: 100px;   /* عرض الحاوية */
-  height: 100px;  /* ارتفاع الحاوية */
-  margin: 0 auto; /* وسط */
+  width: 100px;   /* حجم الحاوية (ممكن تغير الرقم) */
+  height: 100px;
+  margin: 0 auto;
+  z-index: 10; /* يخليها فوق */
 }
+
  .name { 
     margin-top:8px; 
     font-weight:bold; 
@@ -108,7 +110,7 @@
   .badges { 
     display: none !important; 
   }
-  
+
 .modal-backdrop {
   position: fixed;
   inset: 0;
@@ -164,14 +166,16 @@
 /* صور اللاعبين (أفاتار) */
 .avatar {
   position: absolute;
-  top: 50%; 
+  top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); /* يثبتها من الوسط */
-  width: 80px;   /* حجم الصورة */
-  height: 80px;  /* حجم الصورة */
+  transform: translate(-50%, -50%);
+  width: 90px;   /* حجم الصورة */
+  height: 90px;
   object-fit: cover;
   border-radius: 50%;
-  border: 2px solid #fff;
+  border: 3px solid #fff;
+  z-index: 999; /* فوق الكل */
+  pointer-events: none; /* عشان ما تغطي على الأزرار */
 }
 
     
