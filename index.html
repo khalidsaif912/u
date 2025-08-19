@@ -4,74 +4,715 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UNO Live – by Mr.K</title>
-  <link rel="stylesheet" href="style.css">
+  <style>
+    :root {
+      --bg:#0f1220; 
+      --card-bg:#171a2b; 
+      --text:#e8ecff; 
+      --muted:#9aa3c7; 
+      --accent:#7aa2ff;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg); }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--text);
+      background-attachment: fixed;
+      transition: background 0.5s ease;
+    }
+
+    .wrap { max-width: 600px; margin: 0 auto; padding: 16px; padding-bottom: 100px; }
+
+    /* الهيدر */
+    .header {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+      margin: 0 auto 12px;
+      max-width: 600px;
+      height: 120px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .header .title {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(0,0,0,0.4);
+      padding: 4px 10px;
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .title .badge {
+      font-size: 11px; 
+      color: var(--text); 
+      background: rgba(255,255,255,0.1);
+      padding: 2px 8px; 
+      border-radius: 999px;
+    }
+
+    /* الكروت */
+    .grid { display: flex; flex-direction: column; gap: 12px; }
+    .card {
+      border-radius:16px; 
+      padding: 16px; 
+      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+      position: relative; 
+      user-select: none; 
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    .card-body {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* الأرقام */
+    .score-area { 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      position: relative; 
+    }
+    .score-card {
+      background-color: rgba(0,0,0,0.2);
+      border-radius: 8px;
+      padding: 12px 8px;
+      font-size: 32px;
+      font-weight: 900;
+      text-align: center;
+      width: 60px;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+      cursor: pointer;
+      position: relative;
+      z-index: 1;
+    }
+    .arrow-group { 
+      position: absolute; 
+      top: 0; 
+      left: 0; 
+      right: 0; 
+      bottom: 0;
+      display: flex; 
+      flex-direction: column; 
+      justify-content: space-between;
+      z-index: 2; 
+      pointer-events: none;
+    }
+    .arrow {
+      width: 100%; 
+      height: 50%; 
+      display: grid; 
+      place-items: center; 
+      background: transparent; 
+      border: none;
+      user-select: none; 
+      cursor: pointer; 
+      font-size: 20px; 
+      color: transparent;
+      pointer-events: auto; 
+      transition: color 0.2s ease;
+    }
+    .arrow:hover { color: rgba(255,255,255,0.3); }
+    .arrow:active { color: rgba(255,255,255,0.5); }
+
+    /* الصورة + الاسم */
+    .center-col {
+      position: relative;
+      text-align: center;
+      padding-top: 140px;
+    }
+    .emoji {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 5;
+      cursor: pointer;
+    }
+    .avatar {
+      width: 120px; 
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover; 
+      background: #667eea;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 60px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+    }
+    .name {
+      margin: 0;
+      font-weight: bold;
+      font-size: 18px;
+      text-align: center;
+      color: var(--text);
+    }
+    .badges { display: none !important; }
+
+    /* المودالات */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.45);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+    }
+    .modal-backdrop.active { display: flex !important; }
+
+    .modal {
+      width: min(92vw, 500px);
+      background: rgba(20, 24, 48, 0.95);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      animation: popIn 0.25s ease;
+    }
+    .modal h3 {
+      margin: 0 0 16px;
+      font-size: 20px;
+      text-align: center;
+      color: var(--accent);
+    }
+    .modal p {
+      text-align: center;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+    .modal .actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+    .modal .btn {
+      flex: 1;
+      padding: 12px 16px;
+      font-size: 15px;
+      border-radius: 12px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+    .modal .btn-danger {
+      background: linear-gradient(135deg, #e74c3c, #b93a2d);
+      color: #fff;
+    }
+    .modal .btn-cancel {
+      background: rgba(255,255,255,0.08);
+      color: var(--text);
+    }
+    @keyframes popIn {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    /* نافذة معلومات الغرفة */
+    .room-info {
+      background: rgba(255,255,255,0.05);
+      border: 1px dashed rgba(255,255,255,0.25);
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 18px;
+      text-align: center;
+      box-shadow: inset 0 4px 12px rgba(0,0,0,0.25);
+    }
+    .room-info span {
+      display: block;
+      font-weight: bold;
+      font-size: 20px;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .room-info small {
+      display: block;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    /* الألعاب النارية */
+    #confetti-canvas {
+      position: fixed; 
+      top: 0; 
+      left: 0;
+      width: 100% !important; 
+      height: 100% !important;
+      pointer-events: none;
+      z-index: 120;
+      transition: opacity 0.3s;
+    }
+    #screen-flash {
+      position: fixed; 
+      top: 0; 
+      left: 0;
+      width: 100%; 
+      height: 100%;
+      pointer-events: none;
+      visibility: hidden; 
+      opacity: 0;
+      z-index: 121; 
+      background-color: white;
+      transition: opacity 0.5s ease-out;
+    }
+    #confetti-canvas.active, #screen-flash.active { 
+      visibility: visible; 
+      opacity: 1; 
+    }
+    #screen-flash.active { opacity: 0.7; }
+
+    /* الأزرار */
+    .btn {
+      border-radius: 999px; 
+      font-weight: bold; 
+      border: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: transform 0.2s ease; 
+      cursor: pointer; 
+      padding: 10px 14px;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    
+    .add-player-fab {
+      position: fixed; 
+      bottom: 20px; 
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #6c5ce7, #4a3ebc);
+      color: #fff; 
+      padding: 12px 22px;
+      font-size: 16px; 
+      font-weight: bold; 
+      border: none; 
+      border-radius: 999px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+      cursor: pointer;
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      gap: 8px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      z-index: 30;
+    }
+    .add-player-fab:hover {
+      transform: translateX(-50%) translateY(-3px);
+      box-shadow: 0 8px 22px rgba(0,0,0,0.4);
+    }
+    
+    .corner-btn {
+      position: fixed; 
+      bottom: 20px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: bold;
+      color: #fff;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      z-index: 30;
+    }
+    .corner-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+    }
+    #devInfoBtn { 
+      left: 20px; 
+      background: linear-gradient(135deg, #e74c3c, #b93a2d); 
+    }
+    #refreshBtn { 
+      right: 20px; 
+      background: linear-gradient(135deg, #3498db, #2a80b9); 
+    }
+
+    /* إضافات للمودالات الجديدة */
+    .modal input, .modal textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+      font-size: 16px;
+      margin-bottom: 16px;
+    }
+    
+    .modal input:focus, .modal textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    
+    .modal textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    #joinView, #roomManagementView {
+      display: none;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      color: var(--text);
+    }
+    
+    th, td {
+      padding: 8px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    th {
+      background: rgba(255,255,255,0.05);
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
 
   <div class="wrap">
+    <!-- البنر -->
+    <div id="header-container"></div>
 
-    <!-- 🔥 البنر -->
-    <div class="header">
-      <div class="title">
-        UNO Live <span class="badge">by MR.K</span>
-      </div>
+    <!-- الكروت -->
+    <div class="grid" id="players">
+      <!-- سيتم ملء اللاعبين هنا تلقائياً -->
     </div>
-
-    <!-- 🔥 الكروت -->
-    <div class="grid">
-      <div class="card">
-        <div class="card-body">
-          <div class="score-area">
-            <div class="score-card">0</div>
-            <div class="arrow-group">
-              <button class="arrow up">▲</button>
-              <button class="arrow down">▼</button>
-            </div>
-          </div>
-
-          <div class="center-col">
-            <!-- ✅ مسار الصورة الصحيح -->
-            <img class="avatar" src="images/player.png" alt="Player">
-            <div class="name">اللاعب 1</div>
-          </div>
-
-          <div class="score-area">
-            <div class="score-card">0</div>
-            <div class="arrow-group">
-              <button class="arrow up">▲</button>
-              <button class="arrow down">▼</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
   </div>
 
-  <!-- 🔥 زر إضافة لاعب -->
-  <button class="add-player-fab">➕ أضف لاعب</button>
+  <!-- زر إضافة لاعب -->
+  <button class="add-player-fab" id="addPlayerFab">➕ أضف لاعب</button>
 
-  <!-- 🔥 الأزرار الجانبية -->
+  <!-- الأزرار الجانبية -->
   <button id="devInfoBtn" class="corner-btn">MR.K</button>
   <button id="refreshBtn" class="corner-btn">⟳ تحديث</button>
 
-  <!-- 🔥 مودال مثال -->
+  <!-- مودال إدارة الغرفة -->
+  <div class="modal-backdrop" id="roomModal">
+    <div class="modal">
+      <h3>🎮 UNO Live</h3>
+      
+      <!-- عرض إدارة الغرفة -->
+      <div id="roomManagementView">
+        <div class="room-info" id="roomInfoBlock" style="display: none;">
+          <span id="modalRoomId">ROOM123</span>
+          <small id="roomStatus">مشرف</small>
+        </div>
+        
+        <div class="actions">
+          <button class="btn" id="showJoinView" style="background: var(--accent); color: white;">انضم لغرفة</button>
+          <button class="btn" id="openLog" style="background: #27ae60; color: white; display: none;">📊 السجل</button>
+        </div>
+        
+        <div class="actions" style="margin-top: 12px;">
+          <button class="btn" id="copyLinkBtn" style="background: #f39c12; color: white; display: none;">📋 نسخ الرابط</button>
+          <button class="btn btn-danger" id="closeRoomModal">إغلاق</button>
+        </div>
+      </div>
+
+      <!-- عرض الانضمام -->
+      <div id="joinView">
+        <input type="text" id="joinId" placeholder="رمز الغرفة">
+        <div class="actions">
+          <button class="btn" id="doJoin" style="background: var(--accent); color: white;">دخول</button>
+          <button class="btn" id="doCreate" style="background: #27ae60; color: white;">إنشاء غرفة</button>
+        </div>
+        <div class="actions" style="margin-top: 12px;">
+          <button class="btn btn-cancel" id="backToManagement">رجوع</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- مودال إضافة لاعب -->
+  <div class="modal-backdrop" id="addPlayerModal">
+    <div class="modal">
+      <h3>إضافة لاعبين</h3>
+      <textarea id="playerNamesInput" placeholder="اكتب أسماء اللاعبين (كل اسم في سطر منفصل أو افصل بمسافة)"></textarea>
+      <div class="actions">
+        <button class="btn" id="doAddPlayers" style="background: var(--accent); color: white;">إضافة</button>
+        <button class="btn btn-cancel" id="closeAddPlayerModal">إلغاء</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- مودال حذف اللاعب -->
   <div class="modal-backdrop" id="deleteModal">
     <div class="modal">
       <h3>حذف اللاعب</h3>
       <p>هل أنت متأكد أنك تريد حذف هذا اللاعب؟</p>
       <div class="actions">
-        <button class="btn btn-danger">حذف</button>
-        <button class="btn btn-cancel">إلغاء</button>
+        <button class="btn btn-danger" id="deletePlayerBtn">حذف اللاعب</button>
+        <button class="btn btn-cancel" id="closeDeleteModal">إلغاء</button>
+      </div>
+      <div class="actions" style="margin-top: 12px;">
+        <button class="btn" id="deleteAllBtn" style="background: #8e44ad; color: white;">حذف الجميع</button>
       </div>
     </div>
   </div>
 
-  <!-- 🔥 كانفس الألعاب النارية -->
+  <!-- مودال معلومات المطور -->
+  <div class="modal-backdrop" id="devInfoModal">
+    <div class="modal">
+      <h3>👨‍💻 معلومات المطور</h3>
+      <p>تطبيق UNO Live<br>تطوير: MR.K<br>نسخة محدثة ومحسنة</p>
+      <div class="actions">
+        <button class="btn btn-cancel" id="closeDevInfoModal">إغلاق</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- مودال السجل -->
+  <div class="modal-backdrop" id="logModal">
+    <div class="modal">
+      <h3>📊 سجل النقاط</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>التاريخ</th>
+            <th>الاسم</th>
+            <th>انتصارات</th>
+            <th>ميداليات</th>
+          </tr>
+        </thead>
+        <tbody id="logTbody">
+          <tr><td colspan="4">لا توجد سجلات</td></tr>
+        </tbody>
+      </table>
+      <div class="actions" style="margin-top: 16px;">
+        <button class="btn btn-cancel" id="closeLog">إغلاق</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- كانفس الألعاب النارية -->
   <canvas id="confetti-canvas"></canvas>
   <div id="screen-flash"></div>
 
   <!-- سكربت -->
-  <script src="script.js"></script>
-</body>
-</html>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
+    import { getDatabase, ref, set, onValue, update, get, child, remove } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBGuiMxffwcm_P8zY-I6hMUG1hUY1akpFA",
+      authDomain: "uno-game-live.firebaseapp.com",
+      databaseURL: "https://uno-game-live-default-rtdb.firebaseio.com",
+      projectId: "uno-game-live",
+      storageBucket: "uno-game-live.appspot.com",
+      messagingSenderId: "973862287578",
+      appId: "1:973862287578:web:0bac6d3788c78666e48de3"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    const qs = new URLSearchParams(location.search);
+    let roomId = qs.get("room") || localStorage.getItem("uno-room-id") || "";
+    let adminToken = qs.get("admin") || JSON.parse(localStorage.getItem("uno-admin-tokens") || '{}')[roomId];
+    let isAdmin = false;
+
+    const headerContainer = document.getElementById("header-container");
+    const playersEl = document.getElementById("players");
+    const modalRoomId = document.getElementById("modalRoomId");
+    let currentTargetPlayerId = null;
+    let soundsUnlocked = false;
+
+    // الأصوات (محاكاة للأصوات)
+    const playSound = (type) => {
+      console.log(`Playing ${type} sound`);
+      // يمكن إضافة Web Audio API هنا لاحقاً
+    };
+
+    function unlockSounds() {
+      if (soundsUnlocked) return;
+      soundsUnlocked = true;
+      console.log("Audio context unlocked");
+    }
+
+    // إضافة مستمع لفتح قفل الأصوات عند أول تفاعل
+    document.addEventListener('click', unlockSounds, { once: true });
+    document.addEventListener('touchstart', unlockSounds, { once: true });
+
+    const ALL_EMOJIS = ['🤠','😎','🥷','🤡','🦸','🦹','👽','🤖','👑','🦁','🐯','🐺','🐲','🦊','🐸','🐵','🦉','🐨','👨‍🚀','👩‍🚀','👨‍🎨','👩‍🎨','👨‍💻','👩‍💻','👨‍🔬','👩‍🔬'];
+    const CARD_COLORS = ["#8e44ad", "#e67e22", "#c0392b", "#2980b9", "#27ae60", "#f39c12", "#16a085"];
+
+    const makeId = () => Math.random().toString(36).slice(2, 8);
+    const todayTag = () => new Date().toLocaleDateString('en-GB',{day:'2-digit',month:'short'}).replace(/ /g,'').toUpperCase();
+
+    const openModal = (m) => m.classList.add("active");
+    const closeModal = (m) => m.classList.remove("active");
+
+    function setRandomGradientBackground() {
+      const gradients = [
+        "linear-gradient(135deg, #0f2027, #203a43, #2c5364)",
+        "linear-gradient(135deg, #13192e, #232d4b, #3e4a6d)",
+        "linear-gradient(135deg, #23074d, #cc5333)",
+        "linear-gradient(135deg, #1f1c2c, #928dab)",
+        "linear-gradient(135deg, #16222a, #3a6073)",
+        "linear-gradient(135deg, #373b44, #4286f4)",
+        "linear-gradient(135deg, #000000, #434343)",
+        "radial-gradient(circle, #2c3e50, #000000)"
+      ];
+      document.body.style.background = gradients[Math.floor(Math.random() * gradients.length)];
+    }
+
+    function hexToRgba(hex, alpha = 1) {
+      if (!hex || hex === '#FFFFFF') return `rgba(102, 126, 234, ${alpha})`;
+      const [r, g, b] = hex.match(/\w\w/g).map(x => parseInt(x, 16));
+      return `rgba(${r},${g},${b},${alpha})`;
+    }
+
+    function getMedals(score) {
+      const gold = Math.floor((score || 0) / 5);
+      const silver = (score || 0) % 5;
+      return "🥇".repeat(gold) + "🥈".repeat(silver);
+    }
+
+    function renderHeader() {
+      const roomStatusText = isAdmin ? 'مشرف' : 'مشاهد';
+      const bannerHtml = `
+        <div class="header" id="roomBanner">
+          <div class="title">
+            UNO Live <span class="badge">${roomStatusText}</span>
+          </div>
+        </div>`;
+      headerContainer.innerHTML = bannerHtml;
+      
+      document.getElementById("roomBanner").onclick = () => {
+        playSound('click');
+        const roomModal = document.getElementById("roomModal");
+        const roomManagementView = document.getElementById('roomManagementView');
+        const joinView = document.getElementById('joinView');
+        const roomInfoBlock = document.getElementById('roomInfoBlock');
+        roomManagementView.style.display = 'block';
+        joinView.style.display = 'none';
+        const hasRoom = !!roomId;
+        roomInfoBlock.style.display = hasRoom ? 'block' : 'none';
+        document.getElementById('openLog').style.display = hasRoom ? 'block' : 'none';
+        document.getElementById('copyLinkBtn').style.display = hasRoom ? 'block' : 'none';
+        if (hasRoom) {
+          modalRoomId.textContent = roomId;
+          document.getElementById('roomStatus').textContent = isAdmin ? 'مشرف' : 'مشاهد';
+        }
+        openModal(roomModal);
+      };
+    }
+
+    function playerCard(p, index) {
+      const cardColor = p.color || CARD_COLORS[index % CARD_COLORS.length];
+      const emoji = p.character && ALL_EMOJIS.includes(p.character) ? p.character : ALL_EMOJIS[index % ALL_EMOJIS.length];
+      
+      return `<div class="card" data-player-id="${p.id}" style="background: ${hexToRgba(cardColor, 0.8)};">
+        <div class="card-body">
+          <div class="score-area">
+            <div class="score-card" data-act="left" data-value="${p.left||0}">${p.left||0}</div>
+            <div class="arrow-group">
+              <div class="arrow" data-act="left:+1">▲</div>
+              <div class="arrow" data-act="left:-1">▼</div>
+            </div>
+          </div>
+          <div class="center-col">
+            <div class="emoji">
+              <div class="avatar">${emoji}</div>
+            </div>
+            <div class="name">${p.name||'لاعب'}</div>
+          </div>
+          <div class="score-area">
+            <div class="score-card" data-act="right" data-value="${p.right||0}">${p.right||0}</div>
+            <div class="arrow-group">
+              <div class="arrow" data-act="right:+1">▲</div>
+              <div class="arrow" data-act="right:-1">▼</div>
+            </div>
+          </div>
+        </div>
+        <div class="badges">
+          <span>${getMedals(p.left)}</span>
+          <span>${"🏆".repeat(p.right||0)}</span>
+        </div>
+      </div>`;
+    }
+
+    function renderPlayers(list) {
+      renderHeader();
+      playersEl.innerHTML = list.map((p, i) => playerCard(p, i)).join("");
+    }
+
+    function triggerFireworks(winData) {
+      const flashElement = document.getElementById('screen-flash');
+      const canvas = document.getElementById('confetti-canvas');
+
+      function runFlashEffect() {
+        const flashCount = 3; 
+        const flashInterval = 120;
+        for (let i = 0; i < flashCount; i++) {
+          setTimeout(() => {
+            flashElement.classList.add('active');
+            setTimeout(() => { flashElement.classList.remove('active'); }, 60);
+          }, i * flashInterval);
+        }
+      }
+
+      runFlashEffect();
+      canvas.classList.add('active');
+      
+      playSound('win');
+      playSound('victory');
+
+      if (typeof confetti !== 'undefined') {
+        const fire = confetti.create(canvas, { resize: true, useWorker: false });
+        const duration = 5000;
+        const end = Date.now() + duration;
+        const winnerColor = winData.color || '#FFFFFF';
+
+        setTimeout(runFlashEffect, 3000);
+        setTimeout(() => canvas.classList.remove('active'), duration);
+
+        (function frame() {
+          if (Date.now() > end) return;
+          fire({
+            particleCount: 50, 
+            angle: 90, 
+            spread: 45, 
+            startVelocity: 55,
+            origin: { x: Math.random(), y: 1 }, 
+            ticks: 150, 
+            gravity: 1,
+            shapes: ['circle'], 
+            scalar: 0.6, 
+            colors: ['#FFFFFF', winnerColor]
+          });
+          setTimeout(frame, 500 + Math.random() * 300);
+        }());
+      }
+    }
+
+    async function ensureAdminStatus() {
+      if (!roomId || !adminToken) { 
+        isAdmin = false; 
+        return false; 
+      }
+      try {
+        const snap = await get(child(ref(db, `rooms/${roomId}`), 'adminKey'));
+        isAdmin = !!(snap.exists() && adminToken === snap.val());
+      } catch (error) {
+        console.error('Error checking admin status:', error);
+        isAdmin = false;
+      }
+      document.getElementById('addPlayerFab').style.display = isAdmin ? 'flex' : 'none';
+      return isAdmin;
