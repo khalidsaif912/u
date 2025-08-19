@@ -89,8 +89,13 @@
       color: rgba(255,255,255,0.5);
     }
     .center-col { text-align: center; }
-    .emoji { font-size: 52px; line-height: 1; cursor: pointer; }
 
+.emoji {
+  position: relative;
+  width: 100px;   /* عرض الحاوية */
+  height: 100px;  /* ارتفاع الحاوية */
+  margin: 0 auto; /* وسط */
+}
  .name { 
     margin-top:8px; 
     font-weight:bold; 
@@ -103,7 +108,23 @@
   .badges { 
     display: none !important; 
   }
-    .modal-backdrop{ position:fixed; inset:0; background:rgba(0,0,0,.45); backdrop-filter: blur(5px); display:none; align-items:center; justify-content:center; z-index:110; }
+  
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.45);
+  backdrop-filter: blur(5px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 110;
+}
+
+.modal-backdrop.active {
+  display: flex !important;
+}
+
+
     .modal{ width:min(92vw,560px); background:#151935; border:1px solid #2a3257; border-radius:18px; padding:18px; }
     .modal h3{ margin:0 0 16px; text-align: center; }
     .input, input[type=text]{ width:100%; background:#0f142e; color:var(--text); border:1px solid #28325b; border-radius:12px; padding:10px 12px; outline:none; }
@@ -142,12 +163,15 @@
   
 /* صور اللاعبين (أفاتار) */
 .avatar {
-  width: 64px;           /* العرض ثابت */
-  height: 64px;          /* الارتفاع ثابت */
-  object-fit: cover;     /* يقص الزوايد عشان ما تتشوه */
-  border-radius: 50%;    /* يخليها دائرة */
+  position: absolute;
+  top: 50%; 
+  left: 50%;
+  transform: translate(-50%, -50%); /* يثبتها من الوسط */
+  width: 80px;   /* حجم الصورة */
+  height: 80px;  /* حجم الصورة */
+  object-fit: cover;
+  border-radius: 50%;
   border: 2px solid #fff;
-  background: transparent;
 }
 
     
@@ -297,8 +321,9 @@ const ALL_CHARACTERS = [
     const makeId = () => Math.random().toString(36).slice(2, 8);
     const todayTag = () => new Date().toLocaleDateString('en-GB',{day:'2-digit',month:'short'}).replace(/ /g,'').toUpperCase();
 
-    const openModal = (m)=> m.style.display = "flex";
-    const closeModal = (m)=> m.style.display = "none";
+const openModal = (m)=> m.classList.add("active");
+const closeModal = (m)=> m.classList.remove("active");
+
 
     function setRandomGradientBackground() {
       const gradients = [
