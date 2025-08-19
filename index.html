@@ -171,17 +171,22 @@
 /* الصورة */
 .avatar {
   position: absolute;
-  top: 0;              /* بداية الكرت */
+  top: 0;
   left: 50%;
-  transform: translateX(-50%); /* وسط الكرت عرضياً */
-  z-index: 999;        /* فوق الكل */
-  width: 100px;        /* تتحكم بالحجم */
-  height: 200px;
-  object-fit: cover;
-  border-radius: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+
+  width: 120px;    /* 👈 حجم الصورة */
+  height: 120px;
+
+  border-radius: 50%;  
   border: 3px solid #fff;
-  pointer-events: none; /* ما تغطي على الأزرار */
+
+  object-fit: contain;   /* 👈 يخلي الصورة كاملة جوة الدائرة */
+  background: #000;      /* خلفية فاضية حول الصورة */
+  pointer-events: none;
 }
+
 
     
     
