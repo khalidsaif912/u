@@ -101,15 +101,7 @@
   z-index: 10; /* يخليها فوق */
 }
 
-/* الاسم */
-.name {
-  margin-top: 110px;   /* يخلي الاسم يظهر تحت الصورة */
-  font-weight: bold;
-  font-size: 18px;
-  text-align: center;
-  direction: ltr;
-  unicode-bidi: plaintext;
-}
+
 
   /* نشيل الميداليات والكؤوس من أسفل الاسم */
   .badges { 
@@ -168,7 +160,6 @@
     text-align: center;
 }
   
-/* الصورة */
 .avatar {
   position: absolute;
   top: 0;
@@ -176,16 +167,22 @@
   transform: translateX(-50%);
   z-index: 999;
 
-  width: 120px;    /* 👈 حجم الصورة */
-  height: 120px;
-
-  border-radius: 50%;  
-  border: 3px solid #fff;
-
-  object-fit: contain;   /* 👈 يخلي الصورة كاملة جوة الدائرة */
-  background: #000;      /* خلفية فاضية حول الصورة */
-  pointer-events: none;
+  width: 150px;    /* 👈 حجم الصورة */
+  height: auto;    /* 👈 يخلي الارتفاع يتعدل تلقائي */
+  
+  object-fit: contain;   /* تبين الصورة كاملة */
+  border: 2px solid #fff; /* لو تحب إطار بسيط أبيض */
+  background: transparent; /* مافي خلفية سوداء */
+  pointer-events: none;    /* ما تغطي على الأزرار */
 }
+
+.name {
+  margin-top: 160px; /* نزّل الاسم تحت الصورة */
+  font-weight: bold;
+  font-size: 18px;
+  text-align: center;
+}
+
 
 
     
