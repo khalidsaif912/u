@@ -88,7 +88,10 @@
     .arrow:active { 
       color: rgba(255,255,255,0.5);
     }
-    .center-col { text-align: center; }
+.center-col {
+  position: relative;
+  text-align: center;
+}
 
 .emoji {
   position: relative;
@@ -98,13 +101,15 @@
   z-index: 10; /* يخليها فوق */
 }
 
- .name { 
-    margin-top:8px; 
-    font-weight:bold; 
-    font-size:18px; 
-    direction: ltr; 
-    text-align: center; 
-    unicode-bidi: plaintext; 
+/* الاسم */
+.name {
+  margin-top: 110px;   /* يخلي الاسم يظهر تحت الصورة */
+  font-weight: bold;
+  font-size: 18px;
+  text-align: center;
+  direction: ltr;
+  unicode-bidi: plaintext;
+}
 
   /* نشيل الميداليات والكؤوس من أسفل الاسم */
   .badges { 
@@ -163,19 +168,19 @@
     text-align: center;
 }
   
-/* صور اللاعبين (أفاتار) */
+/* الصورة */
 .avatar {
   position: absolute;
-  top: 50%;
+  top: 0;              /* بداية الكرت */
   left: 50%;
-  transform: translate(-50%, -50%);
-  width: 90px;   /* حجم الصورة */
-  height: 90px;
+  transform: translateX(-50%); /* وسط الكرت عرضياً */
+  z-index: 999;        /* فوق الكل */
+  width: 100px;        /* تتحكم بالحجم */
+  height: 100px;
   object-fit: cover;
   border-radius: 50%;
   border: 3px solid #fff;
-  z-index: 999; /* فوق الكل */
-  pointer-events: none; /* عشان ما تغطي على الأزرار */
+  pointer-events: none; /* ما تغطي على الأزرار */
 }
 
     
