@@ -1,5 +1,9 @@
 :root {
-  --bg:#0f1220; --card-bg:#171a2b; --text:#e8ecff; --muted:#9aa3c7; --accent:#7aa2ff;
+  --bg:#0f1220; 
+  --card-bg:#171a2b; 
+  --text:#e8ecff; 
+  --muted:#9aa3c7; 
+  --accent:#7aa2ff;
 }
 
 * { box-sizing: border-box; }
@@ -15,40 +19,35 @@ body {
 
 /* الهيدر (البنر) */
 .header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  background: rgba(0, 0, 0, 0.35);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-
   border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0,0,0,0.25);
   box-shadow: 0 6px 20px rgba(0,0,0,0.25);
-
-  position: relative;
-  width: 100%;         /* 👈 يطابق عرض الكرت */
-  max-width: 600px;    /* 👈 نفس wrap والكرت */
-  margin: 0 auto 12px; /* 👈 توسيط + نفس مسافة الكرت */
-  overflow: hidden;    /* 👈 يمنع خروج الصورة خارج الحواف */
-  padding: 0;          /* 👈 نشيل البادينغ عشان الصورة تاخذ الحجم بالضبط */
+  margin: 0 auto 12px;
+  max-width: 600px; /* نفس الكرت */
 }
 
 .header .banner-img {
   width: 100%;
-  height: 140px;        /* 👈 غيّر الرقم لتصغير/تكبير */
+  height: 120px;   /* 👈 صغرنا */
   object-fit: cover;
+  display: block;
 }
-
 
 .title {
-  position: absolute; top: 18px; right: 18px; font-weight: 800;
-  font-size: 16px; display:flex; align-items:center; gap:8px;
-  background: rgba(0,0,0,0.4); padding: 4px 8px; border-radius: 8px;
+  position: absolute; 
+  top: 18px; right: 18px; 
+  font-weight: 800;
+  font-size: 16px; 
+  display:flex; align-items:center; gap:8px;
+  background: rgba(0,0,0,0.4); 
+  padding: 4px 8px; 
+  border-radius: 8px;
 }
 .title .badge {
-  font-size: 11px; color: var(--text); background: rgba(255,255,255,0.1);
+  font-size: 11px; color: var(--text); 
+  background: rgba(255,255,255,0.1);
   padding: 2px 8px; border-radius: 999px;
 }
 
@@ -234,8 +233,8 @@ body {
   position: fixed; bottom: 20px; left: 50%;
   transform: translateX(-50%);
   background: linear-gradient(135deg, #6c5ce7, #4a3ebc);
-  color: #fff; padding: 14px 28px;
-  font-size: 18px; font-weight: bold; border: none; border-radius: 999px;
+  color: #fff; padding: 12px 22px;
+  font-size: 16px; font-weight: bold; border: none; border-radius: 999px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.3);
   cursor: pointer;
   display: flex; align-items: center; justify-content: center; gap: 8px;
@@ -248,12 +247,12 @@ body {
 }
 .corner-btn {
   position: fixed; bottom: 20px;
-  padding: 10px 18px;
+  padding: 8px 16px;
   border-radius: 999px;
   border: none;
   box-shadow: 0 4px 12px rgba(0,0,0,0.25);
   cursor: pointer;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: bold;
   color: #fff;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
