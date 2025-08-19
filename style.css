@@ -22,11 +22,13 @@ body {
   border-radius: 16px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(0,0,0,0.25);
+  background: rgba(0,0,0,0.25) url("banner.jpg") center/cover no-repeat; 
   box-shadow: 0 6px 20px rgba(0,0,0,0.25);
   margin: 0 auto 12px;
-  max-width: 600px; /* نفس الكرت */
+  max-width: 600px;
+  height: 120px;   /* 👈 نفس ارتفاع الكرت */
 }
+
 
 .header .banner-img {
   width: 100%;
