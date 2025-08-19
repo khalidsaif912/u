@@ -5,102 +5,127 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>UNO Live – by Mr.K</title>
   <style>
-    :root {
-      --bg:#0f1220; --card-bg:#171a2b; --text:#e8ecff; --muted:#9aa3c7; --accent:#7aa2ff;
-    }
-    * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; }
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: var(--text); background-attachment: fixed; transition: background 0.5s ease;
-    }
-    .wrap { max-width: 600px; margin: 0 auto; padding: 16px; padding-bottom: 100px; }
-    .header {
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      gap: 0; background: rgba(0, 0, 0, 0.35); backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.1); padding: 12px 14px;
-      border-radius: 14px; box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
-      cursor: pointer; position: relative; width: 100%; margin-bottom: 12px;
-    }
-    .header .banner-img { width: 100%; height: 120px; object-fit: cover; object-position: center; border-radius: 8px; }
-    .title {
-      position: absolute; top: 18px; right: 18px; font-weight: 800; letter-spacing:.5px;
-      font-size: 16px; display:flex; align-items:center; gap:8px;
-      background: rgba(0,0,0,0.4); padding: 4px 8px; border-radius: 8px;
-    }
-    .title .badge { font-size: 11px; color: var(--text); background: rgba(255,255,255,0.1); padding: 2px 8px; border-radius: 999px; }
-    .grid { display: flex; flex-direction: column; gap: 12px; }
-    .card {
-      border-radius:16px; padding: 8px 16px; box-shadow: 0 6px 20px rgba(0,0,0,0.25);
-      position: relative; user-select: none; border: 1px solid rgba(255, 255, 255, 0.1);
-    }
+:root {
+  --bg:#0f1220; --card-bg:#171a2b; --text:#e8ecff; --muted:#9aa3c7; --accent:#7aa2ff;
+}
 
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text);
+  background-attachment: fixed;
+  transition: background 0.5s ease;
+}
 
-    /* الهامش بين الرقم وحد البطاقة */
-  .score-area { 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    position: relative;
-    margin: 0 10px; /* نفس التباعد الجانبي للميداليات */
-  }
+.wrap { max-width: 600px; margin: 0 auto; padding: 16px; padding-bottom: 100px; }
 
-  .score-card {
-    background-color: rgba(0,0,0,0.2); 
-    border-radius: 8px; 
-    padding: 12px 8px;
-    font-size: 36px; 
-    font-weight: 900; 
-    text-align: center; 
-    width: 60px;
-    border: 1px solid rgba(255,255,255,0.1); 
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
-    cursor: pointer; 
-    position: relative; 
-    z-index: 1;
-  }
-    .arrow-group { 
-      position: absolute; 
-      top: 0; 
-      left: 0; 
-      right: 0; 
-      bottom: 0; 
-      display: flex; 
-      flex-direction: column; 
-      justify-content: space-between; 
-      z-index: 2; 
-      pointer-events: none;
-    }
-    .arrow {
-      width: 100%; height: 50%; display: grid; place-items: center; 
-      background: transparent; border: none;
-      user-select: none; cursor: pointer; font-size: 20px; color: transparent;
-      pointer-events: auto; transition: color 0.2s ease;
-    }
-    .arrow:hover {
-      color: rgba(255,255,255,0.3);
-    }
-    .arrow:active { 
-      color: rgba(255,255,255,0.5);
-    }
+.header {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 0; background: rgba(0, 0, 0, 0.35); backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1); padding: 12px 14px;
+  border-radius: 14px; box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+  cursor: pointer; position: relative; width: 100%; margin-bottom: 12px;
+}
+.header .banner-img {
+  width: 100%; height: 120px; object-fit: cover; object-position: center; border-radius: 8px;
+}
+.title {
+  position: absolute; top: 18px; right: 18px; font-weight: 800; letter-spacing:.5px;
+  font-size: 16px; display:flex; align-items:center; gap:8px;
+  background: rgba(0,0,0,0.4); padding: 4px 8px; border-radius: 8px;
+}
+.title .badge { font-size: 11px; color: var(--text); background: rgba(255,255,255,0.1); padding: 2px 8px; border-radius: 999px; }
+
+.grid { display: flex; flex-direction: column; gap: 12px; }
+
+.card {
+  border-radius:16px; padding: 16px; 
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  position: relative; user-select: none; 
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0,0,0,0.25);
+}
+
+/* هيكل البطاقة */
+.card-body {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr; /* يسار - الوسط - يمين */
+  align-items: center;
+  gap: 12px;
+}
+
+/* الأرقام */
+.score-area { 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  position: relative;
+}
+.score-card {
+  background-color: rgba(0,0,0,0.2);
+  border-radius: 8px;
+  padding: 12px 8px;
+  font-size: 32px;
+  font-weight: 900;
+  text-align: center;
+  width: 60px;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+.arrow-group { 
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  display: flex; flex-direction: column; justify-content: space-between;
+  z-index: 2; pointer-events: none;
+}
+.arrow {
+  width: 100%; height: 50%; display: grid; place-items: center; 
+  background: transparent; border: none;
+  user-select: none; cursor: pointer; font-size: 20px; color: transparent;
+  pointer-events: auto; transition: color 0.2s ease;
+}
+.arrow:hover { color: rgba(255,255,255,0.3); }
+.arrow:active { color: rgba(255,255,255,0.5); }
+
+/* الصورة */
 .center-col {
   position: relative;
   text-align: center;
+  padding-top: 140px; /* مساحة للصورة فوق الاسم */
+}
+.avatar {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+
+  width: 120px;   /* 👈 حجم الصورة */
+  height: auto;
+
+  object-fit: contain;
+  background: transparent;
+  pointer-events: none;
+
+  box-shadow: 0 8px 16px rgba(0,0,0,0.5);
 }
 
-.emoji {
-  position: relative;
+/* الاسم */
+.name {
+  margin: 0;
+  font-weight: bold;
+  font-size: 18px;
   text-align: center;
+  color: var(--text);
 }
 
+/* نخفي الميداليات والكؤوس */
+.badges { display: none !important; }
 
-
-
-  /* نشيل الميداليات والكؤوس من أسفل الاسم */
-  .badges { 
-    display: none !important; 
-  }
-
+/* المودال */
 .modal-backdrop {
   position: fixed;
   inset: 0;
@@ -111,81 +136,21 @@
   justify-content: center;
   z-index: 110;
 }
-
-.modal-backdrop.active {
-  display: flex !important;
+.modal-backdrop.active { display: flex !important; }
+.modal {
+  width:min(92vw,560px); background:#151935;
+  border:1px solid #2a3257; border-radius:18px; padding:18px;
 }
+.modal h3{ margin:0 0 16px; text-align: center; }
 
-
-    .modal{ width:min(92vw,560px); background:#151935; border:1px solid #2a3257; border-radius:18px; padding:18px; }
-    .modal h3{ margin:0 0 16px; text-align: center; }
-    .input, input[type=text]{ width:100%; background:#0f142e; color:var(--text); border:1px solid #28325b; border-radius:12px; padding:10px 12px; outline:none; }
-    .row2{ display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
-    .room-info { text-align: center; margin-bottom: 16px; background: #0f142e; padding: 10px; border-radius: 10px; border: 1px dashed #2a3257; }
-    .room-info span { font-weight: bold; font-size: 18px; color: var(--accent); }
-    hr { border-color: #2a32573d; margin: 16px 0; }
-    .btn { border-radius: 999px; font-weight: bold; border: none; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: transform 0.2s ease; cursor: pointer; padding: 10px 14px; }
-    .btn:hover { transform: translateY(-2px); }
-    .add-player-fab, .corner-btn { position: fixed; bottom: 20px; border-radius: 999px; border: none; box-shadow: 0 4px 10px rgba(0,0,0,0.2); cursor: pointer; font-weight: bold; transition: transform 0.2s ease; z-index: 30; }
-    .add-player-fab { left: 50%; transform: translateX(-50%); background-color: #6c5ce7; color: white; padding: 12px 24px; font-size: 18px; display: flex; align-items: center; justify-content: center; gap: 8px; }
-    .add-player-fab:hover { transform: translateX(-50%) translateY(-2px); }
-    .corner-btn { color: white; padding: 10px 20px; font-size: 14px; display: grid; place-items: center; }
-    .corner-btn:hover { transform: translateY(-2px); }
-    #devInfoBtn { left: 20px; background: #e74c3c; }
-    #refreshBtn { right: 20px; background: #3498db; }
-    .info-item { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
-    .info-item a { color: var(--text); text-decoration: none; }
-    .info-item a:hover { color: var(--accent); }
-    #confetti-canvas, #screen-flash { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; visibility: hidden; opacity: 0; }
-    #confetti-canvas { z-index: 120; transition: opacity 0.3s; }
-    #screen-flash { z-index: 121; background-color: white; transition: opacity 0.5s ease-out; }
-    #confetti-canvas.active, #screen-flash.active { visibility: visible; opacity: 1; }
-    #screen-flash.active { opacity: 0.7; }
- 
- 
- 
- 
-    
-  /* --- لمسة جمالية لنافذة إضافة اللاعبين --- */
-#playerNamesInput {
-    resize: vertical; /* تسمح للمستخدم بتكبير الحقل عموديًا فقط */
-    font-size: 16px;
-    text-align: center;
+/* أزرار */
+.btn {
+  border-radius: 999px; font-weight: bold; border: none;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: transform 0.2s ease; cursor: pointer; padding: 10px 14px;
 }
-  
-.avatar {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 999;
+.btn:hover { transform: translateY(-2px); }
 
-  width: 150px;      /* 👈 حجم الصورة */
-  height: auto;      
-
-  object-fit: contain;  
-  background: transparent;
-  pointer-events: none;
-
-  /* 👇 ظل حول الصورة بدل المستطيل الأبيض */
-  box-shadow: 0 8px 16px rgba(0,0,0,0.5);
-}
-
-/* الاسم أسفل الصورة */
-.name {
-  margin-top: 160px;   /* عدل حسب حجم الصورة */
-  font-weight: bold;
-  font-size: 18px;
-  text-align: center;
-}
-
-/* تباعد الأرقام (تقليل المسافة تحت البطاقة) */
-.card-body {
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  gap: 8px;        /* 👈 كان 12px قللته */
-  padding-bottom: 8px; /* 👈 يقلل المسافة الداخلية */
-}
 
 
 
