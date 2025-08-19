@@ -1,57 +1,76 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UNO Live – by Mr.K</title>
-
-  <!-- ربط ملف التنسيقات -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
   <div class="wrap">
-  
-    <!-- مثال كرت لاعب -->
-    <div class="card">
-      <div class="card-body">
-        <div class="score-area">
-          <div class="score-card">5</div>
-        </div>
-        <div class="center-col">
-          <img class="avatar" src="avatar.png" alt="avatar">
-          <div class="name">اللاعب</div>
-        </div>
-        <div class="score-area">
-          <div class="score-card">8</div>
+
+    <!-- 🔥 البنر -->
+    <div class="header">
+      <div class="title">
+        UNO Live <span class="badge">by MR.K</span>
+      </div>
+    </div>
+
+    <!-- 🔥 الكروت -->
+    <div class="grid">
+      <div class="card">
+        <div class="card-body">
+          <div class="score-area">
+            <div class="score-card">0</div>
+            <div class="arrow-group">
+              <button class="arrow up">▲</button>
+              <button class="arrow down">▼</button>
+            </div>
+          </div>
+
+          <div class="center-col">
+            <img class="avatar" src="player.png" alt="Player">
+            <div class="name">اللاعب 1</div>
+          </div>
+
+          <div class="score-area">
+            <div class="score-card">0</div>
+            <div class="arrow-group">
+              <button class="arrow up">▲</button>
+              <button class="arrow down">▼</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+
   </div>
 
-  <!-- نافذة معلومات الغرفة -->
-  <div class="modal-backdrop" id="roomModal">
-    <div class="modal">
-      <h3>معلومات الغرفة</h3>
-      <div class="room-info">
-        <span>رمز الغرفة: 12345</span>
-        <small>تم الإنشاء بواسطة MR.K</small>
-      </div>
-      <div class="actions">
-        <button class="btn btn-cancel" onclick="closeModal(roomModal)">إغلاق</button>
-      </div>
-    </div>
-  </div>
+  <!-- 🔥 زر إضافة لاعب -->
+  <button class="add-player-fab">➕ أضف لاعب</button>
 
-  <!-- أزرار -->
-  <button class="add-player-fab">➕ إضافة لاعب</button>
+  <!-- 🔥 الأزرار الجانبية -->
   <button id="devInfoBtn" class="corner-btn">MR.K</button>
-  <button id="refreshBtn" class="corner-btn">تحديث</button>
+  <button id="refreshBtn" class="corner-btn">⟳ تحديث</button>
 
-  <!-- مؤثرات -->
+  <!-- 🔥 مودال مثال -->
+  <div class="modal-backdrop" id="deleteModal">
+    <div class="modal">
+      <h3>حذف اللاعب</h3>
+      <p>هل أنت متأكد أنك تريد حذف هذا اللاعب؟</p>
+      <div class="actions">
+        <button class="btn btn-danger">حذف</button>
+        <button class="btn btn-cancel">إلغاء</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🔥 كانفس الألعاب النارية -->
   <canvas id="confetti-canvas"></canvas>
   <div id="screen-flash"></div>
 
-  <!-- ربط ملف الجافاسكربت -->
+  <!-- سكربت -->
   <script src="script.js"></script>
 </body>
 </html>
