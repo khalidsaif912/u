@@ -1,32 +1,4 @@
-.winner-card .card-header {
-      position: absolute;
-      top: 70%;
-      right: 0px;
-      z-index: 10;
-      pointer-events: none;
-    }
-
-    .winner-card .player-name-section {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      font-size: var(--winner-name-font);
-      color: var(--text);
-      padding: 8px 6px 8px 12px;
-      border-radius: 10px 0 0 10px;
-      width: fit-content;
-      background: linear-gradient(to right, rgba(255,215,0,0.4), rgba(255,215,0,0.1));
-      backdrop-filter: blur(10px);
-      border: 2px solid rgba(255,215,0,0.3);
-      border-right: none;
-      white-space: nowrap;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-      writing-mode: vertical-rl;
-      text-orientation: mixed;
-      transform: rotate(180deg);
-      min-height: 50px;
-    }<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
@@ -193,13 +165,13 @@
       100% { transform: translateY(-5px); }
     }
 
-    .winner-card .card-header {
-      position: absolute;
-      bottom: 12px;
-      right: 12px;
-      z-index: 10;
-      pointer-events: none;
-    }
+.card-header {
+  position: relative;
+  margin-top: 10px;   /* مسافة بين الصورة والاسم */
+  text-align: center; /* يوسّط الاسم */
+  z-index: 10;
+}
+
 
     .winner-card .player-name-section {
       display: flex;
@@ -321,33 +293,28 @@
       justify-content: center;
     }
     
-    .card-header {
-      position: absolute;
-      top: 70%;
-      right: 0px;
-      z-index: 10;
-      pointer-events: none;
-    }
+.card-header {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  z-index: 10;
+  pointer-events: none;
+}
+
     
     .player-name-section {
       display: flex;
       align-items: center;
-      justify-content: center;
       font-weight: bold;
       font-size: var(--mobile-name-font);
       color: var(--text);
-      padding: 6px 4px 6px 8px;
-      border-radius: 8px 0 0 8px;
+      padding: 2px 6px;
+      border-radius: 12px;
       width: fit-content;
-      background: linear-gradient(to right, rgba(255,255,255,0.3), rgba(255,255,255,0.05));
+      background: linear-gradient(to left, rgba(255,255,255,0.3), rgba(255,255,255,0.05));
       backdrop-filter: blur(8px);
       border: 1px solid rgba(255,255,255,0.15);
-      border-right: none;
       white-space: nowrap;
-      writing-mode: vertical-rl;
-      text-orientation: mixed;
-      transform: rotate(180deg);
-      min-height: 40px;
     }
     
     .card-body {
