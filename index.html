@@ -812,6 +812,57 @@
           <button class="btn" id="copyLinkBtn">🔗 نسخ رابط المشاهدة</button>
         </div>
         <hr>
+        <div class="row2">
+          <button class="btn" id="doCreate" style="background-color: #27ae60;">✨ إنشاء غرفة جديدة</button>
+          <button class="btn" id="showJoinView" style="background-color: #3498db;">🚪 الانضمام لغرفة</button>
+        </div>
+        <hr>
+        <div style="display:flex; justify-content:flex-end;">
+          <button class="btn" id="closeRoomModal" style="background-color: #95a5a6;">إغلاق</button>
+        </div>
+      </div>
+      
+      <div id="joinView" style="display: none;">
+        <h3>الانضمام لغرفة</h3>
+        <input type="text" id="joinId" class="input" placeholder="أدخل رمز الغرفة" style="margin-bottom: 16px;">
+        <div class="row2">
+          <button class="btn" id="doJoin" style="background-color: #27ae60;">انضمام</button>
+          <button class="btn" id="backToManagement" style="background-color: #95a5a6;">رجوع</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="deleteModal">
+    <div class="modal">
+      <h3>⚠️ تأكيد الحذف</h3>
+      <p style="text-align: center; margin-bottom: 20px;">هل تريد حذف هذا اللاعب؟</p>
+      <div class="row2" style="margin-bottom: 10px;">
+        <button class="btn" id="deletePlayerBtn" style="background-color: #e74c3c;">🗑️ حذف اللاعب</button>
+        <button class="btn" id="deleteAllBtn" style="background-color: #c0392b;">🔥 حذف الكل</button>
+      </div>
+      <div style="display:flex; justify-content:center;">
+        <button class="btn" id="closeDeleteModal" style="background-color: #95a5a6;">إلغاء</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="devInfoModal">
+    <div class="modal">
+      <h3>معلومات المطور</h3>
+      <div class="info-item">
+        <span>👨‍💻</span>
+        <span>تطوير: Mr.K</span>
+      </div>
+      <div class="info-item">
+        <span>🎮</span>
+        <span>تطبيق UNO Live</span>
+      </div>
+      <div class="info-item">
+        <span>📧</span>
+        <a href="mailto:contact@example.com">contact@example.com</a>
+      </div>
+      <hr>
       <p style="text-align:center;">شكراً لاستخدامكم التطبيق</p>
       <div style="display:flex; justify-content:flex-end;">
         <button class="btn" id="closeDevInfoModal">إغلاق</button>
@@ -1364,57 +1415,13 @@
             if (snap.exists()) {
                 const winData = snap.val();
                 triggerFireworks(winData); 
-                if (isAdmin) {
-                    remove(ref(db, `rooms/${roomId}/lastWin`));
-                }
             }
         });
       }
-      
+
       initializeDynamicEventListeners();
     })();
   </script>
 </body>
-</html>>
-        <div class="row2">
-          <button class="btn" id="doCreate">🚀 إنشاء غرفة جديدة</button>
-          <button class="btn" id="showJoinView">🚪 الانضمام لغرفة أخرى</button>
-        </div>
-      </div>
-      <div id="joinView" style="display: none;">
-        <h3>الانضمام لغرفة</h3>
-        <div style="display:flex; gap:6px; align-items:center;">
-          <input type="text" id="joinId" class="input" placeholder="أدخل رمز الغرفة" />
-          <button class="btn" id="doJoin">دخول</button>
-        </div>
-        <button class="btn" id="backToManagement" style="margin-top: 10px; background: #2a3257;">رجوع</button>
-      </div>
-      <hr>
-      <div style="display:flex; justify-content:flex-end;">
-        <button class="btn" id="closeRoomModal">إغلاق</button>
-      </div>
-    </div>
-  </div>
-  
-  <div class="modal-backdrop" id="deleteModal">
-    <div class="modal">
-      <h3>🗑️ تأكيد الحذف</h3>
-      <p style="text-align: center; margin: 16px 0; color: var(--muted);">هل أنت متأكد من حذف هذا اللاعب؟</p>
-      <div class="row2" style="margin-bottom: 10px;">
-        <button class="btn" id="deletePlayerBtn" style="background-color: #e74c3c; color: white;">حذف اللاعب</button>
-        <button class="btn" id="deleteAllBtn" style="background-color: #c0392b; color: white;">حذف الجميع</button>
-      </div>
-      <hr>
-      <div style="display:flex; justify-content:flex-end;">
-        <button class="btn" id="closeDeleteModal" style="background: #2a3257; color: white;">إلغاء</button>
-      </div>
-    </div>
-  </div>
-  
-  <div class="modal-backdrop" id="devInfoModal">
-    <div class="modal">
-      <h3>معلومات المطور</h3>
-      <div class="info-item"><span>🧑‍💻</span> <b>Mr.K</b></div>
-      <div class="info-item"><span>📞</span> <a href="tel:+96899678553">99678553</a><a href="https://wa.me/96899678553" target="_blank" style="font-size: 24px; margin-right: auto;">💬</a></div>
-      <div class="info-item"><span>✉️</span> <a href="mailto:scoon80@gmail.com">scoon80@gmail.com</a></div>
-      <hr
+</html>
+
