@@ -1,9 +1,37 @@
-<!DOCTYPE html>
+.winner-card .card-header {
+      position: absolute;
+      top: 70%;
+      right: 0px;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .winner-card .player-name-section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: var(--winner-name-font);
+      color: var(--text);
+      padding: 8px 6px 8px 12px;
+      border-radius: 10px 0 0 10px;
+      width: fit-content;
+      background: linear-gradient(to right, rgba(255,215,0,0.4), rgba(255,215,0,0.1));
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255,215,0,0.3);
+      border-right: none;
+      white-space: nowrap;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      transform: rotate(180deg);
+      min-height: 50px;
+    }<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>UNO Live — by Mr.K</title>
+  <title>UNO Live â€" by Mr.K</title>
   <style>
     :root {
       --bg:#0f1220; 
@@ -167,8 +195,8 @@
 
     .winner-card .card-header {
       position: absolute;
-      top: 15%;
-      right: 8px;
+      bottom: 12px;
+      right: 12px;
       z-index: 10;
       pointer-events: none;
     }
@@ -176,23 +204,17 @@
     .winner-card .player-name-section {
       display: flex;
       align-items: center;
-      justify-content: center;
       font-weight: bold;
       font-size: var(--winner-name-font);
       color: var(--text);
-      padding: 6px 8px;
-      border-radius: 10px 0 0 10px;
+      padding: 6px 12px;
+      border-radius: 16px;
       width: fit-content;
-      background: linear-gradient(to right, rgba(255,215,0,0.4), rgba(255,215,0,0.1));
+      background: linear-gradient(to left, rgba(255,215,0,0.4), rgba(255,215,0,0.1));
       backdrop-filter: blur(10px);
       border: 2px solid rgba(255,215,0,0.3);
-      border-right: none;
       white-space: nowrap;
       text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-      writing-mode: vertical-rl;
-      text-orientation: mixed;
-      transform: rotate(180deg);
-      min-height: 50px;
     }
 
     .winner-card .card-body {
@@ -301,8 +323,8 @@
     
     .card-header {
       position: absolute;
-      top: 15%;
-      right: 5px;
+      top: 70%;
+      right: 0px;
       z-index: 10;
       pointer-events: none;
     }
@@ -314,7 +336,7 @@
       font-weight: bold;
       font-size: var(--mobile-name-font);
       color: var(--text);
-      padding: 4px 6px;
+      padding: 6px 4px 6px 8px;
       border-radius: 8px 0 0 8px;
       width: fit-content;
       background: linear-gradient(to right, rgba(255,255,255,0.3), rgba(255,255,255,0.05));
@@ -408,7 +430,7 @@
       box-shadow: none;
     }
     
-    /* ===== تصميم متجاوب ===== */
+    /* ===== تصميم خاص بالويندوز والشاشات الكبيرة ===== */
     @media screen and (min-width: 768px) {
       .wrap {
         max-width: 900px;
@@ -438,10 +460,9 @@
       }
 
       .winner-card .player-name-section {
-        font-size: var(--desktop-name-font);
-        padding: 8px 10px;
-        border-radius: 12px 0 0 12px;
-        min-height: 60px;
+        font-size: 28px;
+        padding: 8px 16px;
+        border-radius: 20px;
       }
 
       .winner-card .score-area.left {
@@ -483,9 +504,8 @@
       
       .player-name-section {
         font-size: var(--desktop-name-font);
-        padding: 6px 8px;
-        border-radius: 10px 0 0 10px;
-        min-height: 50px;
+        padding: 4px 10px;
+        border-radius: 14px;
       }
       
       .score-area.left {
@@ -500,16 +520,71 @@
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
         gap: 16px;
       }
-
-      .card-header {
-        right: 8px;
+    }
+    
+    /* ===== تصميم خاص للشاشات الكبيرة جداً (Full HD+) ===== */
+    @media screen and (min-width: 1440px) {
+      .wrap {
+        max-width: 1200px;
       }
 
-      .winner-card .card-header {
-        right: 12px;
+      .winner-card {
+        height: 220px;
+        padding: 28px;
+      }
+
+      .winner-card .avatar {
+        width: 180px;
+        height: 180px;
+      }
+
+      .winner-card .score-card {
+        font-size: 48px;
+        padding: 10px 18px;
+        min-width: 70px;
+      }
+
+      .winner-card .score-icon {
+        font-size: 52px;
+      }
+
+      .winner-card .player-name-section {
+        font-size: 32px;
+        padding: 10px 18px;
+      }
+      
+      .card {
+        min-height: 180px;
+        padding: 24px;
+      }
+      
+      .avatar {
+        width: 140px;
+        height: 140px;
+      }
+      
+      .score-card {
+        font-size: 32px;
+        padding: 6px 12px;
+        min-width: 45px;
+      }
+      
+      .score-icon {
+        font-size: 40px;
+      }
+      
+      .player-name-section {
+        font-size: 22px;
+        padding: 6px 12px;
+      }
+      
+      .grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
       }
     }
     
+    /* ===== تصميم خاص للجوالات الصغيرة ===== */
     @media screen and (max-width: 480px) {
       .wrap {
         padding: 10px;
@@ -540,9 +615,8 @@
 
       .winner-card .player-name-section {
         font-size: 16px;
-        padding: 4px 6px;
-        border-radius: 8px 0 0 8px;
-        min-height: 35px;
+        padding: 4px 8px;
+        border-radius: 12px;
       }
 
       .winner-card .score-area.left {
@@ -586,10 +660,8 @@
       }
       
       .player-name-section {
-        font-size: var(--mobile-name-font);
-        padding: 3px 4px;
-        border-radius: 6px 0 0 6px;
-        min-height: 30px;
+        font-size: 12px;
+        padding: 2px 5px;
       }
       
       .score-area.left {
@@ -599,17 +671,117 @@
       .score-area.right {
         right: 8px;
       }
-
-      .card-header {
-        right: 6px;
+    }
+    
+    /* ===== تصميم خاص للأجهزة اللوحية ===== */
+    @media screen and (min-width: 481px) and (max-width: 767px) {
+      .winner-card {
+        height: 160px;
+        padding: 18px;
       }
 
-      .winner-card .card-header {
-        right: 8px;
+      .winner-card .avatar {
+        width: 120px;
+        height: 120px;
+        border-radius: 18px;
+      }
+
+      .winner-card .score-card {
+        font-size: 30px;
+        padding: 4px 10px;
+        min-width: 40px;
+      }
+
+      .winner-card .score-icon {
+        font-size: 36px;
+      }
+
+      .winner-card .player-name-section {
+        font-size: 20px;
+        padding: 6px 10px;
+      }
+
+      .card {
+        min-height: 130px;
+        padding: 16px;
+      }
+      
+      .avatar {
+        width: 90px;
+        height: 90px;
+      }
+      
+      .score-card {
+        font-size: 22px;
+        padding: 3px 7px;
+        min-width: 32px;
+      }
+      
+      .score-icon {
+        font-size: 30px;
+      }
+      
+      .player-name-section {
+        font-size: 16px;
+      }
+      
+      .grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 12px;
       }
     }
     
-    /* باقي الأنماط */
+    /* ===== تحسينات خاصة بمتصفحات الويندوز ===== */
+    @media screen and (-webkit-min-device-pixel-ratio: 1) and (min-width: 1024px) {
+      /* Chrome & Edge على ويندوز */
+      .score-card {
+        font-weight: 800;
+        letter-spacing: 0.5px;
+      }
+      
+      .avatar {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+      }
+    }
+    
+    /* Firefox على ويندوز */
+    @-moz-document url-prefix() {
+      @media screen and (min-width: 1024px) {
+        .score-card {
+          font-weight: 700;
+        }
+        
+        .avatar {
+          image-rendering: crisp-edges;
+        }
+      }
+    }
+    
+    /* ===== تحسينات خاصة بأجهزة iOS ===== */
+    @supports (-webkit-touch-callout: none) {
+      .card, .winner-card {
+        -webkit-tap-highlight-color: transparent;
+      }
+      
+      .score-card {
+        -webkit-font-smoothing: antialiased;
+      }
+    }
+    
+    /* ===== تحسينات خاصة بأجهزة Android ===== */
+    @media screen and (max-width: 767px) and (-webkit-min-device-pixel-ratio: 2) {
+      .avatar {
+        will-change: transform;
+      }
+      
+      .score-card {
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+      }
+    }
+    
+    /* باقي الأنماط الأصلية */
     .modal-backdrop{ 
       position:fixed; 
       inset:0; 
@@ -750,6 +922,94 @@
       color: var(--accent); 
     }
     
+    /* Log Page Styles */
+    .log-page {
+      width: 95vw;
+      height: 95vh;
+      background: var(--card-bg);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    
+    .log-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid rgba(255,255,255,0.1);
+    }
+    
+    .log-header h2 {
+      margin: 0;
+      color: var(--text);
+      font-size: 24px;
+    }
+    
+    .log-actions {
+      display: flex;
+      gap: 12px;
+    }
+    
+    .log-btn {
+      background: linear-gradient(to bottom, rgba(255,255,255,0.2), rgba(255,255,255,0.05));
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: var(--text);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    
+    .log-content {
+      flex: 1;
+      overflow: auto;
+    }
+    
+    .log-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 16px;
+    }
+    
+    .log-table th {
+      background: linear-gradient(to bottom, rgba(255,255,255,0.2), rgba(255,255,255,0.05));
+      padding: 12px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--text);
+      font-weight: bold;
+    }
+    
+    .log-table td {
+      padding: 10px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--text);
+      background: rgba(255,255,255,0.05);
+    }
+    
+    .log-table tr:nth-child(even) td {
+      background: rgba(255,255,255,0.08);
+    }
+    
+    .log-footer {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 16px;
+      gap: 12px;
+    }
+    
+    .log-footer-btn {
+      flex: 1;
+      padding: 12px;
+      font-size: 16px;
+    }
+    
     #confetti-canvas, #screen-flash { 
       position: fixed; 
       top: 0; 
@@ -802,23 +1062,52 @@
   <button class="corner-btn btn" id="refreshBtn">تحديث</button>
 
   <!-- Modals -->
-  <div class="modal-backdrop" id="roomModal">
-    <div class="modal">
-      <div id="roomManagementView">
-        <h3>إدارة الغرفة</h3>
-        <div class="room-info" id="roomInfoBlock">رمز الغرفة الحالي: <span id="modalRoomId"></span></div>
-        <div class="row2" style="margin-bottom: 10px;">
-          <button class="btn" id="openLog">📜 عرض السجل</button>
-          <button class="btn" id="copyLinkBtn">🔗 نسخ رابط المشاهدة</button>
-        </div>
-        <hr>
-      <p style="text-align:center;">شكراً لاستخدامكم التطبيق</p>
-      <div style="display:flex; justify-content:flex-end;">
-        <button class="btn" id="closeDevInfoModal">إغلاق</button>
+  <div class="modal-backdrop" id="roomModal"><div class="modal"><div id="roomManagementView"><h3>إدارة الغرفة</h3><div class="room-info" id="roomInfoBlock">رمز الغرفة الحالي: <span id="modalRoomId"></span></div><div class="row2" style="margin-bottom: 10px;"><button class="btn" id="openLog">📜 عرض السجل</button><button class="btn" id="copyLinkBtn">🔗 نسخ رابط المشاهدة</button></div><hr><div class="row2"><button class="btn" id="doCreate">🚀 إنشاء غرفة جديدة</button><button class="btn" id="showJoinView">🚪 الانضمام لغرفة أخرى</button></div></div><div id="joinView" style="display: none;"><h3>الانضمام لغرفة</h3><div style="display:flex; gap:6px; align-items:center;"><input type="text" id="joinId" class="input" placeholder="أدخل رمز الغرفة" /><button class="btn" id="doJoin">دخول</button></div><button class="btn" id="backToManagement" style="margin-top: 10px; background: #2a3257;">رجوع</button></div><hr><div style="display:flex; justify-content:flex-end;"><button class="btn" id="closeRoomModal">إغلاق</button></div></div></div>
+  
+  <!-- Log Page -->
+  <div class="modal-backdrop" id="logPage" style="display: none;">
+    <div class="log-page">
+      <div class="log-header">
+        <h2>📊 سجل النتائج</h2>
+      </div>
+      <div class="log-content">
+        <table class="log-table">
+          <thead>
+            <tr>
+              <th>📅</th>
+              <th>👤</th>
+              <th>🏆</th>
+              <th>🥈</th>
+              <th>🥇</th>
+            </tr>
+          </thead>
+          <tbody id="logTableBody"></tbody>
+        </table>
+      </div>
+      <div class="log-footer">
+        <button class="btn log-footer-btn" id="clearLogBtn">🗑️ مسح السجل</button>
+        <button class="btn log-footer-btn" id="closeLogPage">✖️ إغلاق</button>
       </div>
     </div>
   </div>
 
+  <!-- Clear Log Confirmation -->
+  <div class="modal-backdrop" id="clearLogModal">
+    <div class="modal">
+      <h3>🗑️ تأكيد مسح السجل</h3>
+      <p style="text-align: center; margin: 16px 0; color: var(--muted);">هل أنت متأكد من حذف جميع السجلات نهائياً؟</p>
+      <div class="row2">
+        <button class="btn" id="confirmClearLog" style="background-color: #e74c3c; color: white;">✔️ نعم، احذف</button>
+        <button class="btn" id="cancelClearLog" style="background: #2a3257; color: white;">❌ إلغاء</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal-backdrop" id="deleteModal"><div class="modal"><h3>🗑️ تأكيد الحذف</h3><p style="text-align: center; margin: 16px 0; color: var(--muted);">هل أنت متأكد من حذف هذا اللاعب؟</p><div class="row2" style="margin-bottom: 10px;"><button class="btn" id="deletePlayerBtn" style="background-color: #e74c3c; color: white;">حذف اللاعب</button><button class="btn" id="deleteAllBtn" style="background-color: #c0392b; color: white;">حذف الجميع</button></div><hr><div style="display:flex; justify-content:flex-end;"><button class="btn" id="closeDeleteModal" style="background: #2a3257; color: white;">إلغاء</button></div></div></div>
+  
+  <div class="modal-backdrop" id="devInfoModal"><div class="modal"><h3>معلومات المطور</h3><div class="info-item"><span>🧑‍💻</span> <b>Mr.K</b></div><div class="info-item"><span>📞</span> <a href="tel:+96899678553">99678553</a><a href="https://wa.me/96899678553" target="_blank" style="font-size: 24px; margin-right: auto;">💬</a></div><div class="info-item"><span>✉️</span> <a href="mailto:scoon80@gmail.com">scoon80@gmail.com</a></div><hr><p style="text-align:center;">شكراً لاستخدامكم التطبيق</p><div style="display:flex; justify-content:flex-end;"><button class="btn" id="closeDevInfoModal">إغلاق</button></div></div></div>
+
+  <!-- نافذة إضافة اللاعبين -->
   <div class="modal-backdrop" id="addPlayerModal">
     <div class="modal">
       <h3>✨ إضافة لاعبين جدد</h3>
@@ -889,18 +1178,22 @@
         console.log("Audio context unlocked by user interaction.");
     }
 
-    const ALL_EMOJIS = ['🤠','😎','🥷','🤡','🦸','🦹','👽','🤖','👑','🦅','🐯','🐺','🐲','🦊','🐸','🐵','🦉','🐨','👨‍🚀','👩‍🚀','👨‍🎨','👩‍🎨','👨‍💻','👩‍💻','👨‍🔬','👩‍🔬'];
+    const ALL_EMOJIS = ['🤠','😎','🥷','🤡','🦸','🦹','👽','🤖','👑','🦅','🯎','🺎','🲎','🦊','🸎','🵎','🦉','🨎','👨‍🚀','👩‍🚀','👨‍🎨','👩‍🎨','👨‍💻','👩‍💻','👨‍🔬','👩‍🔬'];
     const CARD_COLORS = ["#8e44ad", "#e67e22", "#c0392b", "#2980b9", "#27ae60", "#f39c12", "#16a085"];
 
+    // دالة للحصول على شخصية غير مستخدمة
     function getAvailableCharacter(usedChars) {
         let charIndex = 1;
         let selectedChar = `images/uno${charIndex}.png`;
         
+        // نبحث عن أول شخصية غير مستخدمة
         while (usedChars.includes(selectedChar)) {
             charIndex++;
             selectedChar = `images/uno${charIndex}.png`;
             
+            // حماية من اللوب اللا نهائي - إذا وصلنا لرقم عالي جداً
             if (charIndex > 10000) {
+                // نختار رقم عشوائي كبير ونأمل ألا يكون مستخدماً
                 charIndex = Math.floor(Math.random() * 999999) + 10001;
                 selectedChar = `images/uno${charIndex}.png`;
                 break;
@@ -963,6 +1256,7 @@
         };
     }
 
+    // دالة إنشاء بطاقة الفائز
     function winnerCard(p) {
         const cardColor = p.color || CARD_COLORS[0];
         const medalIcon = (p.left >= 5) ? "🥇" : "🥈";
@@ -994,6 +1288,7 @@
             </div>`;
     }
 
+    // دالة إنشاء بطاقة اللاعب العادي
     function playerCard(p, index){
       const cardColor = p.color || CARD_COLORS[index % CARD_COLORS.length];
       const medalIcon = (p.left >= 5) ? "🥇" : "🥈";
@@ -1032,15 +1327,18 @@
         return;
       }
 
-      const winner = list[0];
-      const otherPlayers = list.slice(1);
+      // فصل الفائز عن باقي اللاعبين
+      const winner = list[0]; // أول لاعب (أعلى الكؤوس)
+      const otherPlayers = list.slice(1); // باقي اللاعبين
       
+      // عرض الفائز في الأعلى
       if (winner && (winner.right > 0 || winner.left > 0)) {
         winnerContainer.innerHTML = winnerCard(winner);
       } else {
         winnerContainer.innerHTML = '';
       }
       
+      // عرض باقي اللاعبين
       playersEl.innerHTML = otherPlayers.map((p, i) => playerCard(p, i + 1)).join("");
     }
 
@@ -1110,6 +1408,7 @@
             let updates = {};
             updates[`players/${id}/${side}`] = newValue;
             
+            // تسجيل فقط المركز الأول (الكؤوس)
             if (side === 'right' && delta > 0 && newValue > oldValue) {
                 const date = todayTag();
                 const silverMedals = p.left || 0;
@@ -1166,17 +1465,20 @@
             const playersSnap = await get(ref(db, `rooms/${roomId}/players`));
             const existingPlayers = playersSnap.exists() ? playersSnap.val() : {};
             
+            // جمع جميع الشخصيات المستخدمة حالياً
             let usedEmojis = Object.values(existingPlayers).map(p => p.character).filter(c => c);
             let usedColors = Object.values(existingPlayers).map(p => p.color).filter(c => c);
 
             for (const name of names) {
+                // الحصول على شخصية غير مستخدمة
                 const char = getAvailableCharacter(usedEmojis);
-                usedEmojis.push(char);
+                usedEmojis.push(char); // إضافة للقائمة المستخدمة فوراً
 
                 let availableColors = CARD_COLORS.filter(c => !usedColors.includes(c));
                 if (availableColors.length === 0) {
+                    // إذا انتهت الألوان، نبدأ من جديد
                     availableColors = [...CARD_COLORS];
-                    usedColors = [];
+                    usedColors = []; // إعادة تعيين الألوان المستخدمة
                 }
                 const color = availableColors[0];
                 usedColors.push(color);
@@ -1192,6 +1494,42 @@
         document.getElementById('devInfoBtn').addEventListener('click', () => { unlockSounds(); clickSound.play().catch(e => {}); openModal(document.getElementById('devInfoModal')); });
         document.getElementById('refreshBtn').addEventListener('click', () => { unlockSounds(); clickSound.play().catch(e => {}); location.reload(); });
         document.getElementById("closeRoomModal").addEventListener('click', () => { clickSound.play().catch(e => {}); closeModal(document.getElementById('roomModal')); });
+        document.getElementById("openLog").addEventListener('click', () => {
+            clickSound.play().catch(e => {});
+            closeModal(document.getElementById('roomModal'));
+            openModal(document.getElementById('logPage'));
+            
+            // تحديث جدول السجل
+            onValue(ref(db, `rooms/${roomId}/winnerLog`), (snap) => {
+                const tbody = document.getElementById("logTableBody");
+                if(!snap.exists()){ 
+                    tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--muted); padding: 20px;">لا توجد سجلات بعد</td></tr>`; 
+                    return; 
+                }
+                const list = Object.values(snap.val());
+                list.sort((a,b)=> (b.date||'').localeCompare(a.date||''));
+                tbody.innerHTML = list.map(e=>`
+                    <tr>
+                        <td>${e.date}</td>
+                        <td>${e.name}</td>
+                        <td>${e.cups||0}</td>
+                        <td>${e.silverMedals||0}</td>
+                        <td>${e.goldMedals||0}</td>
+                    </tr>
+                `).join("");
+            }, { onlyOnce: true });
+        });
+        document.getElementById("closeLogPage").addEventListener('click', () => { clickSound.play().catch(e => {}); closeModal(document.getElementById('logPage')); });
+        document.getElementById("clearLogBtn").addEventListener('click', () => { clickSound.play().catch(e => {}); openModal(document.getElementById('clearLogModal')); });
+        document.getElementById("confirmClearLog").addEventListener('click', () => {
+            clickSound.play().catch(e => {});
+            if (roomId) {
+                remove(ref(db, `rooms/${roomId}/winnerLog`));
+            }
+            closeModal(document.getElementById('clearLogModal'));
+            closeModal(document.getElementById('logPage'));
+        });
+        document.getElementById("cancelClearLog").addEventListener('click', () => { clickSound.play().catch(e => {}); closeModal(document.getElementById('clearLogModal')); });
         document.getElementById("closeDeleteModal").addEventListener('click', () => { clickSound.play().catch(e => {}); closeModal(document.getElementById('deleteModal')); });
         document.getElementById("closeDevInfoModal").addEventListener('click', () => { clickSound.play().catch(e => {}); closeModal(document.getElementById('devInfoModal')); });
         document.getElementById('showJoinView').addEventListener('click', () => { clickSound.play().catch(e => {}); document.getElementById('roomManagementView').style.display = 'none'; document.getElementById('joinView').style.display = 'block'; });
@@ -1244,9 +1582,11 @@
     function initializeDynamicEventListeners() {
         let longPressTimer, isLongPress = false, touchEventDetected = false;
         
+        // معالج الضغط على بطاقة الفائز
         function handleCardClick(e, container) {
             unlockSounds();
             
+            // تجاهل الضغط إذا كان ضغط طويل
             if (isLongPress) {
                 isLongPress = false;
                 return;
@@ -1261,13 +1601,15 @@
                 const cardHeight = rect.height;
                 const cardWidth = rect.width;
                 
+                // تحديد المنطقة: نصف البطاقة العلوي للزيادة، النصف السفلي للتقليل
                 const delta = clickY < cardHeight / 2 ? 1 : -1;
                 
+                // تحديد الجهة: يسار للميداليات، يمين للكؤوس
                 let side;
                 if (clickX < cardWidth / 2) {
-                    side = 'left';
+                    side = 'left'; // الجهة اليسرى = الميداليات
                 } else {
-                    side = 'right';
+                    side = 'right'; // الجهة اليمنى = الكؤوس
                 }
                 
                 handleScoreUpdate(playerId, side, delta);
@@ -1275,6 +1617,7 @@
             }
         }
 
+        // معالج الضغط المطول لحذف اللاعب
         function handleCardPress(target, container) {
             if (!isAdmin) return;
             const card = target.closest('.card, .winner-card');
@@ -1292,9 +1635,13 @@
             clearTimeout(longPressTimer);
         };
 
+        // أحداث بطاقة الفائز
         winnerContainer.addEventListener('click', (e) => handleCardClick(e, winnerContainer));
+        
+        // أحداث بطاقات اللاعبين العاديين
         playersEl.addEventListener('click', (e) => handleCardClick(e, playersEl));
 
+        // منع النافذة المنبثقة للصور فقط
         function preventContextMenu(e) {
             if (e.target.closest('.avatar')) {
                 e.preventDefault();
@@ -1305,6 +1652,7 @@
         winnerContainer.addEventListener('contextmenu', preventContextMenu);
         playersEl.addEventListener('contextmenu', preventContextMenu);
 
+        // أحداث اللمس والماوس للحذف
         function setupPressEvents(container) {
             container.addEventListener('touchstart', (e) => { 
                 touchEventDetected = true; 
@@ -1375,46 +1723,4 @@
     })();
   </script>
 </body>
-</html>>
-        <div class="row2">
-          <button class="btn" id="doCreate">🚀 إنشاء غرفة جديدة</button>
-          <button class="btn" id="showJoinView">🚪 الانضمام لغرفة أخرى</button>
-        </div>
-      </div>
-      <div id="joinView" style="display: none;">
-        <h3>الانضمام لغرفة</h3>
-        <div style="display:flex; gap:6px; align-items:center;">
-          <input type="text" id="joinId" class="input" placeholder="أدخل رمز الغرفة" />
-          <button class="btn" id="doJoin">دخول</button>
-        </div>
-        <button class="btn" id="backToManagement" style="margin-top: 10px; background: #2a3257;">رجوع</button>
-      </div>
-      <hr>
-      <div style="display:flex; justify-content:flex-end;">
-        <button class="btn" id="closeRoomModal">إغلاق</button>
-      </div>
-    </div>
-  </div>
-  
-  <div class="modal-backdrop" id="deleteModal">
-    <div class="modal">
-      <h3>🗑️ تأكيد الحذف</h3>
-      <p style="text-align: center; margin: 16px 0; color: var(--muted);">هل أنت متأكد من حذف هذا اللاعب؟</p>
-      <div class="row2" style="margin-bottom: 10px;">
-        <button class="btn" id="deletePlayerBtn" style="background-color: #e74c3c; color: white;">حذف اللاعب</button>
-        <button class="btn" id="deleteAllBtn" style="background-color: #c0392b; color: white;">حذف الجميع</button>
-      </div>
-      <hr>
-      <div style="display:flex; justify-content:flex-end;">
-        <button class="btn" id="closeDeleteModal" style="background: #2a3257; color: white;">إلغاء</button>
-      </div>
-    </div>
-  </div>
-  
-  <div class="modal-backdrop" id="devInfoModal">
-    <div class="modal">
-      <h3>معلومات المطور</h3>
-      <div class="info-item"><span>🧑‍💻</span> <b>Mr.K</b></div>
-      <div class="info-item"><span>📞</span> <a href="tel:+96899678553">99678553</a><a href="https://wa.me/96899678553" target="_blank" style="font-size: 24px; margin-right: auto;">💬</a></div>
-      <div class="info-item"><span>✉️</span> <a href="mailto:scoon80@gmail.com">scoon80@gmail.com</a></div>
-      <hr
+</html>
