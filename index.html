@@ -1,4 +1,30 @@
-<!DOCTYPE html>
+.winner-card .card-header {
+      position: absolute;
+      top: 75%;
+      right: 12px;
+      transform: translateY(-50%) rotate(-90deg);
+      transform-origin: center center;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .winner-card .player-name-section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: var(--winner-name-font);
+      color: var(--text);
+      padding: 6px 12px;
+      border-radius: 10px 0 0 10px;
+      width: fit-content;
+      background: linear-gradient(to bottom, rgba(255,215,0,0.4), rgba(255,215,0,0.1));
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255,215,0,0.3);
+      border-right: none;
+      white-space: nowrap;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
@@ -295,10 +321,10 @@
     
     .card-header {
       position: absolute;
-      bottom: 50%;
-      right: -1px;
-      transform: translateY(50%) rotate(-90deg);
-      transform-origin: right center;
+      top: 75%;
+      right: 8px;
+      transform: translateY(-50%) rotate(-90deg);
+      transform-origin: center center;
       z-index: 10;
       pointer-events: none;
     }
@@ -316,6 +342,7 @@
       background: linear-gradient(to bottom, rgba(255,255,255,0.3), rgba(255,255,255,0.05));
       backdrop-filter: blur(8px);
       border: 1px solid rgba(255,255,255,0.15);
+      border-right: none;
       white-space: nowrap;
     }
     
