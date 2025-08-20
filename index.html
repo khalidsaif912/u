@@ -1,4 +1,29 @@
-<!DOCTYPE html>
+.winner-card .card-header {
+      position: absolute;
+      bottom: 50%;
+      right: 12px;
+      transform: translateY(50%) rotate(-90deg);
+      transform-origin: center;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .winner-card .player-name-section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: var(--winner-name-font);
+      color: var(--text);
+      padding: 6px 12px;
+      border-radius: 16px;
+      width: fit-content;
+      background: linear-gradient(to bottom, rgba(255,215,0,0.4), rgba(255,215,0,0.1));
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255,215,0,0.3);
+      white-space: nowrap;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
@@ -29,6 +54,15 @@
       --mobile-card-min-height: 120px;
       --mobile-score-padding: 2px 6px;
       --mobile-score-min-width: 30px;
+
+      /* متغيرات بطاقة الفائز */
+      --winner-avatar-size: 140px;
+      --winner-score-font: 36px;
+      --winner-score-icon: 42px;
+      --winner-name-font: 24px;
+      --winner-card-height: 180px;
+      --winner-score-padding: 6px 14px;
+      --winner-score-min-width: 50px;
     }
     
     * { box-sizing: border-box; }
@@ -108,6 +142,160 @@
       padding: 2px 8px; 
       border-radius: 999px; 
     }
+
+    /* ===== بطاقة الفائز ===== */
+    .winner-section {
+      width: 100%;
+      margin-bottom: 16px;
+    }
+
+    .winner-card {
+      border-radius: 16px; 
+      padding: 20px; 
+      box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+      position: relative; 
+      user-select: none; 
+      border: 2px solid rgba(255, 215, 0, 0.6);
+      height: var(--winner-card-height);
+      display: flex; 
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 165, 0, 0.1));
+      backdrop-filter: blur(15px);
+      animation: winnerGlow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes winnerGlow {
+      0% {
+        box-shadow: 0 10px 40px rgba(0,0,0,0.4), 0 0 20px rgba(255, 215, 0, 0.3);
+      }
+      100% {
+        box-shadow: 0 15px 50px rgba(0,0,0,0.5), 0 0 30px rgba(255, 215, 0, 0.6);
+      }
+    }
+
+    .winner-card::before {
+      content: "👑";
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 32px;
+      z-index: 15;
+      animation: crownFloat 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes crownFloat {
+      0% { transform: translateY(0px); }
+      100% { transform: translateY(-5px); }
+    }
+
+    .winner-card .card-header {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .winner-card .player-name-section {
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+      font-size: var(--winner-name-font);
+      color: var(--text);
+      padding: 6px 12px;
+      border-radius: 16px;
+      width: fit-content;
+      background: linear-gradient(to left, rgba(255,215,0,0.4), rgba(255,215,0,0.1));
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255,215,0,0.3);
+      white-space: nowrap;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .winner-card .card-body {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .winner-card .score-area { 
+      display: flex; 
+      flex-direction: column;
+      align-items: center; 
+      justify-content: center;
+      gap: 12px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .winner-card .score-area.left {
+      left: 25px;
+    }
+
+    .winner-card .score-area.right {
+      right: 25px;
+    }
+
+    .winner-card .score-card {
+      background: linear-gradient(to top, rgba(255,215,0,0.4), rgba(255,215,0,0.1)); 
+      backdrop-filter: blur(15px);
+      border-radius: 10px; 
+      padding: var(--winner-score-padding);
+      font-size: var(--winner-score-font); 
+      font-weight: 900; 
+      text-align: center; 
+      min-width: var(--winner-score-min-width);
+      border: 2px solid rgba(255,215,0,0.4); 
+      box-shadow: 0 8px 32px rgba(255,215,0,0.2);
+      transition: all 0.3s ease; 
+      position: relative;
+      pointer-events: none;
+      color: var(--text);
+      line-height: 1;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .winner-card .score-icon {
+      font-size: var(--winner-score-icon);
+      opacity: 1;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+    }
+
+    .winner-card .center-col { 
+      text-align: center; 
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 5;
+    }
+
+    .winner-card .avatar {
+      width: var(--winner-avatar-size);
+      height: var(--winner-avatar-size);
+      object-fit: cover;
+      background: transparent;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      pointer-events: none;
+      border-radius: 20px;
+      position: relative;
+      z-index: 5;
+      filter: drop-shadow(4px 8px 6px rgba(0,0,0,0.6));
+      transform: translateY(0px);
+      box-shadow: none;
+      border: 3px solid rgba(255,215,0,0.5);
+    }
     
     .grid { 
       display: grid; 
@@ -132,8 +320,10 @@
     
     .card-header {
       position: absolute;
-      bottom: 8px;
+      bottom: 50%;
       right: 8px;
+      transform: translateY(50%) rotate(-90deg);
+      transform-origin: center;
       z-index: 10;
       pointer-events: none;
     }
@@ -141,13 +331,14 @@
     .player-name-section {
       display: flex;
       align-items: center;
+      justify-content: center;
       font-weight: bold;
       font-size: var(--mobile-name-font);
       color: var(--text);
-      padding: 2px 6px;
+      padding: 4px 8px;
       border-radius: 12px;
       width: fit-content;
-      background: linear-gradient(to left, rgba(255,255,255,0.3), rgba(255,255,255,0.05));
+      background: linear-gradient(to bottom, rgba(255,255,255,0.3), rgba(255,255,255,0.05));
       backdrop-filter: blur(8px);
       border: 1px solid rgba(255,255,255,0.15);
       white-space: nowrap;
@@ -235,6 +426,47 @@
     
     /* ===== تصميم خاص بالويندوز والشاشات الكبيرة ===== */
     @media screen and (min-width: 768px) {
+      .wrap {
+        max-width: 900px;
+      }
+
+      .winner-card {
+        height: 200px;
+        padding: 24px;
+      }
+
+      .winner-card .avatar {
+        width: 160px;
+        height: 160px;
+        border-radius: 25px;
+        border: 4px solid rgba(255,215,0,0.6);
+      }
+
+      .winner-card .score-card {
+        font-size: 42px;
+        padding: 8px 16px;
+        min-width: 60px;
+        border-radius: 12px;
+      }
+
+      .winner-card .score-icon {
+        font-size: 48px;
+      }
+
+      .winner-card .player-name-section {
+        font-size: 28px;
+        padding: 8px 16px;
+        border-radius: 20px;
+      }
+
+      .winner-card .score-area.left {
+        left: 35px;
+      }
+
+      .winner-card .score-area.right {
+        right: 35px;
+      }
+
       .card {
         min-height: var(--desktop-card-min-height);
         padding: 20px;
@@ -289,6 +521,31 @@
       .wrap {
         max-width: 1200px;
       }
+
+      .winner-card {
+        height: 220px;
+        padding: 28px;
+      }
+
+      .winner-card .avatar {
+        width: 180px;
+        height: 180px;
+      }
+
+      .winner-card .score-card {
+        font-size: 48px;
+        padding: 10px 18px;
+        min-width: 70px;
+      }
+
+      .winner-card .score-icon {
+        font-size: 52px;
+      }
+
+      .winner-card .player-name-section {
+        font-size: 32px;
+        padding: 10px 18px;
+      }
       
       .card {
         min-height: 180px;
@@ -325,6 +582,49 @@
     @media screen and (max-width: 480px) {
       .wrap {
         padding: 10px;
+      }
+
+      .winner-card {
+        height: 140px;
+        padding: 16px;
+      }
+
+      .winner-card .avatar {
+        width: 100px;
+        height: 100px;
+        border-radius: 15px;
+        border: 2px solid rgba(255,215,0,0.4);
+      }
+
+      .winner-card .score-card {
+        font-size: 24px;
+        padding: 3px 8px;
+        min-width: 35px;
+        border-radius: 8px;
+      }
+
+      .winner-card .score-icon {
+        font-size: 30px;
+      }
+
+      .winner-card .player-name-section {
+        font-size: 16px;
+        padding: 4px 8px;
+        border-radius: 12px;
+      }
+
+      .winner-card .score-area.left {
+        left: 15px;
+      }
+
+      .winner-card .score-area.right {
+        right: 15px;
+      }
+
+      .winner-card::before {
+        font-size: 24px;
+        top: 8px;
+        left: 8px;
       }
       
       .grid {
@@ -369,6 +669,32 @@
     
     /* ===== تصميم خاص للأجهزة اللوحية ===== */
     @media screen and (min-width: 481px) and (max-width: 767px) {
+      .winner-card {
+        height: 160px;
+        padding: 18px;
+      }
+
+      .winner-card .avatar {
+        width: 120px;
+        height: 120px;
+        border-radius: 18px;
+      }
+
+      .winner-card .score-card {
+        font-size: 30px;
+        padding: 4px 10px;
+        min-width: 40px;
+      }
+
+      .winner-card .score-icon {
+        font-size: 36px;
+      }
+
+      .winner-card .player-name-section {
+        font-size: 20px;
+        padding: 6px 10px;
+      }
+
       .card {
         min-height: 130px;
         padding: 16px;
@@ -428,7 +754,7 @@
     
     /* ===== تحسينات خاصة بأجهزة iOS ===== */
     @supports (-webkit-touch-callout: none) {
-      .card {
+      .card, .winner-card {
         -webkit-tap-highlight-color: transparent;
       }
       
@@ -714,81 +1040,6 @@
       font-size: 16px;
       text-align: center;
     }
-
-    /* ===== أنماط Wake Lock Modal ===== */
-    .wake-lock-modal {
-      width: min(95vw, 600px);
-      max-height: 90vh;
-      overflow-y: auto;
-    }
-    
-    .wake-lock-status {
-      font-size: 18px;
-      margin: 20px 0;
-      padding: 15px;
-      border-radius: 10px;
-      font-weight: bold;
-      text-align: center;
-    }
-    
-    .wake-lock-status.active {
-      background: rgba(46, 204, 113, 0.2);
-      border: 2px solid #2ecc71;
-    }
-    
-    .wake-lock-status.inactive {
-      background: rgba(231, 76, 60, 0.2);
-      border: 2px solid #e74c3c;
-    }
-    
-    .wake-lock-timer {
-      font-size: 24px;
-      font-weight: bold;
-      margin: 20px 0;
-      font-family: 'Courier New', monospace;
-      text-align: center;
-    }
-    
-    .wake-lock-info {
-      background: rgba(52, 152, 219, 0.2);
-      border: 1px solid #3498db;
-      border-radius: 10px;
-      padding: 15px;
-      margin: 20px 0;
-      text-align: right;
-      line-height: 1.6;
-    }
-    
-    .wake-lock-warning {
-      background: rgba(243, 156, 18, 0.2);
-      border: 1px solid #f39c12;
-      border-radius: 10px;
-      padding: 15px;
-      margin: 20px 0;
-      text-align: right;
-    }
-    
-    .feature-list {
-      text-align: right;
-      margin: 15px 0;
-    }
-    
-    .feature-list li {
-      margin: 8px 0;
-      padding: 5px 0;
-    }
-    
-    .wake-lock-controls {
-      display: flex;
-      gap: 12px;
-      margin: 20px 0;
-    }
-    
-    .wake-lock-controls .btn {
-      flex: 1;
-      padding: 12px 16px;
-      font-size: 16px;
-    }
   </style>
 </head>
 <body>
@@ -796,6 +1047,7 @@
   <div id="screen-flash"></div>
   <div class="wrap">
     <div id="header-container"></div>
+    <div id="winner-container"></div>
     <div class="grid" id="players"></div>
   </div>
 
@@ -847,72 +1099,7 @@
   
   <div class="modal-backdrop" id="deleteModal"><div class="modal"><h3>🗑️ تأكيد الحذف</h3><p style="text-align: center; margin: 16px 0; color: var(--muted);">هل أنت متأكد من حذف هذا اللاعب؟</p><div class="row2" style="margin-bottom: 10px;"><button class="btn" id="deletePlayerBtn" style="background-color: #e74c3c; color: white;">حذف اللاعب</button><button class="btn" id="deleteAllBtn" style="background-color: #c0392b; color: white;">حذف الجميع</button></div><hr><div style="display:flex; justify-content:flex-end;"><button class="btn" id="closeDeleteModal" style="background: #2a3257; color: white;">إلغاء</button></div></div></div>
   
-  <div class="modal-backdrop" id="devInfoModal">
-    <div class="modal">
-      <h3>معلومات المطور</h3>
-      <div class="info-item"><span>🧑‍💻</span> <b>Mr.K</b></div>
-      <div class="info-item"><span>📞</span> <a href="tel:+96899678553">99678553</a><a href="https://wa.me/96899678553" target="_blank" style="font-size: 24px; margin-right: auto;">💬</a></div>
-      <div class="info-item"><span>✉️</span> <a href="mailto:scoon80@gmail.com">scoon80@gmail.com</a></div>
-      <hr>
-      <!-- زر Wake Lock الجديد -->
-      <div style="margin: 16px 0;">
-        <button class="btn" id="openWakeLockBtn" style="width: 100%; background: linear-gradient(45deg, #667eea, #764ba2); color: white; padding: 12px; font-size: 16px;">
-          🚫💤 إعدادات منع وضع السكون
-        </button>
-      </div>
-      <hr>
-      <p style="text-align:center;">شكراً لاستخدامكم التطبيق</p>
-      <div style="display:flex; justify-content:flex-end;">
-        <button class="btn" id="closeDevInfoModal">إغلاق</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- نافذة Wake Lock -->
-  <div class="modal-backdrop" id="wakeLockModal">
-    <div class="modal wake-lock-modal">
-      <h3>🚫💤 منع وضع السكون</h3>
-      
-      <div id="wakeLockStatus" class="wake-lock-status inactive">
-        ⚫ وضع السكون مُفعّل
-      </div>
-      
-      <div class="wake-lock-timer" id="wakeLockTimer">
-        ⏱️ الوقت النشط: 00:00:00
-      </div>
-      
-      <div class="wake-lock-controls">
-        <button class="btn" id="toggleWakeLock" style="background: linear-gradient(45deg, #667eea, #764ba2); color: white;">🔓 منع وضع السكون</button>
-        <button class="btn" id="resetWakeLockTimer" style="background: #2a3257; color: white;">🔄 إعادة تعيين</button>
-      </div>
-      
-      <div class="wake-lock-info">
-        <h4>📋 معلومات Wake Lock API:</h4>
-        <div class="feature-list">
-          <ul>
-            <li>🌐 يعمل في المتصفحات الحديثة (Chrome, Edge, Safari)</li>
-            <li>🔋 يمنع الشاشة من الإطفاء والجهاز من السكون</li>
-            <li>⚡ يتطلب تفاعل المستخدم لبدء التشغيل</li>
-            <li>🔒 يتوقف تلقائياً عند إغلاق التبويب</li>
-          </ul>
-        </div>
-      </div>
-      
-      <div class="wake-lock-warning">
-        <strong>⚠️ تنبيه:</strong> استخدام هذه الميزة قد يؤثر على عمر البطارية. تأكد من إيقافها عند عدم الحاجة.
-      </div>
-      
-      <div id="wakeLockSupportInfo" class="wake-lock-info" style="display: none; background: rgba(231, 76, 60, 0.2); border-color: #e74c3c;">
-        <p>❌ متصفحك لا يدعم Wake Lock API</p>
-        <p>جرب استخدام Chrome أو Edge الحديث</p>
-      </div>
-      
-      <hr>
-      <div style="display:flex; justify-content:flex-end;">
-        <button class="btn" id="closeWakeLockModal" style="background: #2a3257; color: white;">إغلاق</button>
-      </div>
-    </div>
-  </div>
+  <div class="modal-backdrop" id="devInfoModal"><div class="modal"><h3>معلومات المطور</h3><div class="info-item"><span>🧑‍💻</span> <b>Mr.K</b></div><div class="info-item"><span>📞</span> <a href="tel:+96899678553">99678553</a><a href="https://wa.me/96899678553" target="_blank" style="font-size: 24px; margin-right: auto;">💬</a></div><div class="info-item"><span>✉️</span> <a href="mailto:scoon80@gmail.com">scoon80@gmail.com</a></div><hr><p style="text-align:center;">شكراً لاستخدامكم التطبيق</p><div style="display:flex; justify-content:flex-end;"><button class="btn" id="closeDevInfoModal">إغلاق</button></div></div></div>
 
   <!-- نافذة إضافة اللاعبين -->
   <div class="modal-backdrop" id="addPlayerModal">
@@ -957,20 +1144,10 @@
     let isAdmin = false;
 
     const headerContainer = document.getElementById("header-container");
+    const winnerContainer = document.getElementById("winner-container");
     const playersEl = document.getElementById("players");
     const modalRoomId = document.getElementById("modalRoomId");
     let currentTargetPlayerId = null;
-
-    // ===== Wake Lock Variables =====
-    let wakeLock = null;
-    let wakeLockStartTime = null;
-    let wakeLockTimerInterval = null;
-    
-    const wakeLockStatusDiv = document.getElementById('wakeLockStatus');
-    const wakeLockTimerDiv = document.getElementById('wakeLockTimer');
-    const toggleWakeLockBtn = document.getElementById('toggleWakeLock');
-    const resetWakeLockTimerBtn = document.getElementById('resetWakeLockTimer');
-    const wakeLockSupportInfo = document.getElementById('wakeLockSupportInfo');
 
     // الأصوات
     const clickSound = new Audio('./click.mp3');
@@ -997,99 +1174,6 @@
 
     const ALL_EMOJIS = ['🤠','😎','🥷','🤡','🦸','🦹','👽','🤖','👑','🦅','🯎','🺎','🲎','🦊','🸎','🵎','🦉','🨎','👨‍🚀','👩‍🚀','👨‍🎨','👩‍🎨','👨‍💻','👩‍💻','👨‍🔬','👩‍🔬'];
     const CARD_COLORS = ["#8e44ad", "#e67e22", "#c0392b", "#2980b9", "#27ae60", "#f39c12", "#16a085"];
-
-    // ===== Wake Lock Functions =====
-    function checkWakeLockSupport() {
-        if ('wakeLock' in navigator) {
-            console.log('Wake Lock API مدعوم! 🎉');
-            return true;
-        } else {
-            wakeLockSupportInfo.style.display = 'block';
-            toggleWakeLockBtn.disabled = true;
-            toggleWakeLockBtn.textContent = '❌ غير مدعوم في هذا المتصفح';
-            return false;
-        }
-    }
-
-    function updateWakeLockTimer() {
-        if (wakeLockStartTime) {
-            const elapsed = Date.now() - wakeLockStartTime;
-            const hours = Math.floor(elapsed / 3600000);
-            const minutes = Math.floor((elapsed % 3600000) / 60000);
-            const seconds = Math.floor((elapsed % 60000) / 1000);
-            
-            wakeLockTimerDiv.textContent = `⏱️ الوقت النشط: ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-        }
-    }
-
-    function startWakeLockTimer() {
-        if (!wakeLockStartTime) {
-            wakeLockStartTime = Date.now();
-            wakeLockTimerInterval = setInterval(updateWakeLockTimer, 1000);
-        }
-    }
-
-    function stopWakeLockTimer() {
-        if (wakeLockTimerInterval) {
-            clearInterval(wakeLockTimerInterval);
-            wakeLockTimerInterval = null;
-        }
-    }
-
-    function resetWakeLockTimer() {
-        stopWakeLockTimer();
-        wakeLockStartTime = null;
-        wakeLockTimerDiv.textContent = '⏱️ الوقت النشط: 00:00:00';
-    }
-
-    async function toggleWakeLock() {
-        try {
-            if (wakeLock === null) {
-                // تشغيل Wake Lock
-                wakeLock = await navigator.wakeLock.request('screen');
-                
-                wakeLockStatusDiv.textContent = '🟢 تم منع وضع السكون';
-                wakeLockStatusDiv.className = 'wake-lock-status active';
-                toggleWakeLockBtn.textContent = '🔒 السماح بوضع السكون';
-                
-                startWakeLockTimer();
-                
-                console.log('Wake Lock مُفعّل بنجاح! 🎯');
-                
-                // مراقبة انتهاء Wake Lock
-                wakeLock.addEventListener('release', () => {
-                    console.log('Wake Lock تم إطلاقه');
-                    wakeLockStatusDiv.textContent = '⚫ وضع السكون مُفعّل';
-                    wakeLockStatusDiv.className = 'wake-lock-status inactive';
-                    toggleWakeLockBtn.textContent = '🔓 منع وضع السكون';
-                    wakeLock = null;
-                    stopWakeLockTimer();
-                });
-                
-            } else {
-                // إيقاف Wake Lock
-                await wakeLock.release();
-                wakeLock = null;
-            }
-            
-        } catch (err) {
-            console.error('خطأ في Wake Lock:', err);
-            alert('حدث خطأ: ' + err.message);
-        }
-    }
-
-    // معالجة تغيير visibility للـ Wake Lock
-    document.addEventListener('visibilitychange', async () => {
-        if (wakeLock !== null && document.visibilityState === 'visible') {
-            // إعادة تشغيل Wake Lock عند العودة للتبويب
-            try {
-                wakeLock = await navigator.wakeLock.request('screen');
-                console.log('Wake Lock أُعيد تشغيله بعد العودة للتبويب');
-            } catch (err) {
-                console.error('فشل في إعادة تشغيل Wake Lock:', err);
-            }
-        }
-    });
 
     // دالة للحصول على شخصية غير مستخدمة
     function getAvailableCharacter(usedChars) {
@@ -1166,13 +1250,44 @@
         };
     }
 
-    // دالة إنشاء بطاقة اللاعب - تصميم نهائي نظيف
+    // دالة إنشاء بطاقة الفائز
+    function winnerCard(p) {
+        const cardColor = p.color || CARD_COLORS[0];
+        const medalIcon = (p.left >= 5) ? "🥇" : "🥈";
+        
+        return `
+            <div class="winner-section">
+                <div class="winner-card" data-player-id="${p.id}" style="background: linear-gradient(135deg, ${hexToRgba(cardColor, 0.2)}, ${hexToRgba(cardColor, 0.1)});">
+                    <div class="card-body">
+                        <div class="score-area left">
+                            <div class="score-card" data-side="left" data-player-id="${p.id}">${p.left||0}</div>
+                            <span class="score-icon">${medalIcon}</span>
+                        </div>
+                        <div class="center-col">
+                            <div class="emoji">
+                                <img src="${p.character||'images/uno1.png'}" class="avatar" alt="char" onerror="this.src='images/uno1.png'">
+                            </div>
+                        </div>
+                        <div class="score-area right">
+                            <div class="score-card" data-side="right" data-player-id="${p.id}">${p.right||0}</div>
+                            <span class="score-icon">🏆</span>
+                        </div>
+                    </div>
+                    <div class="card-header">
+                        <div class="player-name-section">
+                            <span>${p.name||'لاعب'}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+    }
+
+    // دالة إنشاء بطاقة اللاعب العادي
     function playerCard(p, index){
       const cardColor = p.color || CARD_COLORS[index % CARD_COLORS.length];
-      // تحديد أيقونة الميدالية (ذهبية أم فضية)
       const medalIcon = (p.left >= 5) ? "🥇" : "🥈";
       
-              return `
+      return `
         <div class="card" data-player-id="${p.id}" style="background-color: ${hexToRgba(cardColor, 0.8)};">
           <div class="card-body">
             <div class="score-area left">
@@ -1199,7 +1314,26 @@
 
     function renderPlayers(list){
       renderHeader();
-      playersEl.innerHTML = list.map((p, i) => playerCard(p, i)).join("");
+      
+      if (list.length === 0) {
+        winnerContainer.innerHTML = '';
+        playersEl.innerHTML = '';
+        return;
+      }
+
+      // فصل الفائز عن باقي اللاعبين
+      const winner = list[0]; // أول لاعب (أعلى الكؤوس)
+      const otherPlayers = list.slice(1); // باقي اللاعبين
+      
+      // عرض الفائز في الأعلى
+      if (winner && (winner.right > 0 || winner.left > 0)) {
+        winnerContainer.innerHTML = winnerCard(winner);
+      } else {
+        winnerContainer.innerHTML = '';
+      }
+      
+      // عرض باقي اللاعبين
+      playersEl.innerHTML = otherPlayers.map((p, i) => playerCard(p, i + 1)).join("");
     }
 
     function triggerFireworks(winData) {
@@ -1353,31 +1487,6 @@
         document.getElementById('addPlayerFab').addEventListener('click', () => { unlockSounds(); clickSound.play().catch(e => {}); addPlayers(); });
         document.getElementById('devInfoBtn').addEventListener('click', () => { unlockSounds(); clickSound.play().catch(e => {}); openModal(document.getElementById('devInfoModal')); });
         document.getElementById('refreshBtn').addEventListener('click', () => { unlockSounds(); clickSound.play().catch(e => {}); location.reload(); });
-        
-        // Wake Lock Event Listeners
-        document.getElementById('openWakeLockBtn').addEventListener('click', () => {
-            clickSound.play().catch(e => {});
-            closeModal(document.getElementById('devInfoModal'));
-            openModal(document.getElementById('wakeLockModal'));
-            checkWakeLockSupport();
-        });
-        
-        document.getElementById('closeWakeLockModal').addEventListener('click', () => {
-            clickSound.play().catch(e => {});
-            closeModal(document.getElementById('wakeLockModal'));
-        });
-        
-        toggleWakeLockBtn.addEventListener('click', () => {
-            unlockSounds();
-            clickSound.play().catch(e => {});
-            toggleWakeLock();
-        });
-        
-        resetWakeLockTimerBtn.addEventListener('click', () => {
-            clickSound.play().catch(e => {});
-            resetWakeLockTimer();
-        });
-        
         document.getElementById("closeRoomModal").addEventListener('click', () => { clickSound.play().catch(e => {}); closeModal(document.getElementById('roomModal')); });
         document.getElementById("openLog").addEventListener('click', () => {
             clickSound.play().catch(e => {});
@@ -1467,8 +1576,8 @@
     function initializeDynamicEventListeners() {
         let longPressTimer, isLongPress = false, touchEventDetected = false;
         
-        // معالج الضغط الجديد على بطاقة اللاعب
-        playersEl.addEventListener('click', (e) => {
+        // معالج الضغط على بطاقة الفائز
+        function handleCardClick(e, container) {
             unlockSounds();
             
             // تجاهل الضغط إذا كان ضغط طويل
@@ -1477,7 +1586,7 @@
                 return;
             }
             
-            const card = e.target.closest('.card');
+            const card = e.target.closest('.card, .winner-card');
             if (card && isAdmin) {
                 const playerId = card.dataset.playerId;
                 const rect = card.getBoundingClientRect();
@@ -1500,61 +1609,77 @@
                 handleScoreUpdate(playerId, side, delta);
                 clickSound.play().catch(e => {});
             }
-        });
+        }
 
-        // معالج الضغط المطول على أي مكان في البطاقة لحذف اللاعب
-        const handlePress = (target) => {
+        // معالج الضغط المطول لحذف اللاعب
+        function handleCardPress(target, container) {
             if (!isAdmin) return;
-            const card = target.closest('.card');
+            const card = target.closest('.card, .winner-card');
             if (card) {
                 isLongPress = false;
                 currentTargetPlayerId = card.dataset.playerId;
                 longPressTimer = setTimeout(() => { 
                     isLongPress = true; 
                     openModal(document.getElementById('deleteModal')); 
-                }, 1000); // زيادة الوقت قليلاً لتجنب الفتح بالخطأ
+                }, 1000);
             }
-        };
+        }
         
         const handleRelease = () => {
             clearTimeout(longPressTimer);
         };
 
+        // أحداث بطاقة الفائز
+        winnerContainer.addEventListener('click', (e) => handleCardClick(e, winnerContainer));
+        
+        // أحداث بطاقات اللاعبين العاديين
+        playersEl.addEventListener('click', (e) => handleCardClick(e, playersEl));
+
         // منع النافذة المنبثقة للصور فقط
-        playersEl.addEventListener('contextmenu', (e) => {
+        function preventContextMenu(e) {
             if (e.target.closest('.avatar')) {
                 e.preventDefault();
                 return false;
             }
-        });
+        }
 
-        playersEl.addEventListener('touchstart', (e) => { 
-            touchEventDetected = true; 
-            handlePress(e.target); 
-        }, { passive: true });
-        
-        playersEl.addEventListener('touchend', (e) => { 
-            if (!touchEventDetected) return; 
-            handleRelease(); 
-        });
-        
-        playersEl.addEventListener('mousedown', (e) => { 
-            if (touchEventDetected || e.button !== 0) return; 
-            handlePress(e.target); 
-        });
-        
-        playersEl.addEventListener('mouseup', (e) => { 
-            if (touchEventDetected || e.button !== 0) return; 
-            handleRelease(); 
-        });
+        winnerContainer.addEventListener('contextmenu', preventContextMenu);
+        playersEl.addEventListener('contextmenu', preventContextMenu);
 
-        const cancelPress = () => {
-            clearTimeout(longPressTimer);
-            isLongPress = false;
-        };
-        playersEl.addEventListener('touchcancel', cancelPress);
-        playersEl.addEventListener('touchmove', cancelPress); // إلغاء عند الحركة
-        playersEl.addEventListener('mouseleave', cancelPress);
+        // أحداث اللمس والماوس للحذف
+        function setupPressEvents(container) {
+            container.addEventListener('touchstart', (e) => { 
+                touchEventDetected = true; 
+                handleCardPress(e.target, container); 
+            }, { passive: true });
+            
+            container.addEventListener('touchend', (e) => { 
+                if (!touchEventDetected) return; 
+                handleRelease(); 
+            });
+            
+            container.addEventListener('mousedown', (e) => { 
+                if (touchEventDetected || e.button !== 0) return; 
+                handleCardPress(e.target, container); 
+            });
+            
+            container.addEventListener('mouseup', (e) => { 
+                if (touchEventDetected || e.button !== 0) return; 
+                handleRelease(); 
+            });
+
+            const cancelPress = () => {
+                clearTimeout(longPressTimer);
+                isLongPress = false;
+            };
+            
+            container.addEventListener('touchcancel', cancelPress);
+            container.addEventListener('touchmove', cancelPress);
+            container.addEventListener('mouseleave', cancelPress);
+        }
+
+        setupPressEvents(winnerContainer);
+        setupPressEvents(playersEl);
     }
 
     (async function boot(){
@@ -1589,14 +1714,6 @@
       }
       
       initializeDynamicEventListeners();
-      
-      // تحديث مؤقت Wake Lock كل ثانية
-      setInterval(() => {
-          if (wakeLockStartTime) {
-              updateWakeLockTimer();
-          }
-      }, 1000);
-      
     })();
   </script>
 </body>
