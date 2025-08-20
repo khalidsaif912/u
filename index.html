@@ -1,9 +1,7 @@
 .winner-card .card-header {
       position: absolute;
-      top: 75%;
-      right: 12px;
-      transform: translateY(-50%) rotate(-90deg);
-      transform-origin: center center;
+      top: 70%;
+      right: 0px;
       z-index: 10;
       pointer-events: none;
     }
@@ -15,15 +13,19 @@
       font-weight: bold;
       font-size: var(--winner-name-font);
       color: var(--text);
-      padding: 6px 12px;
+      padding: 8px 6px 8px 12px;
       border-radius: 10px 0 0 10px;
       width: fit-content;
-      background: linear-gradient(to bottom, rgba(255,215,0,0.4), rgba(255,215,0,0.1));
+      background: linear-gradient(to right, rgba(255,215,0,0.4), rgba(255,215,0,0.1));
       backdrop-filter: blur(10px);
       border: 2px solid rgba(255,215,0,0.3);
       border-right: none;
       white-space: nowrap;
       text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      transform: rotate(180deg);
+      min-height: 50px;
     }<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -321,10 +323,8 @@
     
     .card-header {
       position: absolute;
-      top: 75%;
-      right: 8px;
-      transform: translateY(-50%) rotate(-90deg);
-      transform-origin: center center;
+      top: 70%;
+      right: 0px;
       z-index: 10;
       pointer-events: none;
     }
@@ -336,14 +336,18 @@
       font-weight: bold;
       font-size: var(--mobile-name-font);
       color: var(--text);
-      padding: 4px 8px;
+      padding: 6px 4px 6px 8px;
       border-radius: 8px 0 0 8px;
       width: fit-content;
-      background: linear-gradient(to bottom, rgba(255,255,255,0.3), rgba(255,255,255,0.05));
+      background: linear-gradient(to right, rgba(255,255,255,0.3), rgba(255,255,255,0.05));
       backdrop-filter: blur(8px);
       border: 1px solid rgba(255,255,255,0.15);
       border-right: none;
       white-space: nowrap;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      transform: rotate(180deg);
+      min-height: 40px;
     }
     
     .card-body {
