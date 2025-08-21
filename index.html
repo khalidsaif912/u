@@ -938,7 +938,6 @@
             <div class="winner-section">
                 <div class="winner-card" data-player-id="${p.id}" style="background: linear-gradient(135deg, ${hexToRgba(cardColor, 0.2)}, ${hexToRgba(cardColor, 0.1)});">
                     <div class="card-body">
-                        <!-- الأيقونات في الأعلى: كأس يسار، ميدالية يمين -->
                         <div class="top-icons">
                             <span class="top-icon">🏆</span>
                             <span class="top-icon">${medalIcon}</span>
@@ -951,19 +950,20 @@
                         </div>
                     </div>
                     
-    <!-- الترتيب الصحيح: الميداليات يسار، الاسم وسط، الكؤوس يمين -->
-<div class="card-header">
-    <div class="score-area left">
-        <div class="score-card" data-side="left" data-player-id="${p.id}">${p.left||0}</div>
-    </div>
-    <div class="player-name-section">
-        <span>${p.name||'لاعب'}</span>
-    </div>
-    <div class="score-area right">
-        <div class="score-card" data-side="right" data-player-id="${p.id}">${p.right||0}</div>
-    </div>
-</div>
-
+                    <div class="card-header">
+                        <div class="score-area left">
+                            <div class="score-card" data-side="left" data-player-id="${p.id}">${p.left||0}</div>
+                        </div>
+                        <div class="player-name-section">
+                            <span>${p.name||'لاعب'}</span>
+                        </div>
+                        <div class="score-area right">
+                            <div class="score-card" data-side="right" data-player-id="${p.id}">${p.right||0}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+    }
 
     // دالة إنشاء بطاقة اللاعب العادي المحدثة (عكس الأيقونات)
     function playerCard(p, index){
@@ -973,7 +973,6 @@
       return `
         <div class="card" data-player-id="${p.id}" style="background-color: ${hexToRgba(cardColor, 0.8)};">
           <div class="card-body">
-            <!-- الأيقونات في الأعلى: كأس يسار، ميدالية يمين -->
             <div class="top-icons">
               <span class="top-icon">🏆</span>
               <span class="top-icon">${medalIcon}</span>
@@ -986,7 +985,6 @@
             </div>
           </div>
           
-          <!-- الترتيب الجديد: الكؤوس يسار، الاسم وسط، الميداليات يمين -->
           <div class="card-header">
             <div class="score-area left">
               <div class="score-card" data-side="right" data-player-id="${p.id}">${p.right||0}</div>
@@ -1328,14 +1326,13 @@
                 // تحديد المنطقة: نصف البطاقة العلوي للزيادة، النصف السفلي للتقليل
                 const delta = clickY < cardHeight / 2 ? 1 : -1;
                 
-// تحديد الجهة: يسار = ميداليات، يمين = كؤوس
-let side;
-if (clickX < cardWidth / 2) {
-    side = 'left'; // الجهة اليسرى = الميداليات
-} else {
-    side = 'right'; // الجهة اليمنى = الكؤوس
-}
-
+                // تحديد الجهة: يسار = ميداليات، يمين = كؤوس
+                let side;
+                if (clickX < cardWidth / 2) {
+                    side = 'left'; // الجهة اليسرى = الميداليات
+                } else {
+                    side = 'right'; // الجهة اليمنى = الكؤوس
+                }
                 
                 handleScoreUpdate(playerId, side, delta);
                 clickSound.play().catch(e => {});
@@ -1449,4 +1446,3 @@ if (clickX < cardWidth / 2) {
   </script>
 </body>
 </html>
-
