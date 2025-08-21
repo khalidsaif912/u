@@ -241,8 +241,8 @@
           <div class="card-body">
             <!-- الأيقونات في الأعلى: ميدالية يسار، كأس يمين -->
             <div class="top-icons">
-              <span class="top-icon">${medalIcon}</span>
               <span class="top-icon">🏆</span>
+              <span class="top-icon">${medalIcon}</span>
             </div>
             
             <div class="center-col">
@@ -254,13 +254,13 @@
           
           <!-- الترتيب الجديد: الميداليات يسار، الاسم وسط، الكأس يمين -->
           <div class="card-header">
-            <div class="score-area left">
+            <div class="score-area right">
               <div class="score-card" data-side="left" data-player-id="${p.id}">${p.left||0}</div>
             </div>
             <div class="player-name-section">
               <span>${p.name||'لاعب'}</span>
             </div>
-            <div class="score-area right">
+            <div class="score-area left">
               <div class="score-card" data-side="right" data-player-id="${p.id}">${p.right||0}</div>
             </div>
           </div>
