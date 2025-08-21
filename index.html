@@ -280,8 +280,7 @@
 
 .winner-card .card-header {
   position: absolute;
-    bottom: calc(var(--winner-avatar-size) * 0.2);
-  left: 50%;
+  bottom: clamp(15px, 3vh, 25px);  left: 50%;
   transform: translateX(-50%);
   z-index: 10;
   pointer-events: none;
