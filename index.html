@@ -556,9 +556,9 @@
                 // تحديد الجهة: يسار للميداليات، يمين للكؤوس
                 let side;
                 if (clickX < cardWidth / 2) {
-                    side = 'left'; // الجهة اليسرى = الميداليات
+                    side = 'right'; // الجهة اليسرى = الميداليات
                 } else {
-                    side = 'right'; // الجهة اليمنى = الكؤوس
+                    side = 'left'; // الجهة اليمنى = الكؤوس
                 }
                 
                 handleScoreUpdate(playerId, side, delta);
