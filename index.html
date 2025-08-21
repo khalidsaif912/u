@@ -929,41 +929,50 @@
         };
     }
 
-    // دالة إنشاء بطاقة الفائز المحدثة (بدون التاج وعكس الأيقونات)
-    function winnerCard(p) {
-        const cardColor = p.color || CARD_COLORS[0];
-        const medalIcon = (p.left >= 5) ? "🥇" : "🥈";
+
+
+
+// دالة إنشاء بطاقة اللاعب العادي المحدثة (مع توحيد منطق العرض)
+function playerCard(p, index){
+  const cardColor = p.color || CARD_COLORS[index % CARD_COLORS.length];
+  const medalIcon = (p.left >= 5) ? "🥇" : "🥈";
+  
+  return `
+    <div class="card" data-player-id="${p.id}" style="background-color: ${hexToRgba(cardColor, 0.8)};">
+      <div class="card-body">
+        <div class="top-icons">
+          <span class="top-icon">🏆</span>
+          <span class="top-icon">${medalIcon}</span>
+        </div>
         
-        return `
-            <div class="winner-section">
-                <div class="winner-card" data-player-id="${p.id}" style="background: linear-gradient(135deg, ${hexToRgba(cardColor, 0.2)}, ${hexToRgba(cardColor, 0.1)});">
-                    <div class="card-body">
-                        <div class="top-icons">
-                            <span class="top-icon">🏆</span>
-                            <span class="top-icon">${medalIcon}</span>
-                        </div>
-                        
-                        <div class="center-col">
-                            <div class="emoji">
-                                <img src="${p.character||'images/uno1.png'}" class="avatar" alt="char" onerror="this.src='images/uno1.png'">
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="card-header">
-                        <div class="score-area left">
-                            <div class="score-card" data-side="left" data-player-id="${p.id}">${p.left||0}</div>
-                        </div>
-                        <div class="player-name-section">
-                            <span>${p.name||'لاعب'}</span>
-                        </div>
-                        <div class="score-area right">
-                            <div class="score-card" data-side="right" data-player-id="${p.id}">${p.right||0}</div>
-                        </div>
-                    </div>
-                </div>
-            </div>`;
-    }
+        <div class="center-col">
+          <div class="emoji">
+            <img src="${p.character||'images/uno1.png'}" class="avatar" alt="char" onerror="this.src='images/uno1.png'">
+          </div>
+        </div>
+      </div>
+      
+      <div class="card-header">
+        <!-- الجهة اليسرى تعرض الميداليات (left) -->
+        <div class="score-area left">
+          <div class="score-card" data-side="left" data-player-id="${p.id}">${p.left||0}</div>
+        </div>
+        <div class="player-name-section">
+          <span>${p.name||'لاعب'}</span>
+        </div>
+        <!-- الجهة اليمنى تعرض الكؤوس (right) -->
+        <div class="score-area right">
+          <div class="score-card" data-side="right" data-player-id="${p.id}">${p.right||0}</div>
+        </div>
+      </div>
+    </div>`;
+}
+ 
+    
+    
+    
+    
+    
 
     // دالة إنشاء بطاقة اللاعب العادي المحدثة (عكس الأيقونات)
     function playerCard(p, index){
@@ -998,6 +1007,13 @@
           </div>
         </div>`;
     }
+    
+    
+    
+    
+    
+    
+    
 
     function renderPlayers(list){
       renderHeader();
@@ -1307,8 +1323,7 @@
         
         
         
-        
-      // ابحث عن هذه الدالة في الكود
+// معالج الضغط على بطاقة (يعمل الآن لكلا النوعين من البطاقات)
 function handleCardClick(e, container) {
     unlockSounds();
     
@@ -1317,30 +1332,20 @@ function handleCardClick(e, container) {
         return;
     }
     
-    const card = e.target.closest('.card, .winner-card');
-    if (card && isAdmin) {
-        const playerId = card.dataset.playerId;
-        const rect = card.getBoundingClientRect();
+    // استهداف بطاقة النقاط مباشرة لأنها تحتوي على المعلومات التي نحتاجها
+    const scoreCard = e.target.closest('.score-card');
+    
+    // التحقق من أن المستخدم هو المشرف وأن النقرة كانت على بطاقة النقاط
+    if (scoreCard && isAdmin) {
+        const playerId = scoreCard.dataset.playerId;
+        
+        // قراءة جهة التحديث (left أو right) مباشرة من السمة data-side
+        const side = scoreCard.dataset.side; 
+        
+        // تحديد الزيادة أو النقصان بناءً على مكان النقر (النصف العلوي أو السفلي)
+        const rect = scoreCard.getBoundingClientRect();
         const clickY = e.clientY - rect.top;
-        const clickX = e.clientX - rect.left;
-        const cardHeight = rect.height;
-        const cardWidth = rect.width;
-        
-        const delta = clickY < cardHeight / 2 ? 1 : -1;
-        
-        let side;
-        // التحقق إذا كانت البطاقة هي بطاقة الفائز
-        const isWinnerCard = card.classList.contains('winner-card');
-
-        if (clickX < cardWidth / 2) {
-            // الجهة اليسرى من الشاشة
-            // إذا كانت بطاقة فائز، فهي للكؤوس (right). وإلا فهي للميداليات (left).
-            side = isWinnerCard ? 'right' : 'left';
-        } else {
-            // الجهة اليمنى من الشاشة
-            // إذا كانت بطاقة فائز، فهي للميداليات (left). وإلا فهي للكؤوس (right).
-            side = isWinnerCard ? 'left' : 'right';
-        }
+        const delta = clickY < rect.height / 2 ? 1 : -1;
         
         handleScoreUpdate(playerId, side, delta);
         clickSound.play().catch(e => {});
