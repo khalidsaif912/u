@@ -1304,40 +1304,53 @@
     function initializeDynamicEventListeners() {
         let longPressTimer, isLongPress = false, touchEventDetected = false;
         
-        // معالج الضغط على بطاقة الفائز
-        function handleCardClick(e, container) {
-            unlockSounds();
-            
-            // تجاهل الضغط إذا كان ضغط طويل
-            if (isLongPress) {
-                isLongPress = false;
-                return;
-            }
-            
-            const card = e.target.closest('.card, .winner-card');
-            if (card && isAdmin) {
-                const playerId = card.dataset.playerId;
-                const rect = card.getBoundingClientRect();
-                const clickY = e.clientY - rect.top;
-                const clickX = e.clientX - rect.left;
-                const cardHeight = rect.height;
-                const cardWidth = rect.width;
-                
-                // تحديد المنطقة: نصف البطاقة العلوي للزيادة، النصف السفلي للتقليل
-                const delta = clickY < cardHeight / 2 ? 1 : -1;
-                
-                // تحديد الجهة: يسار = ميداليات، يمين = كؤوس
-                let side;
-                if (clickX < cardWidth / 2) {
-                    side = 'left'; // الجهة اليسرى = الميداليات
-                } else {
-                    side = 'right'; // الجهة اليمنى = الكؤوس
-                }
-                
-                handleScoreUpdate(playerId, side, delta);
-                clickSound.play().catch(e => {});
-            }
+        
+        
+        
+        
+      // ابحث عن هذه الدالة في الكود
+function handleCardClick(e, container) {
+    unlockSounds();
+    
+    if (isLongPress) {
+        isLongPress = false;
+        return;
+    }
+    
+    const card = e.target.closest('.card, .winner-card');
+    if (card && isAdmin) {
+        const playerId = card.dataset.playerId;
+        const rect = card.getBoundingClientRect();
+        const clickY = e.clientY - rect.top;
+        const clickX = e.clientX - rect.left;
+        const cardHeight = rect.height;
+        const cardWidth = rect.width;
+        
+        const delta = clickY < cardHeight / 2 ? 1 : -1;
+        
+        let side;
+        // التحقق إذا كانت البطاقة هي بطاقة الفائز
+        const isWinnerCard = card.classList.contains('winner-card');
+
+        if (clickX < cardWidth / 2) {
+            // الجهة اليسرى من الشاشة
+            // إذا كانت بطاقة فائز، فهي للكؤوس (right). وإلا فهي للميداليات (left).
+            side = isWinnerCard ? 'right' : 'left';
+        } else {
+            // الجهة اليمنى من الشاشة
+            // إذا كانت بطاقة فائز، فهي للميداليات (left). وإلا فهي للكؤوس (right).
+            side = isWinnerCard ? 'left' : 'right';
         }
+        
+        handleScoreUpdate(playerId, side, delta);
+        clickSound.play().catch(e => {});
+    }
+}
+
+        
+        
+        
+        
 
         // معالج الضغط المطول لحذف اللاعب
         function handleCardPress(target, container) {
