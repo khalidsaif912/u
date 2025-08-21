@@ -315,13 +315,14 @@
       left: 50%;
       transform: translateX(-50%);
       display: flex;
-      gap: 20px;
+      justify-content: space-between;
+      width: 90%;
       z-index: 15;
     }
 
     .winner-card .top-icons {
       top: 15px;
-      gap: 30px;
+      width: 90%;
     }
 
     .top-icon {
@@ -1230,7 +1231,7 @@
             <div class="winner-section">
                 <div class="winner-card" data-player-id="${p.id}" style="background: linear-gradient(135deg, ${hexToRgba(cardColor, 0.2)}, ${hexToRgba(cardColor, 0.1)});">
                     <div class="card-body">
-                        <!-- الأيقونات في الأعلى -->
+                        <!-- الأيقونات في الأعلى: ميدالية يسار، كأس يمين -->
                         <div class="top-icons">
                             <span class="top-icon">${medalIcon}</span>
                             <span class="top-icon">🏆</span>
@@ -1267,7 +1268,7 @@
       return `
         <div class="card" data-player-id="${p.id}" style="background-color: ${hexToRgba(cardColor, 0.8)};">
           <div class="card-body">
-            <!-- الأيقونات في الأعلى -->
+            <!-- الأيقونات في الأعلى: ميدالية يسار، كأس يمين -->
             <div class="top-icons">
               <span class="top-icon">${medalIcon}</span>
               <span class="top-icon">🏆</span>
