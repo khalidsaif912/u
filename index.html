@@ -150,15 +150,16 @@
       }
     }
 
-    .winner-card::before {
-      content: "👑";
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      font-size: 32px;
-      z-index: 15;
-      animation: crownFloat 2s ease-in-out infinite alternate;
-    }
+.winner-card::before {
+  content: "👑";
+  position: absolute;
+  top: 5px; /* قريب من الأعلى */
+  left: 50%; /* في وسط البطاقة أفقياً */
+  transform: translateX(-50%); /* توسيط مثالي */
+  font-size: 64px;
+  z-index: 15;
+  animation: crownFloat 2s ease-in-out infinite alternate;
+}
 
     @keyframes crownFloat {
       0% { transform: translateY(0px); }
