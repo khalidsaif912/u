@@ -267,25 +267,27 @@
     .card-header {
       position: absolute;
       bottom: 8px;
-      right: 50%; /* وضع في الوسط أفقياً */
-      transform: translateX(50%); /* توسيط أفقي */
+      left: 50%; /* وضع في الوسط أفقياً */
+      transform: translateX(-50%); /* توسيط أفقي */
       z-index: 10;
       pointer-events: none;
       display: flex;
       align-items: center;
-      gap: 8px; /* مسافة بين الاسم والأرقام */
+      justify-content: space-between;
+      width: 90%; /* عرض ثابت لتوزيع العناصر */
     }
 
     .winner-card .card-header {
       position: absolute;
       bottom: 20px; /* مسافة أكبر من الأسفل */
-      right: 50%; /* وضع في الوسط أفقياً */
-      transform: translateX(50%); /* توسيط أفقي */
+      left: 50%; /* وضع في الوسط أفقياً */
+      transform: translateX(-50%); /* توسيط أفقي */
       z-index: 10;
       pointer-events: none;
       display: flex;
       align-items: center;
-      gap: 12px; /* مسافة بين الاسم والأرقام */
+      justify-content: space-between;
+      width: 90%; /* عرض ثابت لتوزيع العناصر */
     }
 
     /* تحريك الأرقام للأسفل مع الاسم */
@@ -487,14 +489,7 @@
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
         gap: 16px;
       }
-
-      .card-header {
-        gap: 10px;
-      }
-
-      .winner-card .card-header {
-        gap: 15px;
-      }
+    }
     }
     
     /* ===== تصميم خاص للشاشات الكبيرة جداً (Full HD+) ===== */
@@ -638,14 +633,7 @@
         padding: 2px 5px;
         max-width: 80px;
       }
-
-      .card-header {
-        gap: 6px;
-      }
-
-      .winner-card .card-header {
-        gap: 8px;
-      }
+    }
     }
     
     /* ===== تصميم خاص للأجهزة اللوحية ===== */
@@ -1255,13 +1243,13 @@
                         </div>
                     </div>
                     
-                    <!-- الاسم والأرقام في الأسفل -->
+                    <!-- الترتيب الجديد: الميداليات يسار، الاسم وسط، الكأس يمين -->
                     <div class="card-header">
-                        <div class="player-name-section">
-                            <span>${p.name||'لاعب'}</span>
-                        </div>
                         <div class="score-area left">
                             <div class="score-card" data-side="left" data-player-id="${p.id}">${p.left||0}</div>
+                        </div>
+                        <div class="player-name-section">
+                            <span>${p.name||'لاعب'}</span>
                         </div>
                         <div class="score-area right">
                             <div class="score-card" data-side="right" data-player-id="${p.id}">${p.right||0}</div>
@@ -1292,13 +1280,13 @@
             </div>
           </div>
           
-          <!-- الاسم والأرقام في الأسفل -->
+          <!-- الترتيب الجديد: الميداليات يسار، الاسم وسط، الكأس يمين -->
           <div class="card-header">
-            <div class="player-name-section">
-              <span>${p.name||'لاعب'}</span>
-            </div>
             <div class="score-area left">
               <div class="score-card" data-side="left" data-player-id="${p.id}">${p.left||0}</div>
+            </div>
+            <div class="player-name-section">
+              <span>${p.name||'لاعب'}</span>
             </div>
             <div class="score-area right">
               <div class="score-card" data-side="right" data-player-id="${p.id}">${p.right||0}</div>
