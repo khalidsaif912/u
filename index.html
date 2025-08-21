@@ -167,8 +167,8 @@
 
     .winner-card .card-header {
       position: absolute;
-      bottom: 8px;
-      right: 50px;
+      bottom: 12px;
+      right: 12px;
       z-index: 10;
       pointer-events: none;
     }
@@ -267,7 +267,7 @@
       position: relative;
       z-index: 5;
       filter: drop-shadow(4px 8px 6px rgba(0,0,0,0.6));
-      transform: translateY(-10px);
+      transform: translateY(0px);
       box-shadow: none;
       border: 3px solid rgba(255,215,0,0.5);
     }
@@ -296,7 +296,7 @@
     .card-header {
       position: absolute;
       bottom: 8px;
-      right: 50%;
+      right: 8px;
       z-index: 10;
       pointer-events: none;
     }
@@ -309,7 +309,7 @@
       color: var(--text);
       padding: 1px 4px;
       border-radius: 8px;
-      max-width: 120px;
+       max-width: 120px; /* حد أقصى للعرض */
       width: fit-content;
       background: linear-gradient(to left, rgba(255,255,255,0.3), rgba(255,255,255,0.05));
       backdrop-filter: blur(8px);
@@ -393,7 +393,7 @@
       position: relative;
       z-index: 5;
       filter: drop-shadow(2px 4px 3px rgba(0,0,0,0.4));
-      transform: translateY(-15px);
+      transform: translateY(10px);
       box-shadow: none;
     }
     
