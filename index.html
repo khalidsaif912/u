@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>UNO Live â€" by Mr.K</title>
+  <title>UNO Live — by Mr.K</title>
   <style>
     :root {
       --bg:#0f1220; 
@@ -165,30 +165,6 @@
       100% { transform: translateY(-5px); }
     }
 
-    .winner-card .card-header {
-      position: absolute;
-      bottom: 12px;
-      right: 12px;
-      z-index: 10;
-      pointer-events: none;
-    }
-
-    .winner-card .player-name-section {
-      display: flex;
-      align-items: center;
-      font-weight: bold;
-      font-size: var(--winner-name-font);
-      color: var(--text);
-      padding: 6px 12px;
-      border-radius: 16px;
-      width: fit-content;
-      background: linear-gradient(to left, rgba(255,215,0,0.4), rgba(255,215,0,0.1));
-      backdrop-filter: blur(10px);
-      border: 2px solid rgba(255,215,0,0.3);
-      white-space: nowrap;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-    }
-
     .winner-card .card-body {
       display: flex;
       align-items: center;
@@ -196,50 +172,6 @@
       width: 100%;
       height: 100%;
       position: relative;
-    }
-
-    .winner-card .score-area { 
-      display: flex; 
-      flex-direction: column;
-      align-items: center; 
-      justify-content: center;
-      gap: 12px;
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-
-    .winner-card .score-area.left {
-      left: 25px;
-    }
-
-    .winner-card .score-area.right {
-      right: 25px;
-    }
-
-    .winner-card .score-card {
-      background: linear-gradient(to top, rgba(255,215,0,0.4), rgba(255,215,0,0.1)); 
-      backdrop-filter: blur(15px);
-      border-radius: 10px; 
-      padding: var(--winner-score-padding);
-      font-size: var(--winner-score-font); 
-      font-weight: 900; 
-      text-align: center; 
-      min-width: var(--winner-score-min-width);
-      border: 2px solid rgba(255,215,0,0.4); 
-      box-shadow: 0 8px 32px rgba(255,215,0,0.2);
-      transition: all 0.3s ease; 
-      position: relative;
-      pointer-events: none;
-      color: var(--text);
-      line-height: 1;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-    }
-
-    .winner-card .score-icon {
-      font-size: var(--winner-score-icon);
-      opacity: 1;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
     }
 
     .winner-card .center-col { 
@@ -267,7 +199,7 @@
       position: relative;
       z-index: 5;
       filter: drop-shadow(4px 8px 6px rgba(0,0,0,0.6));
-      transform: translateY(0px);
+      transform: translateY(-10px);
       box-shadow: none;
       border: 3px solid rgba(255,215,0,0.5);
     }
@@ -293,30 +225,6 @@
       justify-content: center;
     }
     
-    .card-header {
-      position: absolute;
-      bottom: 8px;
-      right: 40%;
-      z-index: 10;
-      pointer-events: none;
-    }
-    
-    .player-name-section {
-      display: flex;
-      align-items: center;
-      font-weight: bold;
-      font-size: var(--mobile-name-font);
-      color: var(--text);
-      padding: 1px 4px;
-      border-radius: 8px;
-       max-width: 120px; /* حد أقصى للعرض */
-      width: fit-content;
-      background: linear-gradient(to left, rgba(255,255,255,0.3), rgba(255,255,255,0.05));
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255,255,255,0.15);
-      white-space: nowrap;
-    }
-    
     .card-body {
       display: flex;
       align-items: center;
@@ -324,48 +232,6 @@
       width: 100%;
       height: 100%;
       position: relative;
-    }
-    
-    .score-area { 
-      display: flex; 
-      flex-direction: column;
-      align-items: center; 
-      justify-content: center;
-      gap: 8px;
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-    
-    .score-area.left {
-      left: 10px;
-    }
-    
-    .score-area.right {
-      right: 10px;
-    }
-    
-    .score-card {
-      background: linear-gradient(to top, rgba(255,255,255,0.25), rgba(255,255,255,0.05)); 
-      backdrop-filter: blur(10px);
-      border-radius: 6px; 
-      padding: var(--mobile-score-padding);
-      font-size: var(--mobile-score-font); 
-      font-weight: 900; 
-      text-align: center; 
-      min-width: var(--mobile-score-min-width);
-      border: 1px solid rgba(255,255,255,0.2); 
-      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-      transition: all 0.2s ease; 
-      position: relative;
-      pointer-events: none;
-      color: var(--text);
-      line-height: 1;
-    }
-    
-    .score-icon {
-      font-size: var(--mobile-score-icon);
-      opacity: 0.9;
     }
     
     .center-col { 
@@ -393,8 +259,154 @@
       position: relative;
       z-index: 5;
       filter: drop-shadow(2px 4px 3px rgba(0,0,0,0.4));
-      transform: translateY(20px);
+      transform: translateY(0px);
       box-shadow: none;
+    }
+
+    /* تحريك حاوية الاسم أسفل الصورة وتقليل حجمها */
+    .card-header {
+      position: absolute;
+      bottom: 8px;
+      right: 50%; /* وضع في الوسط أفقياً */
+      transform: translateX(50%); /* توسيط أفقي */
+      z-index: 10;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      gap: 8px; /* مسافة بين الاسم والأرقام */
+    }
+
+    .winner-card .card-header {
+      position: absolute;
+      bottom: 20px; /* مسافة أكبر من الأسفل */
+      right: 50%; /* وضع في الوسط أفقياً */
+      transform: translateX(50%); /* توسيط أفقي */
+      z-index: 10;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      gap: 12px; /* مسافة بين الاسم والأرقام */
+    }
+
+    /* تحريك الأرقام للأسفل مع الاسم */
+    .score-area {
+      display: flex; 
+      flex-direction: row; /* صف أفقي بدلاً من عمود */
+      align-items: center; 
+      justify-content: center;
+      gap: 4px; /* مسافة بين الرقم والأيقونة */
+      position: static; /* إزالة الموضع المطلق */
+      transform: none; /* إزالة التحويل */
+    }
+
+    .score-area.left, .score-area.right {
+      left: auto;
+      right: auto;
+      top: auto;
+      transform: none;
+    }
+
+    /* نقل الأيقونات للأعلى */
+    .top-icons {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 20px;
+      z-index: 15;
+    }
+
+    .winner-card .top-icons {
+      top: 15px;
+      gap: 30px;
+    }
+
+    .top-icon {
+      font-size: var(--mobile-score-icon);
+      opacity: 0.9;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+    }
+
+    .winner-card .top-icon {
+      font-size: var(--winner-score-icon);
+      opacity: 1;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+    }
+    
+    /* تقليل حجم حاوية الاسم */
+    .player-name-section {
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+      font-size: var(--mobile-name-font);
+      color: var(--text);
+      padding: 1px 4px; /* تقليل الحشو */
+      border-radius: 8px; /* تقليل نصف القطر */
+      width: fit-content;
+      background: linear-gradient(to left, rgba(255,255,255,0.3), rgba(255,255,255,0.05));
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.15);
+      white-space: nowrap;
+      max-width: 100px; /* حد أقصى للعرض */
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .winner-card .player-name-section {
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+      font-size: var(--winner-name-font);
+      color: var(--text);
+      padding: 4px 8px; /* تقليل الحشو */
+      border-radius: 12px; /* تقليل نصف القطر */
+      width: fit-content;
+      background: linear-gradient(to left, rgba(255,215,0,0.4), rgba(255,215,0,0.1));
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255,215,0,0.3);
+      white-space: nowrap;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+      max-width: 120px; /* حد أقصى للعرض */
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    .score-card {
+      background: linear-gradient(to top, rgba(255,255,255,0.25), rgba(255,255,255,0.05)); 
+      backdrop-filter: blur(10px);
+      border-radius: 6px; 
+      padding: var(--mobile-score-padding);
+      font-size: var(--mobile-score-font); 
+      font-weight: 900; 
+      text-align: center; 
+      min-width: var(--mobile-score-min-width);
+      border: 1px solid rgba(255,255,255,0.2); 
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      transition: all 0.2s ease; 
+      position: relative;
+      pointer-events: none;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .winner-card .score-card {
+      background: linear-gradient(to top, rgba(255,215,0,0.4), rgba(255,215,0,0.1)); 
+      backdrop-filter: blur(15px);
+      border-radius: 10px; 
+      padding: var(--winner-score-padding);
+      font-size: var(--winner-score-font); 
+      font-weight: 900; 
+      text-align: center; 
+      min-width: var(--winner-score-min-width);
+      border: 2px solid rgba(255,215,0,0.4); 
+      box-shadow: 0 8px 32px rgba(255,215,0,0.2);
+      transition: all 0.3s ease; 
+      position: relative;
+      pointer-events: none;
+      color: var(--text);
+      line-height: 1;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
     }
     
     /* ===== تصميم خاص بالويندوز والشاشات الكبيرة ===== */
@@ -413,6 +425,7 @@
         height: 160px;
         border-radius: 25px;
         border: 4px solid rgba(255,215,0,0.6);
+        transform: translateY(-15px);
       }
 
       .winner-card .score-card {
@@ -422,7 +435,7 @@
         border-radius: 12px;
       }
 
-      .winner-card .score-icon {
+      .winner-card .top-icon {
         font-size: 48px;
       }
 
@@ -430,14 +443,7 @@
         font-size: 28px;
         padding: 8px 16px;
         border-radius: 20px;
-      }
-
-      .winner-card .score-area.left {
-        left: 35px;
-      }
-
-      .winner-card .score-area.right {
-        right: 35px;
+        max-width: 180px;
       }
 
       .card {
@@ -450,6 +456,7 @@
         height: var(--desktop-avatar-size);
         border-radius: 20px;
         filter: drop-shadow(3px 6px 5px rgba(0,0,0,0.5));
+        transform: translateY(0px);
       }
       
       .score-card {
@@ -465,7 +472,7 @@
         border-color: rgba(255,255,255,0.5);
       }
       
-      .score-icon {
+      .top-icon {
         font-size: var(--desktop-score-icon);
       }
       
@@ -473,19 +480,20 @@
         font-size: var(--desktop-name-font);
         padding: 4px 10px;
         border-radius: 14px;
-      }
-      
-      .score-area.left {
-        left: 20px;
-      }
-      
-      .score-area.right {
-        right: 20px;
+        max-width: 150px;
       }
       
       .grid {
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
         gap: 16px;
+      }
+
+      .card-header {
+        gap: 10px;
+      }
+
+      .winner-card .card-header {
+        gap: 15px;
       }
     }
     
@@ -503,6 +511,7 @@
       .winner-card .avatar {
         width: 180px;
         height: 180px;
+        transform: translateY(-20px);
       }
 
       .winner-card .score-card {
@@ -511,13 +520,14 @@
         min-width: 70px;
       }
 
-      .winner-card .score-icon {
+      .winner-card .top-icon {
         font-size: 52px;
       }
 
       .winner-card .player-name-section {
         font-size: 32px;
         padding: 10px 18px;
+        max-width: 200px;
       }
       
       .card {
@@ -528,6 +538,7 @@
       .avatar {
         width: 140px;
         height: 140px;
+        transform: translateY(0px);
       }
       
       .score-card {
@@ -536,13 +547,14 @@
         min-width: 45px;
       }
       
-      .score-icon {
+      .top-icon {
         font-size: 40px;
       }
       
       .player-name-section {
         font-size: 22px;
         padding: 6px 12px;
+        max-width: 170px;
       }
       
       .grid {
@@ -567,6 +579,7 @@
         height: 100px;
         border-radius: 15px;
         border: 2px solid rgba(255,215,0,0.4);
+        transform: translateY(-8px);
       }
 
       .winner-card .score-card {
@@ -576,7 +589,7 @@
         border-radius: 8px;
       }
 
-      .winner-card .score-icon {
+      .winner-card .top-icon {
         font-size: 30px;
       }
 
@@ -584,14 +597,7 @@
         font-size: 16px;
         padding: 4px 8px;
         border-radius: 12px;
-      }
-
-      .winner-card .score-area.left {
-        left: 15px;
-      }
-
-      .winner-card .score-area.right {
-        right: 15px;
+        max-width: 120px;
       }
 
       .winner-card::before {
@@ -614,6 +620,7 @@
         width: 70px;
         height: 70px;
         border-radius: 12px;
+        transform: translateY(0px);
       }
       
       .score-card {
@@ -622,21 +629,22 @@
         min-width: 28px;
       }
       
-      .score-icon {
+      .top-icon {
         font-size: 24px;
       }
       
       .player-name-section {
         font-size: 12px;
         padding: 2px 5px;
+        max-width: 80px;
       }
-      
-      .score-area.left {
-        left: 8px;
+
+      .card-header {
+        gap: 6px;
       }
-      
-      .score-area.right {
-        right: 8px;
+
+      .winner-card .card-header {
+        gap: 8px;
       }
     }
     
@@ -651,6 +659,7 @@
         width: 120px;
         height: 120px;
         border-radius: 18px;
+        transform: translateY(-12px);
       }
 
       .winner-card .score-card {
@@ -659,7 +668,7 @@
         min-width: 40px;
       }
 
-      .winner-card .score-icon {
+      .winner-card .top-icon {
         font-size: 36px;
       }
 
@@ -676,6 +685,7 @@
       .avatar {
         width: 90px;
         height: 90px;
+        transform: translateY(0px);
       }
       
       .score-card {
@@ -684,7 +694,7 @@
         min-width: 32px;
       }
       
-      .score-icon {
+      .top-icon {
         font-size: 30px;
       }
       
@@ -1053,7 +1063,7 @@
       </div>
       <div class="log-footer">
         <button class="btn log-footer-btn" id="clearLogBtn">🗑️ مسح السجل</button>
-        <button class="btn log-footer-btn" id="closeLogPage">✖️ إغلاق</button>
+        <button class="btn log-footer-btn" id="closeLogPage">❌ إغلاق</button>
       </div>
     </div>
   </div>
@@ -1145,7 +1155,7 @@
         console.log("Audio context unlocked by user interaction.");
     }
 
-    const ALL_EMOJIS = ['🤠','😎','🥷','🤡','🦸','🦹','👽','🤖','👑','🦅','🯎','🺎','🲎','🦊','🸎','🵎','🦉','🨎','👨‍🚀','👩‍🚀','👨‍🎨','👩‍🎨','👨‍💻','👩‍💻','👨‍🔬','👩‍🔬'];
+    const ALL_EMOJIS = ['🤠','😎','🥷','🤡','🦸','🦹','👽','🤖','🐱','🦅','🐯','🐺','🐲','🦊','🐸','🐵','🦉','🐨','👨‍🚀','👩‍🚀','👨‍🎨','👩‍🎨','👨‍💻','👩‍💻','👨‍🔬','👩‍🔬'];
     const CARD_COLORS = ["#8e44ad", "#e67e22", "#c0392b", "#2980b9", "#27ae60", "#f39c12", "#16a085"];
 
     // دالة للحصول على شخصية غير مستخدمة
@@ -1223,7 +1233,7 @@
         };
     }
 
-    // دالة إنشاء بطاقة الفائز
+    // دالة إنشاء بطاقة الفائز المحدثة
     function winnerCard(p) {
         const cardColor = p.color || CARD_COLORS[0];
         const medalIcon = (p.left >= 5) ? "🥇" : "🥈";
@@ -1232,30 +1242,36 @@
             <div class="winner-section">
                 <div class="winner-card" data-player-id="${p.id}" style="background: linear-gradient(135deg, ${hexToRgba(cardColor, 0.2)}, ${hexToRgba(cardColor, 0.1)});">
                     <div class="card-body">
-                        <div class="score-area left">
-                            <div class="score-card" data-side="left" data-player-id="${p.id}">${p.left||0}</div>
-                            <span class="score-icon">${medalIcon}</span>
+                        <!-- الأيقونات في الأعلى -->
+                        <div class="top-icons">
+                            <span class="top-icon">${medalIcon}</span>
+                            <span class="top-icon">🏆</span>
                         </div>
+                        
                         <div class="center-col">
                             <div class="emoji">
                                 <img src="${p.character||'images/uno1.png'}" class="avatar" alt="char" onerror="this.src='images/uno1.png'">
                             </div>
                         </div>
-                        <div class="score-area right">
-                            <div class="score-card" data-side="right" data-player-id="${p.id}">${p.right||0}</div>
-                            <span class="score-icon">🏆</span>
-                        </div>
                     </div>
+                    
+                    <!-- الاسم والأرقام في الأسفل -->
                     <div class="card-header">
                         <div class="player-name-section">
                             <span>${p.name||'لاعب'}</span>
+                        </div>
+                        <div class="score-area left">
+                            <div class="score-card" data-side="left" data-player-id="${p.id}">${p.left||0}</div>
+                        </div>
+                        <div class="score-area right">
+                            <div class="score-card" data-side="right" data-player-id="${p.id}">${p.right||0}</div>
                         </div>
                     </div>
                 </div>
             </div>`;
     }
 
-    // دالة إنشاء بطاقة اللاعب العادي
+    // دالة إنشاء بطاقة اللاعب العادي المحدثة
     function playerCard(p, index){
       const cardColor = p.color || CARD_COLORS[index % CARD_COLORS.length];
       const medalIcon = (p.left >= 5) ? "🥇" : "🥈";
@@ -1263,23 +1279,29 @@
       return `
         <div class="card" data-player-id="${p.id}" style="background-color: ${hexToRgba(cardColor, 0.8)};">
           <div class="card-body">
-            <div class="score-area left">
-              <div class="score-card" data-side="left" data-player-id="${p.id}">${p.left||0}</div>
-              <span class="score-icon">${medalIcon}</span>
+            <!-- الأيقونات في الأعلى -->
+            <div class="top-icons">
+              <span class="top-icon">${medalIcon}</span>
+              <span class="top-icon">🏆</span>
             </div>
+            
             <div class="center-col">
               <div class="emoji">
                 <img src="${p.character||'images/uno1.png'}" class="avatar" alt="char" onerror="this.src='images/uno1.png'">
               </div>
             </div>
-            <div class="score-area right">
-              <div class="score-card" data-side="right" data-player-id="${p.id}">${p.right||0}</div>
-              <span class="score-icon">🏆</span>
-            </div>
           </div>
+          
+          <!-- الاسم والأرقام في الأسفل -->
           <div class="card-header">
             <div class="player-name-section">
               <span>${p.name||'لاعب'}</span>
+            </div>
+            <div class="score-area left">
+              <div class="score-card" data-side="left" data-player-id="${p.id}">${p.left||0}</div>
+            </div>
+            <div class="score-area right">
+              <div class="score-card" data-side="right" data-player-id="${p.id}">${p.right||0}</div>
             </div>
           </div>
         </div>`;
