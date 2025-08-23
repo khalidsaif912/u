@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>UNO Live — by Mr.K</title>
   <style>
-    /* إعادة تعيين شاملة للمتصفحات */
+    /* ===== إعادة تعيين شاملة للمتصفحات ===== */
     * { 
       box-sizing: border-box;
       margin: 0;
@@ -19,43 +19,22 @@
       -moz-osx-font-smoothing: grayscale;
     }
     
+    /* ===== متغيرات CSS الأساسية ===== */
     :root {
-      --bg:#0f1220; 
-      --card-bg:#171a2b; 
-      --text:#e8ecff; 
-      --muted:#9aa3c7; 
-      --accent:#7aa2ff;
+      /* الألوان الأساسية */
+      --bg: #0f1220; 
+      --card-bg: #171a2b; 
+      --text: #e8ecff; 
+      --muted: #9aa3c7; 
+      --accent: #7aa2ff;
       
-      /* أحجام ثابتة */
+      /* الأحجام الأساسية */
       --base-font: 16px;
       --spacing: 12px;
       --border-radius: 12px;
-      
-      /* أحجام البطاقات الثابتة */
-      --card-width: 280px;
-      --card-height: 320px;
-      --card-gap: 20px;
-      
-      /* أحجام الأفتار الثابتة */
-      --avatar-size: 100px;
-      --winner-avatar-size: 140px;
-      
-      /* أحجام النصوص الثابتة */
-      --score-font: 24px;
-      --name-font: 18px;
-      --icon-font: 36px;
-      
-      /* أحجام بطاقة الفائز الثابتة */
-      --winner-card-height: 200px;
-      --winner-score-font: 32px;
-      --winner-name-font: 24px;
-      --winner-icon-font: 40px;
-      
-      /* أحجام الحشو الثابتة */
-      --score-padding: 6px 10px;
-      --name-padding: 4px 8px;
     }
     
+    /* ===== تنسيق الجسم الأساسي ===== */
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       color: var(--text); 
@@ -70,7 +49,7 @@
       padding-bottom: 100px;
     }
     
-    /* الهيدر */
+    /* ===== تنسيق الهيدر ===== */
     .header {
       display: flex; 
       flex-direction: column; 
@@ -133,7 +112,39 @@
       border-radius: 999px; 
     }
 
-    /* بطاقة الفائز */
+    /* ===== تنسيق الشبكة الأساسية ===== */
+    .grid { 
+      display: grid; 
+      gap: 20px;
+      justify-content: center;
+      margin: 0 auto;
+      padding: 5px;
+    }
+    
+    /* ===== تنسيق البطاقة الأساسية ===== */
+    .card {
+      border-radius: 12px;
+      padding: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+      position: relative; 
+      user-select: none; 
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex; 
+      flex-direction: column; 
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .card-body {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+    
+    /* ===== تنسيق بطاقة الفائز ===== */
     .winner-section {
       width: 100%;
       margin-bottom: 20px;
@@ -146,9 +157,6 @@
       position: relative; 
       user-select: none; 
       border: 2px solid rgba(255, 215, 0, 0.6);
-      height: 200px;
-      width: 100%;
-      max-width: 920px;
       display: flex; 
       align-items: center;
       justify-content: center;
@@ -175,133 +183,7 @@
       position: relative;
     }
 
-    .winner-card .center-col { 
-      text-align: center; 
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      position: absolute;
-      top: 40%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 5;
-      width: 100%;
-    }
-
-    .winner-card .avatar {
-      width: 140px;
-      height: 140px;
-      object-fit: cover;
-      background: transparent;
-      -webkit-touch-callout: none;
-      -webkit-user-select: none;
-      pointer-events: none;
-      border-radius: 25px;
-      position: relative;
-      z-index: 5;
-      filter: drop-shadow(4px 8px 6px rgba(0,0,0,0.6));
-      transform: translateY(-15px);
-      box-shadow: none;
-      border: 4px solid rgba(255,215,0,0.5);
-    }
-    
-    /* الشبكة - ثابتة بـ 3 بطاقات كحد أقصى */
-    .grid { 
-      display: grid; 
-      grid-template-columns: repeat(3, 280px);
-      gap: 20px;
-      justify-content: center;
-      max-width: 920px;
-      margin: 0 auto;
-      padding: 5px;
-                 .card .bottom-icon:first-child {
-    position: relative;
-     top: -5px; /* تحريك الميدالية قليلاً إلى الأعلى */
-    right: -25px; /* تحريك الميدالية قليلاً إلى اليمين */
-      }
-       .winner-card {
-        max-width: 300px;
-      }
-        .card .bottom-icon:last-child {
-    position: relative;
-    left: -25px; /* تحريك الكأس قليلاً إلى اليسار */
-    top: -5px; /* تحريك الكأس قليلاً إلى الأسفل */
-  }
-}
-
-    
-    /* للشاشات المتوسطة - 2 بطاقات */
-    @media screen and (max-width: 1000px) {
-      .grid {
-        grid-template-columns: repeat(2, 280px);
-        max-width: 600px;
-           .card .bottom-icon:first-child {
-    position: relative;
-     top: -5px; /* تحريك الميدالية قليلاً إلى الأعلى */
-    right: -25px; /* تحريك الميدالية قليلاً إلى اليمين */
-      }
-       .winner-card {
-        max-width: 300px;
-      }
-        .card .bottom-icon:last-child {
-    position: relative;
-    left: -25px; /* تحريك الكأس قليلاً إلى اليسار */
-    top: -8px; /* تحريك الكأس قليلاً إلى الأسفل */
-
-
-    
-  }
-}
-    }
-    
-    /* للشاشات الصغيرة - بطاقة واحدة */
-    @media screen and (max-width: 650px) {
-      .grid {
-        grid-template-columns: 1fr;
-        max-width: 300px;
-          .card .bottom-icon:first-child {
-    position: relative;
-     top: -5px; /* تحريك الميدالية قليلاً إلى الأعلى */
-    right: -25px; /* تحريك الميدالية قليلاً إلى اليمين */
-      }
-       .winner-card {
-        max-width: 300px;
-      }
-        .card .bottom-icon:last-child {
-    position: relative;
-    left: -25px; /* تحريك الكأس قليلاً إلى اليسار */
-    top: -5px; /* تحريك الكأس قليلاً إلى الأسفل */
-  }
-}
-    }
-    
-    
-    /* البطاقة الأساسية */
-    .card {
-      border-radius: 12px;
-      padding: 12px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
-      position: relative; 
-      user-select: none; 
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      height: 320px;
-      width: 280px;
-      display: flex; 
-      flex-direction: column; 
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .card-body {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%;
-      height: 100%;
-      position: relative;
-    }
-    
+    /* ===== تنسيق العمود المركزي (الأفاتار) ===== */
     .center-col { 
       text-align: center; 
       display: flex;
@@ -309,16 +191,14 @@
       align-items: center;
       justify-content: center;
       position: absolute;
-      top: 35%;
       left: 50%;
       transform: translate(-50%, -50%);
       z-index: 5;
       width: 100%;
     }
-    
+
+    /* ===== تنسيق الأفاتار للشاشات الكبيرة (أكبر من 1000px) ===== */
     .avatar {
-      width: 100px;
-      height: 100px;
       object-fit: cover;
       background: transparent;
       -webkit-touch-callout: none;
@@ -328,11 +208,27 @@
       position: relative;
       z-index: 5;
       filter: drop-shadow(2px 4px 3px rgba(0,0,0,0.4));
-      transform: translateY(0px);
       box-shadow: none;
     }
 
-    /* حاوية العناصر السفلية */
+    /* الأفاتار في البطاقات العادية - الشاشات الكبيرة */
+    .card .avatar {
+      width: 100px;
+      height: 100px;
+      transform: translateY(0px);
+    }
+
+    /* الأفاتار في بطاقة الفائز - الشاشات الكبيرة */
+    .winner-card .avatar {
+      width: 140px;
+      height: 140px;
+      border-radius: 25px;
+      filter: drop-shadow(4px 8px 6px rgba(0,0,0,0.6));
+      transform: translateY(-15px);
+      border: 4px solid rgba(255,215,0,0.5);
+    }
+
+    /* ===== تنسيق حاوية العناصر السفلية ===== */
     .card-header {
       position: absolute;
       bottom: 6px;
@@ -347,22 +243,13 @@
     }
 
     .winner-card .card-header {
-      position: absolute;
       bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 10;
-      pointer-events: none;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 90%;
     }
 
-    /* منطقة النقاط */
+    /* ===== تنسيق منطقة النقاط ===== */
     .score-area {
       display: flex; 
-      flex-direction: row;
+      flex-direction: column;
       align-items: center; 
       justify-content: center;
       gap: 3px;
@@ -370,130 +257,7 @@
       transform: none;
     }
 
-    .score-area.left, .score-area.right {
-      left: auto;
-      right: auto;
-      top: auto;
-      transform: none;
-    }
-
-    /* تنسيق الأيقونات السفلية للبطاقات العادية */
-    .bottom-icons {
-      position: absolute;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-      z-index: 15;
-      padding: 0 20px;
-    }
-
-    .bottom-icon {
-      font-size: 46px;
-      opacity: 0.9;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
-    }
-
-    /* تنسيق الأيقونات السفلية لبطاقة الفائز */
-    .winner-card .bottom-icons {
-      bottom: 50px;
-      width: 100%;
-      padding: 0 20px;
-    }
-
-    .winner-card .bottom-icon {
-      font-size: 40px;
-      opacity: 1;
-    }
-
- .winner-card .bottom-icon.medal {
-  font-size: 60px;
-  position: relative;
-  right: -18px; /* لتحريك الميدالية إلى اليمين */
-  top: -5px; /* تحريك الميدالية قليلاً إلى الأعلى */
-}
-
-.winner-card .bottom-icon.trophy {
-  font-size: 60px;
-  position: relative;
-  left: -15px; /* تحريك الكأس إلى اليسار */
-  top: -7px; /* تحريك الكأس إلى الأعلى */
-}
-
-    /* الأيقونات العلوية */
-    .top-icons {
-      position: absolute;
-      top: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: none !important;
-      justify-content: space-between;
-      width: 100%;
-      z-index: 15;
-      padding: 0 20px;
-    }
-
-    .winner-card .top-icons {
-      top: 15px;
-      width: 100%;
-      padding: 0 20px;
-    }
-
-    .top-icon {
-      font-size: 36px;
-      opacity: 0.9;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
-    }
-
-    .winner-card .top-icon {
-      font-size: 40px;
-      opacity: 1;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
-    }
-    
-    .winner-card .top-icon.medal {
-      font-size: 60px;
-    }
-    
-    .winner-card .top-icon.trophy {
-      font-size: 60px;
-    }
-    
-    /* حاوية الاسم */
-    .player-name-section {
-      display: flex;
-      align-items: center;
-      font-weight: bold;
-      font-size: 18px;
-      color: var(--text);
-      padding: 4px 8px;
-      border-radius: 6px;
-      width: fit-content;
-      background: linear-gradient(to left, rgba(255,255,255,0.3), rgba(255,255,255,0.05));
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255,255,255,0.15);
-      white-space: nowrap;
-      max-width: 150px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-.winner-card .player-name-section {
-  font-size: 24px;
-  padding: 6px 12px;
-  border-radius: 15px;
-  background: linear-gradient(to left, rgba(255,215,0,0.4), rgba(255,215,0,0.1));
-  backdrop-filter: blur(10px);
-  border: 2px solid rgba(255,215,0,0.3);
-  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-  max-width: 200px;
-  position: relative; /* إضافة هذه الخاصية */
-  top: 15px; /* تحريك الاسم إلى الأسفل */
-}
-    
-    /* بطاقة النقاط */
+    /* ===== تنسيق بطاقة النقاط ===== */
     .score-card {
       background: linear-gradient(to top, rgba(255,255,255,0.25), rgba(255,255,255,0.05)); 
       backdrop-filter: blur(10px);
@@ -507,9 +271,10 @@
       box-shadow: 0 8px 32px rgba(0,0,0,0.1);
       transition: all 0.2s ease; 
       position: relative;
-      pointer-events: none;
+      pointer-events: auto;
       color: var(--text);
       line-height: 1;
+      cursor: pointer;
     }
 
     .winner-card .score-card {
@@ -524,8 +289,393 @@
       transition: all 0.3s ease; 
       text-shadow: 0 2px 4px rgba(0,0,0,0.5);
     }
-    
-    /* تحسينات التفاعل */
+
+    /* ===== تنسيق الأيقونات السفلية (الميدالية والكأس) ===== */
+    .bottom-icons {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      z-index: 15;
+      padding: 0 20px;
+    }
+
+    .bottom-icon {
+      opacity: 0.9;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+      position: relative;
+    }
+
+    /* تنسيق الأيقونات السفلية لبطاقة الفائز */
+    .winner-card .bottom-icons {
+      bottom: 50px;
+    }
+
+    .winner-card .bottom-icon {
+      opacity: 1;
+    }
+
+    /* ===== تنسيق حاوية الاسم ===== */
+    .player-name-section {
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+      color: var(--text);
+      border-radius: 6px;
+      width: fit-content;
+      background: linear-gradient(to left, rgba(255,255,255,0.3), rgba(255,255,255,0.05));
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.15);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .winner-card .player-name-section {
+      border-radius: 15px;
+      background: linear-gradient(to left, rgba(255,215,0,0.4), rgba(255,215,0,0.1));
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255,215,0,0.3);
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+      position: relative;
+      top: 15px;
+    }
+
+    /* ===== أقسام النقاط الأربعة ===== */
+    .quad-sections {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 20;
+    }
+
+    .quad-section {
+      position: absolute;
+      width: 50%;
+      height: 50%;
+      pointer-events: auto;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: bold;
+      color: rgba(255, 255, 255, 0.7);
+      transition: all 0.2s ease;
+    }
+
+    .quad-section:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white;
+    }
+
+    .quad-section.top-left {
+      top: 0;
+      left: 0;
+      border-right: 1px dashed rgba(255, 255, 255, 0.2);
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+    }
+
+    .quad-section.top-right {
+      top: 0;
+      right: 0;
+      border-left: 1px dashed rgba(255, 255, 255, 0.2);
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+    }
+
+    .quad-section.bottom-left {
+      bottom: 0;
+      left: 0;
+      border-right: 1px dashed rgba(255, 255, 255, 0.2);
+      border-top: 1px dashed rgba(255, 255, 255, 0.2);
+    }
+
+    .quad-section.bottom-right {
+      bottom: 0;
+      right: 0;
+      border-left: 1px dashed rgba(255, 255, 255, 0.2);
+      border-top: 1px dashed rgba(255, 255, 255, 0.2);
+    }
+
+    /* ===== تنسيق للشاشات الكبيرة (أكبر من 1000px) ===== */
+    @media screen and (min-width: 1001px) {
+      /* الشبكة - 3 بطاقات */
+      .grid {
+        grid-template-columns: repeat(3, 280px);
+        max-width: 920px;
+      }
+      
+      /* البطاقات العادية */
+      .card {
+        height: 320px;
+        width: 280px;
+      }
+      
+      /* بطاقة الفائز */
+      .winner-card {
+        height: 200px;
+        width: 100%;
+        max-width: 920px;
+      }
+      
+      /* العمود المركزي */
+      .card .center-col {
+        top: 35%;
+      }
+      
+      .winner-card .center-col {
+        top: 40%;
+      }
+      
+      /* الميدالية - الشاشات الكبيرة */
+      .card .bottom-icon:first-child {
+        font-size: 46px;
+        top: -5px;
+        right: -10px;
+      }
+      
+      .winner-card .bottom-icon.medal {
+        font-size: 60px;
+        right: -18px;
+        top: -5px;
+      }
+      
+      /* الكأس - الشاشات الكبيرة */
+      .card .bottom-icon:last-child {
+        font-size: 46px;
+        left: -25px;
+        top: -5px;
+      }
+      
+      .winner-card .bottom-icon.trophy {
+        font-size: 60px;
+        left: -15px;
+        top: -7px;
+      }
+      
+      /* الأرقام الأيمن والأيسر - الشاشات الكبيرة */
+      .card .score-card {
+        font-size: 24px;
+        padding: 6px 10px;
+        min-width: 45px;
+      }
+      
+      .winner-card .score-card {
+        font-size: 32px;
+        padding: 8px 15px;
+        min-width: 70px;
+      }
+      
+      /* الاسم - الشاشات الكبيرة */
+      .card .player-name-section {
+        font-size: 18px;
+        padding: 4px 8px;
+        max-width: 150px;
+      }
+      
+      .winner-card .player-name-section {
+        font-size: 24px;
+        padding: 6px 12px;
+        max-width: 200px;
+      }
+    }
+
+    /* ===== تنسيق للشاشات المتوسطة (651px - 1000px) ===== */
+    @media screen and (min-width: 651px) and (max-width: 1000px) {
+      /* الشبكة - 2 بطاقات */
+      .grid {
+        grid-template-columns: repeat(2, 280px);
+        max-width: 600px;
+      }
+      
+      /* البطاقات العادية */
+      .card {
+        height: 320px;
+        width: 280px;
+      }
+      
+      /* بطاقة الفائز */
+      .winner-card {
+        height: 200px;
+        width: 100%;
+        max-width: 600px;
+      }
+      
+      /* العمود المركزي */
+      .card .center-col {
+        top: 35%;
+      }
+      
+      .winner-card .center-col {
+        top: 40%;
+      }
+      
+      /* الأفاتار - الشاشات المتوسطة */
+      .card .avatar {
+        width: 95px;
+        height: 95px;
+      }
+      
+      .winner-card .avatar {
+        width: 130px;
+        height: 130px;
+      }
+      
+      /* الميدالية - الشاشات المتوسطة */
+      .card .bottom-icon:first-child {
+        font-size: 42px;
+        top: -5px;
+        right: -25px;
+      }
+      
+      .winner-card .bottom-icon.medal {
+        font-size: 55px;
+        right: -20px;
+        top: -5px;
+      }
+      
+      /* الكأس - الشاشات المتوسطة */
+      .card .bottom-icon:last-child {
+        font-size: 42px;
+        left: -25px;
+        top: -8px;
+      }
+      
+      .winner-card .bottom-icon.trophy {
+        font-size: 55px;
+        left: -18px;
+        top: -7px;
+      }
+      
+      /* الأرقام الأيمن والأيسر - الشاشات المتوسطة */
+      .card .score-card {
+        font-size: 22px;
+        padding: 5px 9px;
+        min-width: 42px;
+      }
+      
+      .winner-card .score-card {
+        font-size: 30px;
+        padding: 7px 14px;
+        min-width: 65px;
+      }
+      
+      /* الاسم - الشاشات المتوسطة */
+      .card .player-name-section {
+        font-size: 17px;
+        padding: 4px 7px;
+        max-width: 140px;
+      }
+      
+      .winner-card .player-name-section {
+        font-size: 22px;
+        padding: 5px 11px;
+        max-width: 180px;
+      }
+    }
+
+    /* ===== تنسيق للشاشات الصغيرة (أقل من 651px) ===== */
+    @media screen and (max-width: 650px) {
+      /* الشبكة - بطاقة واحدة */
+      .grid {
+        grid-template-columns: 1fr;
+        max-width: 300px;
+      }
+      
+      /* البطاقات العادية */
+      .card {
+        height: 300px;
+        width: 100%;
+        max-width: 300px;
+      }
+      
+      /* بطاقة الفائز */
+      .winner-card {
+        height: 180px;
+        width: 100%;
+        max-width: 300px;
+      }
+      
+      /* العمود المركزي */
+      .card .center-col {
+        top: 35%;
+      }
+      
+      .winner-card .center-col {
+        top: 40%;
+      }
+      
+      /* الأفاتار - الشاشات الصغيرة */
+      .card .avatar {
+        width: 85px;
+        height: 85px;
+      }
+      
+      .winner-card .avatar {
+        width: 110px;
+        height: 110px;
+      }
+      
+      /* الميدالية - الشاشات الصغيرة */
+      .card .bottom-icon:first-child {
+        font-size: 38px;
+        top: -5px;
+        right: -25px;
+      }
+      
+      .winner-card .bottom-icon.medal {
+        font-size: 50px;
+        right: -22px;
+        top: -5px;
+      }
+      
+      /* الكأس - الشاشات الصغيرة */
+      .card .bottom-icon:last-child {
+        font-size: 38px;
+        left: -25px;
+        top: -5px;
+      }
+      
+      .winner-card .bottom-icon.trophy {
+        font-size: 50px;
+        left: -20px;
+        top: -7px;
+      }
+      
+      /* الأرقام الأيمن والأيسر - الشاشات الصغيرة */
+      .card .score-card {
+        font-size: 20px;
+        padding: 4px 8px;
+        min-width: 38px;
+      }
+      
+      .winner-card .score-card {
+        font-size: 26px;
+        padding: 6px 12px;
+        min-width: 55px;
+      }
+      
+      /* الاسم - الشاشات الصغيرة */
+      .card .player-name-section {
+        font-size: 15px;
+        padding: 3px 6px;
+        max-width: 120px;
+      }
+      
+      .winner-card .player-name-section {
+        font-size: 19px;
+        padding: 4px 9px;
+        max-width: 150px;
+      }
+    }
+
+    /* ===== تحسينات التفاعل ===== */
     @media (hover: hover) and (pointer: fine) {
       .score-card:hover {
         background: rgba(255,255,255,0.35);
@@ -546,7 +696,7 @@
       }
     }
     
-    /* باقي الأنماط الثابتة */
+    /* ===== باقي الأنماط الثابتة (المودالات والأزرار) ===== */
     .modal-backdrop{ 
       position: fixed; 
       inset: 0; 
@@ -677,7 +827,7 @@
       color: var(--accent); 
     }
     
-    /* صفحة السجل */
+    /* ===== صفحة السجل ===== */
     .log-page {
       width: 90vw;
       height: 90vh;
@@ -750,6 +900,7 @@
       font-size: 16px;
     }
     
+    /* ===== تأثيرات الألعاب النارية ===== */
     #confetti-canvas, #screen-flash { 
       position: fixed; 
       top: 0; 
@@ -789,22 +940,54 @@
   </style>
 </head>
 <body>
+  <!-- عناصر تأثيرات الألعاب النارية -->
   <canvas id="confetti-canvas"></canvas>
   <div id="screen-flash"></div>
+  
+  <!-- الحاوية الرئيسية -->
   <div class="wrap">
     <div id="header-container"></div>
     <div id="winner-container"></div>
     <div class="grid" id="players"></div>
   </div>
 
+  <!-- الأزرار الثابتة -->
   <button class="add-player-fab btn" id="addPlayerFab"><span>+</span> إضافة لاعب</button>
   <button class="corner-btn btn" id="devInfoBtn">MR.K</button>
   <button class="corner-btn btn" id="refreshBtn">تحديث</button>
 
-  <!-- Modals -->
-  <div class="modal-backdrop" id="roomModal"><div class="modal"><div id="roomManagementView"><h3>إدارة الغرفة</h3><div class="room-info" id="roomInfoBlock">رمز الغرفة الحالي: <span id="modalRoomId"></span></div><div class="row2" style="margin-bottom: 10px;"><button class="btn" id="openLog">📜 عرض السجل</button><button class="btn" id="copyLinkBtn">🔗 نسخ رابط المشاهدة</button></div><hr><div class="row2"><button class="btn" id="doCreate">🚀 إنشاء غرفة جديدة</button><button class="btn" id="showJoinView">🚪 الانضمام لغرفة أخرى</button></div></div><div id="joinView" style="display: none;"><h3>الانضمام لغرفة</h3><div style="display:flex; gap:6px; align-items:center;"><input type="text" id="joinId" class="input" placeholder="أدخل رمز الغرفة" /><button class="btn" id="doJoin">دخول</button></div><button class="btn" id="backToManagement" style="margin-top: 10px; background: #2a3257;">رجوع</button></div><hr><div style="display:flex; justify-content:flex-end;"><button class="btn" id="closeRoomModal">إغلاق</button></div></div></div>
+  <!-- المودالات -->
+  <div class="modal-backdrop" id="roomModal">
+    <div class="modal">
+      <div id="roomManagementView">
+        <h3>إدارة الغرفة</h3>
+        <div class="room-info" id="roomInfoBlock">رمز الغرفة الحالي: <span id="modalRoomId"></span></div>
+        <div class="row2" style="margin-bottom: 10px;">
+          <button class="btn" id="openLog">📜 عرض السجل</button>
+          <button class="btn" id="copyLinkBtn">🔗 نسخ رابط المشاهدة</button>
+        </div>
+        <hr>
+        <div class="row2">
+          <button class="btn" id="doCreate">🚀 إنشاء غرفة جديدة</button>
+          <button class="btn" id="showJoinView">🚪 الانضمام لغرفة أخرى</button>
+        </div>
+      </div>
+      <div id="joinView" style="display: none;">
+        <h3>الانضمام لغرفة</h3>
+        <div style="display:flex; gap:6px; align-items:center;">
+          <input type="text" id="joinId" class="input" placeholder="أدخل رمز الغرفة" />
+          <button class="btn" id="doJoin">دخول</button>
+        </div>
+        <button class="btn" id="backToManagement" style="margin-top: 10px; background: #2a3257;">رجوع</button>
+      </div>
+      <hr>
+      <div style="display:flex; justify-content:flex-end;">
+        <button class="btn" id="closeRoomModal">إغلاق</button>
+      </div>
+    </div>
+  </div>
   
-  <!-- Log Page -->
+  <!-- صفحة السجل -->
   <div class="modal-backdrop" id="logPage" style="display: none;">
     <div class="log-page">
       <div class="log-header">
@@ -831,7 +1014,7 @@
     </div>
   </div>
 
-  <!-- Clear Log Confirmation -->
+  <!-- تأكيد مسح السجل -->
   <div class="modal-backdrop" id="clearLogModal">
     <div class="modal">
       <h3>🗑️ تأكيد مسح السجل</h3>
@@ -843,9 +1026,36 @@
     </div>
   </div>
   
-  <div class="modal-backdrop" id="deleteModal"><div class="modal"><h3>🗑️ تأكيد الحذف</h3><p style="text-align: center; margin: 16px 0; color: var(--muted);">هل أنت متأكد من حذف هذا اللاعب؟</p><div class="row2" style="margin-bottom: 10px;"><button class="btn" id="deletePlayerBtn" style="background-color: #e74c3c; color: white;">حذف اللاعب</button><button class="btn" id="deleteAllBtn" style="background-color: #c0392b; color: white;">حذف الجميع</button></div><hr><div style="display:flex; justify-content:flex-end;"><button class="btn" id="closeDeleteModal" style="background: #2a3257; color: white;">إلغاء</button></div></div></div>
+  <!-- مودال الحذف -->
+  <div class="modal-backdrop" id="deleteModal">
+    <div class="modal">
+      <h3>🗑️ تأكيد الحذف</h3>
+      <p style="text-align: center; margin: 16px 0; color: var(--muted);">هل أنت متأكد من حذف هذا اللاعب؟</p>
+      <div class="row2" style="margin-bottom: 10px;">
+        <button class="btn" id="deletePlayerBtn" style="background-color: #e74c3c; color: white;">حذف اللاعب</button>
+        <button class="btn" id="deleteAllBtn" style="background-color: #c0392b; color: white;">حذف الجميع</button>
+      </div>
+      <hr>
+      <div style="display:flex; justify-content:flex-end;">
+        <button class="btn" id="closeDeleteModal" style="background: #2a3257; color: white;">إلغاء</button>
+      </div>
+    </div>
+  </div>
   
-  <div class="modal-backdrop" id="devInfoModal"><div class="modal"><h3>معلومات المطور</h3><div class="info-item"><span>🧑‍💻</span> <b>Mr.K</b></div><div class="info-item"><span>📞</span> <a href="tel:+96899678553">99678553</a><a href="https://wa.me/96899678553" target="_blank" style="font-size: 24px; margin-right: auto;">💬</a></div><div class="info-item"><span>✉️</span> <a href="mailto:scoon80@gmail.com">scoon80@gmail.com</a></div><hr><p style="text-align:center;">شكراً لاستخدامكم التطبيق</p><div style="display:flex; justify-content:flex-end;"><button class="btn" id="closeDevInfoModal">إغلاق</button></div></div></div>
+  <!-- معلومات المطور -->
+  <div class="modal-backdrop" id="devInfoModal">
+    <div class="modal">
+      <h3>معلومات المطور</h3>
+      <div class="info-item"><span>🧑‍💻</span> <b>Mr.K</b></div>
+      <div class="info-item"><span>📞</span> <a href="tel:+96899678553">99678553</a><a href="https://wa.me/96899678553" target="_blank" style="font-size: 24px; margin-right: auto;">💬</a></div>
+      <div class="info-item"><span>✉️</span> <a href="mailto:scoon80@gmail.com">scoon80@gmail.com</a></div>
+      <hr>
+      <p style="text-align:center;">شكراً لاستخدامكم التطبيق</p>
+      <div style="display:flex; justify-content:flex-end;">
+        <button class="btn" id="closeDevInfoModal">إغلاق</button>
+      </div>
+    </div>
+  </div>
 
   <!-- نافذة إضافة اللاعبين -->
   <div class="modal-backdrop" id="addPlayerModal">
@@ -866,11 +1076,15 @@
     </div>
   </div>
 
+  <!-- مكتبة الألعاب النارية -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  
+  <!-- الكود الرئيسي للتطبيق -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
     import { getDatabase, ref, set, onValue, update, get, child, remove } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-database.js";
 
+    // إعدادات Firebase
     const firebaseConfig = {
       apiKey: "AIzaSyBGuiMxffwcm_P8zY-I6hMUG1hUY1akpFA",
       authDomain: "uno-game-live.firebaseapp.com",
@@ -884,18 +1098,20 @@
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
 
+    // متغيرات التطبيق الأساسية
     const qs = new URLSearchParams(location.search);
     let roomId = qs.get("room") || localStorage.getItem("uno-room-id") || "";
     let adminToken = qs.get("admin") || JSON.parse(localStorage.getItem("uno-admin-tokens") || '{}')[roomId];
     let isAdmin = false;
 
+    // عناصر DOM الأساسية
     const headerContainer = document.getElementById("header-container");
     const winnerContainer = document.getElementById("winner-container");
     const playersEl = document.getElementById("players");
     const modalRoomId = document.getElementById("modalRoomId");
     let currentTargetPlayerId = null;
 
-    // الأصوات
+    // إعدادات الأصوات
     const clickSound = new Audio('./click.mp3');
     clickSound.volume = 0.8;
     const winSound = new Audio('./fireworks.mp3');
@@ -918,6 +1134,7 @@
         console.log("Audio context unlocked by user interaction.");
     }
 
+    // ثوابت التطبيق
     const ALL_EMOJIS = ['🤠','😎','🥷','🤡','🦸','🦹','👽','🤖','🐱','🦅','🐯','🐺','🐲','🦊','🐸','🐵','🦉','🐨','👨‍🚀','👩‍🚀','👨‍🎨','👩‍🎨','👨‍💻','👩‍💻','👨‍🔬','👩‍🔬'];
     const CARD_COLORS = ["#8e44ad", "#e67e22", "#c0392b", "#2980b9", "#27ae60", "#f39c12", "#16a085"];
 
@@ -943,9 +1160,9 @@
         return selectedChar;
     }
 
+    // دوال مساعدة
     const makeId = () => Math.random().toString(36).slice(2, 8);
     const todayTag = () => new Date().toLocaleDateString('en-GB',{day:'2-digit',month:'short'}).replace(/ /g,'').toUpperCase();
-
     const openModal = (m)=> m.style.display = "flex";
     const closeModal = (m)=> m.style.display = "none";
 
@@ -970,6 +1187,7 @@
         return "🥇".repeat(gold) + "🥈".repeat(silver);
     }
 
+    // دالة عرض الهيدر
     function renderHeader() {
         const roomStatusText = isAdmin ? 'مشرف' : 'مشاهد';
         const bannerHtml = `
@@ -985,13 +1203,9 @@
             const roomModal = document.getElementById("roomModal");
             const roomManagementView = document.getElementById('roomManagementView');
             const joinView = document.getElementById('joinView');
-            const roomInfoBlock = document.getElementById('roomInfoBlock');
             roomManagementView.style.display = 'block';
             joinView.style.display = 'none';
-            const hasRoom = !!roomId;
-            roomInfoBlock.style.display = hasRoom ? 'block' : 'none';
-            document.getElementById('openLog').style.display = hasRoom ? 'block' : 'none';
-            document.getElementById('copyLinkBtn').style.display = hasRoom ? 'block' : 'none';
+            modalRoomId.textContent = roomId || 'غير محدد';
             openModal(roomModal);
         };
     }
@@ -1015,6 +1229,14 @@
                         <div class="bottom-icons">
                             <span class="bottom-icon medal">${medalIcon}</span>
                             <span class="bottom-icon trophy">🏆</span>
+                        </div>
+                        
+                        <!-- أقسام النقاط الأربعة -->
+                        <div class="quad-sections">
+                            <div class="quad-section top-left" data-player-id="${p.id}" data-side="left" data-action="increment">+</div>
+                            <div class="quad-section top-right" data-player-id="${p.id}" data-side="right" data-action="increment">+</div>
+                            <div class="quad-section bottom-left" data-player-id="${p.id}" data-side="left" data-action="decrement">-</div>
+                            <div class="quad-section bottom-right" data-player-id="${p.id}" data-side="right" data-action="decrement">-</div>
                         </div>
                     </div>
                     
@@ -1052,6 +1274,14 @@
               <span class="bottom-icon">${medalIcon}</span>
               <span class="bottom-icon">🏆</span>
             </div>
+            
+            <!-- أقسام النقاط الأربعة -->
+            <div class="quad-sections">
+              <div class="quad-section top-left" data-player-id="${p.id}" data-side="left" data-action="increment">+</div>
+              <div class="quad-section top-right" data-player-id="${p.id}" data-side="right" data-action="increment">+</div>
+              <div class="quad-section bottom-left" data-player-id="${p.id}" data-side="left" data-action="decrement">-</div>
+              <div class="quad-section bottom-right" data-player-id="${p.id}" data-side="right" data-action="decrement">-</div>
+            </div>
           </div>
           
           <div class="card-header">
@@ -1068,6 +1298,7 @@
         </div>`;
     }
 
+    // دالة عرض اللاعبين
     function renderPlayers(list){
       renderHeader();
       
@@ -1092,6 +1323,7 @@
       playersEl.innerHTML = otherPlayers.map((p, i) => playerCard(p, i + 1)).join("");
     }
 
+    // دالة تأثيرات الألعاب النارية
     function triggerFireworks(winData) {
         const flashElement = document.getElementById('screen-flash');
         const canvas = document.getElementById('confetti-canvas');
@@ -1140,6 +1372,7 @@
         }());
     }
 
+    // دالة التحقق من صلاحيات المشرف
     async function ensureAdminStatus(){
       if(!roomId || !adminToken) { isAdmin = false; return false; }
       const snap = await get(child(ref(db, `rooms/${roomId}`), 'adminKey'));
@@ -1147,6 +1380,7 @@
       document.getElementById('addPlayerFab').style.display = isAdmin ? 'flex' : 'none';
     }
 
+    // دالة تحديث النقاط
     function handleScoreUpdate(id, side, delta) {
         if (!isAdmin) return;
         const playerRef = ref(db, `rooms/${roomId}/players/${id}`);
@@ -1189,6 +1423,7 @@
         });
     }
 
+    // دالة إضافة اللاعبين
     async function addPlayers() {
         const modal = document.getElementById('addPlayerModal');
         const input = document.getElementById('playerNamesInput');
@@ -1239,6 +1474,7 @@
         };
     }
 
+    // تهيئة مستمعات الأحداث الثابتة
     function initializeStaticEventListeners() {
         document.getElementById('addPlayerFab').addEventListener('click', () => { unlockSounds(); clickSound.play().catch(e => {}); addPlayers(); });
         document.getElementById('devInfoBtn').addEventListener('click', () => { unlockSounds(); clickSound.play().catch(e => {}); openModal(document.getElementById('devInfoModal')); });
@@ -1329,148 +1565,80 @@
         });
     }
 
+    // تهيئة مستمعات الأحداث الديناميكية
     function initializeDynamicEventListeners() {
-        let longPressTimer, isLongPress = false, touchEventDetected = false;
-        
-        // معالج الضغط على بطاقة الفائز
-        function handleCardClick(e, container) {
-            unlockSounds();
-            
-            // تجاهل الضغط إذا كان ضغط طويل
-            if (isLongPress) {
-                isLongPress = false;
-                return;
-            }
-            
-            const card = e.target.closest('.card, .winner-card');
-            if (card && isAdmin) {
-                const playerId = card.dataset.playerId;
-                const rect = card.getBoundingClientRect();
-                const clickY = e.clientY - rect.top;
-                const clickX = e.clientX - rect.left;
-                const cardHeight = rect.height;
-                const cardWidth = rect.width;
+        document.addEventListener('click', (e) => {
+            // التحقق من النقر على أحد أقسام النقاط الأربعة
+            if (e.target.classList.contains('quad-section')) {
+                unlockSounds();
+                const playerId = e.target.dataset.playerId;
+                const side = e.target.dataset.side;
+                const action = e.target.dataset.action;
                 
-                // تحديد المنطقة: نصف البطاقة العلوي للزيادة، النصف السفلي للتقليل
-                const delta = clickY < cardHeight / 2 ? 1 : -1;
-                
-                // تحديد الجهة: يسار للميداليات، يمين للكؤوس
-                let side;
-                if (clickX < cardWidth / 2) {
-                    side = 'right'; // الجهة اليسرى = الميداليات
-                } else {
-                    side = 'left'; // الجهة اليمنى = الكؤوس
+                // تحديد القيمة المطلوب إضافتها بناءً على الإجراء
+                let delta = 1;
+                if (action === 'decrement') {
+                    delta = -1;
                 }
                 
                 handleScoreUpdate(playerId, side, delta);
-                clickSound.play().catch(e => {});
             }
-        }
+        });
 
-        // معالج الضغط المطول لحذف اللاعب
-        function handleCardPress(target, container) {
-            if (!isAdmin) return;
-            const card = target.closest('.card, .winner-card');
-            if (card) {
-                isLongPress = false;
-                currentTargetPlayerId = card.dataset.playerId;
-                longPressTimer = setTimeout(() => { 
-                    isLongPress = true; 
-                    openModal(document.getElementById('deleteModal')); 
-                }, 1000);
-            }
-        }
-        
-        const handleRelease = () => {
-            clearTimeout(longPressTimer);
-        };
-
-        // أحداث بطاقة الفائز
-        winnerContainer.addEventListener('click', (e) => handleCardClick(e, winnerContainer));
-        
-        // أحداث بطاقات اللاعبين العاديين
-        playersEl.addEventListener('click', (e) => handleCardClick(e, playersEl));
-
-        // منع النافذة المنبثقة للصور فقط
-        function preventContextMenu(e) {
-            if (e.target.closest('.avatar')) {
+        document.addEventListener('contextmenu', (e) => {
+            // التحقق من النقر بزر الماوس الأيمن على أحد أقسام النقاط الأربعة
+            if (e.target.classList.contains('quad-section')) {
                 e.preventDefault();
-                return false;
+                unlockSounds();
+                const playerId = e.target.dataset.playerId;
+                const side = e.target.dataset.side;
+                handleScoreUpdate(playerId, side, -1);
             }
-        }
+        });
 
-        winnerContainer.addEventListener('contextmenu', preventContextMenu);
-        playersEl.addEventListener('contextmenu', preventContextMenu);
-
-        // أحداث اللمس والماوس للحذف
-        function setupPressEvents(container) {
-            container.addEventListener('touchstart', (e) => { 
-                touchEventDetected = true; 
-                handleCardPress(e.target, container); 
-            }, { passive: true });
-            
-            container.addEventListener('touchend', (e) => { 
-                if (!touchEventDetected) return; 
-                handleRelease(); 
-            });
-            
-            container.addEventListener('mousedown', (e) => { 
-                if (touchEventDetected || e.button !== 0) return; 
-                handleCardPress(e.target, container); 
-            });
-            
-            container.addEventListener('mouseup', (e) => { 
-                if (touchEventDetected || e.button !== 0) return; 
-                handleRelease(); 
-            });
-
-            const cancelPress = () => {
-                clearTimeout(longPressTimer);
-                isLongPress = false;
-            };
-            
-            container.addEventListener('touchcancel', cancelPress);
-            container.addEventListener('touchmove', cancelPress);
-            container.addEventListener('mouseleave', cancelPress);
-        }
-
-        setupPressEvents(winnerContainer);
-        setupPressEvents(playersEl);
+        document.addEventListener('dblclick', (e) => {
+            if (e.target.closest('.card') && isAdmin) {
+                unlockSounds();
+                clickSound.play().catch(e => {});
+                const card = e.target.closest('.card');
+                currentTargetPlayerId = card.dataset.playerId;
+                openModal(document.getElementById('deleteModal'));
+            }
+        });
     }
 
-    (async function boot(){
-      setRandomGradientBackground();
-      initializeStaticEventListeners();
-      await ensureAdminStatus();
+    // تهيئة التطبيق
+    async function initApp() {
+        setRandomGradientBackground();
+        await ensureAdminStatus();
+        initializeStaticEventListeners();
+        initializeDynamicEventListeners();
 
-      if(!roomId){
-        renderHeader();
-        document.getElementById('addPlayerFab').style.display = 'none';
-        openModal(document.getElementById('roomModal'));
-      } else {
-        modalRoomId.textContent = roomId;
-        localStorage.setItem("uno-room-id", roomId);
+        if (roomId) {
+            localStorage.setItem("uno-room-id", roomId);
+            
+            // مراقبة تغييرات اللاعبين
+            onValue(ref(db, `rooms/${roomId}/players`), (snap) => {
+                const players = snap.exists() ? Object.entries(snap.val()).map(([id, data]) => ({ id, ...data })) : [];
+                players.sort((a, b) => (b.right || 0) - (a.right || 0) || (b.left || 0) - (a.left || 0));
+                renderPlayers(players);
+            });
 
-        onValue(ref(db, `rooms/${roomId}/players`), (snap) => {
-            const playersData = snap.exists() ? snap.val() : {};
-            const players = Object.entries(playersData).map(([id, v]) => ({ id, ...v }));
-            players.sort((a, b) => (b.right || 0) - (a.right || 0) || (b.left || 0) - (a.left || 0));
-            renderPlayers(players);
-        });
-
-        onValue(ref(db, `rooms/${roomId}/lastWin`), (snap) => {
-            if (snap.exists()) {
-                const winData = snap.val();
-                triggerFireworks(winData); 
-                if (isAdmin) {
-                    remove(ref(db, `rooms/${roomId}/lastWin`));
+            // مراقبة الانتصارات للألعاب النارية
+            onValue(ref(db, `rooms/${roomId}/lastWin`), (snap) => {
+                if (snap.exists()) {
+                    const winData = snap.val();
+                    if (Date.now() - winData.timestamp < 10000) {
+                        triggerFireworks(winData);
+                    }
                 }
-            }
-        });
-      }
-      
-      initializeDynamicEventListeners();
-    })();
+            });
+        } else {
+            renderHeader();
+        }
+    }
+
+    initApp();
   </script>
 </body>
 </html>
