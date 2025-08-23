@@ -487,17 +487,17 @@
     }
 
     /* ===== تنسيق للشاشات المتوسطة (651px - 1000px) ===== */
-    @media screen and (min-width: 651px) and (max-width: 1000px) {
-      /* الشبكة - 2 بطاقات */
+   @media screen and (min-width: 651px) and (max-width: 1000px) {
+      /* الشبكة - 3 بطاقات */
       .grid {
-        grid-template-columns: repeat(2, 280px);
-        max-width: 600px;
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 100%;
       }
       
       /* البطاقات العادية */
       .card {
-        height: 320px;
-        width: 280px;
+        height: 280px;
+        width: 240px;
       }
       
       /* بطاقة الفائز */
@@ -582,22 +582,22 @@
 
     /* ===== تنسيق للشاشات الصغيرة (أقل من 651px) ===== */
     @media screen and (max-width: 650px) {
-      /* الشبكة - بطاقة واحدة */
+      /* الشبكة - 3 بطاقات */
       .grid {
-        grid-template-columns: 1fr;
-        max-width: 300px;
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 100%;
       }
       
       /* البطاقات العادية */
       .card {
-        height: 300px;
+        height: 210px;
         width: 100%;
         max-width: 300px;
       }
       
       /* بطاقة الفائز */
       .winner-card {
-        height: 180px;
+        height: 250px;
         width: 100%;
         max-width: 300px;
       }
@@ -624,8 +624,8 @@
       
       /* الميدالية - الشاشات الصغيرة */
       .card .bottom-icon:first-child {
-        font-size: 38px;
-        top: -5px;
+        font-size: 30px;
+        top: -px;
         right: -25px;
       }
       
@@ -637,9 +637,9 @@
       
       /* الكأس - الشاشات الصغيرة */
       .card .bottom-icon:last-child {
-        font-size: 38px;
-        left: -25px;
-        top: -5px;
+        font-size: 30px;
+        left: -12px;
+        top: -0px;
       }
       
       .winner-card .bottom-icon.trophy {
@@ -650,7 +650,7 @@
       
       /* الأرقام الأيمن والأيسر - الشاشات الصغيرة */
       .card .score-card {
-        font-size: 20px;
+        font-size: 16px;
         padding: 4px 8px;
         min-width: 38px;
       }
@@ -663,9 +663,9 @@
       
       /* الاسم - الشاشات الصغيرة */
       .card .player-name-section {
-        font-size: 15px;
-        padding: 3px 6px;
-        max-width: 120px;
+        font-size: 11px;
+        padding: 1px 4px;
+        max-width: 90px;
       }
       
       .winner-card .player-name-section {
@@ -1233,10 +1233,10 @@
                         
                         <!-- أقسام النقاط الأربعة -->
                         <div class="quad-sections">
-                            <div class="quad-section left-top" data-player-id="${p.id}" data-side="left" data-action="increment">+</div>
-                            <div class="quad-section right-top" data-player-id="${p.id}" data-side="right" data-action="increment">+</div>
-                            <div class="quad-section left-bottom" data-player-id="${p.id}" data-side="left" data-action="decrement">-</div>
-                            <div class="quad-section right-bottom" data-player-id="${p.id}" data-side="right" data-action="decrement">-</div>
+                              <div class="quad-section left-top" data-player-id="${p.id}" data-side="right" data-action="increment">+</div>
+                              <div class="quad-section right-top" data-player-id="${p.id}" data-side="left" data-action="increment">+</div>
+                              <div class="quad-section left-bottom" data-player-id="${p.id}" data-side="right" data-action="decrement">-</div>
+                              <div class="quad-section right-bottom" data-player-id="${p.id}" data-side="left" data-action="decrement">-</div>
                         </div>
                     </div>
                     
@@ -1277,10 +1277,11 @@
             
             <!-- أقسام النقاط الأربعة -->
             <div class="quad-sections">
-              <div class="quad-section left-top" data-player-id="${p.id}" data-side="left" data-action="increment">+</div>
-              <div class="quad-section right-top" data-player-id="${p.id}" data-side="right" data-action="increment">+</div>
-              <div class="quad-section left-bottom" data-player-id="${p.id}" data-side="left" data-action="decrement">-</div>
-              <div class="quad-section right-bottom" data-player-id="${p.id}" data-side="right" data-action="decrement">-</div>
+<div class="quad-section left-top" data-player-id="${p.id}" data-side="right" data-action="increment">+</div>
+<div class="quad-section right-top" data-player-id="${p.id}" data-side="left" data-action="increment">+</div>
+<div class="quad-section left-bottom" data-player-id="${p.id}" data-side="right" data-action="decrement">-</div>
+<div class="quad-section right-bottom" data-player-id="${p.id}" data-side="left" data-action="decrement">-</div>
+
             </div>
           </div>
           
@@ -1392,29 +1393,31 @@
             let updates = {};
             updates[`players/${id}/${side}`] = newValue;
             
-            // تسجيل فقط النقاط للجهة التي تم النقر عليها
+            // تسجيل فقط المركز الأول (الكؤوس)
+            if (side === 'right' && delta > 0 && newValue > oldValue) {
+                const date = todayTag();
+                const silverMedals = p.left || 0;
+                const goldMedals = Math.floor(silverMedals / 5);
+                const remainingSilver = silverMedals % 5;
+                
+                updates[`winnerLog/${date}_${p.name}`] = { 
+                    date, 
+                    name: p.name, 
+                    cups: newValue,
+                    silverMedals: remainingSilver,
+                    goldMedals: goldMedals
+                };
+            }
+            
             if (delta > 0) {
                 if (side === 'left') {
                     const oldGoldCount = Math.floor(oldValue / 5);
                     const newGoldCount = Math.floor(newValue / 5);
                     if (newGoldCount > oldGoldCount) { goldMedalSound.play().catch(e => {}); }
                     else { silverMedalSound.play().catch(e => {}); }
-                } else if (side === 'right') {
+                } else {
                     winSound.play().catch(e => {});
                     updates['lastWin'] = { timestamp: Date.now(), color: p.color || '#FFFFFF' };
-
-                    const date = todayTag();
-                    const silverMedals = p.left || 0;
-                    const goldMedals = Math.floor(silverMedals / 5);
-                    const remainingSilver = silverMedals % 5;
-                    
-                    updates[`winnerLog/${date}_${p.name}`] = { 
-                        date, 
-                        name: p.name, 
-                        cups: newValue,
-                        silverMedals: remainingSilver,
-                        goldMedals: goldMedals
-                    };
                 }
             }
             update(ref(db, `rooms/${roomId}`), updates);
