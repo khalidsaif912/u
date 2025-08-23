@@ -213,8 +213,8 @@
 
     /* الأفاتار في البطاقات العادية - الشاشات الكبيرة */
     .card .avatar {
-      width: 100px;
-      height: 100px;
+      width: 140px;
+      height: 140px;
       transform: translateY(0px);
     }
 
@@ -375,28 +375,28 @@
       color: white;
     }
 
-    .quad-section.top-left {
+    .quad-section.left-top {
       top: 0;
       left: 0;
       border-right: 1px dashed rgba(255, 255, 255, 0.2);
       border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
     }
 
-    .quad-section.top-right {
+    .quad-section.right-top {
       top: 0;
       right: 0;
       border-left: 1px dashed rgba(255, 255, 255, 0.2);
       border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
     }
 
-    .quad-section.bottom-left {
+    .quad-section.left-bottom {
       bottom: 0;
       left: 0;
       border-right: 1px dashed rgba(255, 255, 255, 0.2);
       border-top: 1px dashed rgba(255, 255, 255, 0.2);
     }
 
-    .quad-section.bottom-right {
+    .quad-section.right-bottom {
       bottom: 0;
       right: 0;
       border-left: 1px dashed rgba(255, 255, 255, 0.2);
@@ -437,12 +437,12 @@
       .card .bottom-icon:first-child {
         font-size: 46px;
         top: -5px;
-        right: -10px;
+        right: -28px;
       }
       
       .winner-card .bottom-icon.medal {
         font-size: 60px;
-        right: -18px;
+        right: 4px;
         top: -5px;
       }
       
@@ -455,7 +455,7 @@
       
       .winner-card .bottom-icon.trophy {
         font-size: 60px;
-        left: -15px;
+        left: 7px;
         top: -7px;
       }
       
@@ -518,8 +518,8 @@
       
       /* الأفاتار - الشاشات المتوسطة */
       .card .avatar {
-        width: 95px;
-        height: 95px;
+        width: 140px;
+        height: 140px;
       }
       
       .winner-card .avatar {
@@ -536,7 +536,7 @@
       
       .winner-card .bottom-icon.medal {
         font-size: 55px;
-        right: -20px;
+        right: -10px;
         top: -5px;
       }
       
@@ -549,7 +549,7 @@
       
       .winner-card .bottom-icon.trophy {
         font-size: 55px;
-        left: -18px;
+        left: -10px;
         top: -7px;
       }
       
@@ -613,8 +613,8 @@
       
       /* الأفاتار - الشاشات الصغيرة */
       .card .avatar {
-        width: 85px;
-        height: 85px;
+        width: 120px;
+        height: 120px;
       }
       
       .winner-card .avatar {
@@ -631,7 +631,7 @@
       
       .winner-card .bottom-icon.medal {
         font-size: 50px;
-        right: -22px;
+        right: -25px;
         top: -5px;
       }
       
@@ -644,7 +644,7 @@
       
       .winner-card .bottom-icon.trophy {
         font-size: 50px;
-        left: -20px;
+        left: -25px;
         top: -7px;
       }
       
@@ -1233,10 +1233,10 @@
                         
                         <!-- أقسام النقاط الأربعة -->
                         <div class="quad-sections">
-                            <div class="quad-section top-left" data-player-id="${p.id}" data-side="left" data-action="increment">+</div>
-                            <div class="quad-section top-right" data-player-id="${p.id}" data-side="right" data-action="increment">+</div>
-                            <div class="quad-section bottom-left" data-player-id="${p.id}" data-side="left" data-action="decrement">-</div>
-                            <div class="quad-section bottom-right" data-player-id="${p.id}" data-side="right" data-action="decrement">-</div>
+                            <div class="quad-section left-top" data-player-id="${p.id}" data-side="left" data-action="increment">+</div>
+                            <div class="quad-section right-top" data-player-id="${p.id}" data-side="right" data-action="increment">+</div>
+                            <div class="quad-section left-bottom" data-player-id="${p.id}" data-side="left" data-action="decrement">-</div>
+                            <div class="quad-section right-bottom" data-player-id="${p.id}" data-side="right" data-action="decrement">-</div>
                         </div>
                     </div>
                     
@@ -1277,10 +1277,10 @@
             
             <!-- أقسام النقاط الأربعة -->
             <div class="quad-sections">
-              <div class="quad-section top-left" data-player-id="${p.id}" data-side="left" data-action="increment">+</div>
-              <div class="quad-section top-right" data-player-id="${p.id}" data-side="right" data-action="increment">+</div>
-              <div class="quad-section bottom-left" data-player-id="${p.id}" data-side="left" data-action="decrement">-</div>
-              <div class="quad-section bottom-right" data-player-id="${p.id}" data-side="right" data-action="decrement">-</div>
+              <div class="quad-section left-top" data-player-id="${p.id}" data-side="left" data-action="increment">+</div>
+              <div class="quad-section right-top" data-player-id="${p.id}" data-side="right" data-action="increment">+</div>
+              <div class="quad-section left-bottom" data-player-id="${p.id}" data-side="left" data-action="decrement">-</div>
+              <div class="quad-section right-bottom" data-player-id="${p.id}" data-side="right" data-action="decrement">-</div>
             </div>
           </div>
           
@@ -1392,31 +1392,29 @@
             let updates = {};
             updates[`players/${id}/${side}`] = newValue;
             
-            // تسجيل فقط المركز الأول (الكؤوس)
-            if (side === 'right' && delta > 0 && newValue > oldValue) {
-                const date = todayTag();
-                const silverMedals = p.left || 0;
-                const goldMedals = Math.floor(silverMedals / 5);
-                const remainingSilver = silverMedals % 5;
-                
-                updates[`winnerLog/${date}_${p.name}`] = { 
-                    date, 
-                    name: p.name, 
-                    cups: newValue,
-                    silverMedals: remainingSilver,
-                    goldMedals: goldMedals
-                };
-            }
-            
+            // تسجيل فقط النقاط للجهة التي تم النقر عليها
             if (delta > 0) {
                 if (side === 'left') {
                     const oldGoldCount = Math.floor(oldValue / 5);
                     const newGoldCount = Math.floor(newValue / 5);
                     if (newGoldCount > oldGoldCount) { goldMedalSound.play().catch(e => {}); }
                     else { silverMedalSound.play().catch(e => {}); }
-                } else {
+                } else if (side === 'right') {
                     winSound.play().catch(e => {});
                     updates['lastWin'] = { timestamp: Date.now(), color: p.color || '#FFFFFF' };
+
+                    const date = todayTag();
+                    const silverMedals = p.left || 0;
+                    const goldMedals = Math.floor(silverMedals / 5);
+                    const remainingSilver = silverMedals % 5;
+                    
+                    updates[`winnerLog/${date}_${p.name}`] = { 
+                        date, 
+                        name: p.name, 
+                        cups: newValue,
+                        silverMedals: remainingSilver,
+                        goldMedals: goldMedals
+                    };
                 }
             }
             update(ref(db, `rooms/${roomId}`), updates);
