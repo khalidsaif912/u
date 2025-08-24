@@ -351,6 +351,7 @@
       height: 100%;
       pointer-events: none;
       z-index: 20;
+      color: rgba(255, 255, 255, 0.0);
     }
 
     .quad-section {
@@ -364,7 +365,7 @@
       justify-content: center;
       font-size: 24px;
       font-weight: bold;
-      color: rgba(255, 255, 255, 0.7);
+      color: rgba(255, 255, 255, 0.0);
       transition: all 0.2s ease;
     }
 
@@ -376,29 +377,29 @@
     .quad-section.left-top {
       top: 0;
       left: 0;
-      border-right: 1px dashed rgba(255, 255, 255, 0.2);
-      border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+      border-right: 1px dashed rgba(255, 255, 255, 0.0);
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.0);
     }
 
     .quad-section.right-top {
       top: 0;
       right: 0;
-      border-left: 1px dashed rgba(255, 255, 255, 0.2);
-      border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+      border-left: 1px dashed rgba(255, 255, 255, 0.0);
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.0);
     }
 
     .quad-section.left-bottom {
       bottom: 0;
       left: 0;
-      border-right: 1px dashed rgba(255, 255, 255, 0.2);
-      border-top: 1px dashed rgba(255, 255, 255, 0.2);
+      border-right: 1px dashed rgba(255, 255, 255, 0.0);
+      border-top: 1px dashed rgba(255, 255, 255, 0.0);
     }
 
     .quad-section.right-bottom {
       bottom: 0;
       right: 0;
-      border-left: 1px dashed rgba(255, 255, 255, 0.2);
-      border-top: 1px dashed rgba(255, 255, 255, 0.2);
+      border-left: 1px dashed rgba(255, 255, 255, 0.0);
+      border-top: 1px dashed rgba(255, 255, 255, 0.0);
     }
 
     /* ===== تنسيق للشاشات الكبيرة (أكبر من 1000px) ===== */
@@ -1621,81 +1622,107 @@
             closeModal(document.getElementById('deleteModal'));
         });
     }
-
-    // تهيئة مستمعات الأحداث الديناميكية
-    function initializeDynamicEventListeners() {
-        document.addEventListener('click', (e) => {
-            // التحقق من النقر على أحد أقسام النقاط الأربعة
-            if (e.target.classList.contains('quad-section')) {
-                unlockSounds();
-                const playerId = e.target.dataset.playerId;
-                const side = e.target.dataset.side;
-                const action = e.target.dataset.action;
-                
-                // تحديد القيمة المطلوب إضافتها بناءً على الإجراء
-                let delta = 1;
-                if (action === 'decrement') {
-                    delta = -1;
-                }
-                
-                handleScoreUpdate(playerId, side, delta);
-            }
-        });
-
-        document.addEventListener('contextmenu', (e) => {
-            // التحقق من النقر بزر الماوس الأيمن على أحد أقسام النقاط الأربعة
-            if (e.target.classList.contains('quad-section')) {
-                e.preventDefault();
-                unlockSounds();
-                const playerId = e.target.dataset.playerId;
-                const side = e.target.dataset.side;
-                handleScoreUpdate(playerId, side, -1);
-            }
-        });
-
-        document.addEventListener('dblclick', (e) => {
-            if (e.target.closest('.card') && isAdmin) {
-                unlockSounds();
-                clickSound.play().catch(e => {});
-                const card = e.target.closest('.card');
-                currentTargetPlayerId = card.dataset.playerId;
-                openModal(document.getElementById('deleteModal'));
-            }
-        });
-    }
-
-    // تهيئة التطبيق
-    async function initApp() {
-        setRandomGradientBackground();
-        await ensureAdminStatus();
-        initializeStaticEventListeners();
-        initializeDynamicEventListeners();
-
-        if (roomId) {
-            localStorage.setItem("uno-room-id", roomId);
+// تهيئة مستمعات الأحداث الديناميكية
+function initializeDynamicEventListeners() {
+    document.addEventListener('click', (e) => {
+        // التحقق من النقر على أحد أقسام النقاط الأربعة
+        if (e.target.classList.contains('quad-section')) {
+            unlockSounds();
+            const playerId = e.target.dataset.playerId;
+            const side = e.target.dataset.side;
+            const action = e.target.dataset.action;
             
-            // مراقبة تغييرات اللاعبين
-            onValue(ref(db, `rooms/${roomId}/players`), (snap) => {
-                const players = snap.exists() ? Object.entries(snap.val()).map(([id, data]) => ({ id, ...data })) : [];
-                players.sort((a, b) => (b.right || 0) - (a.right || 0) || (b.left || 0) - (a.left || 0));
-                renderPlayers(players);
-            });
-
-            // مراقبة الانتصارات للألعاب النارية
-            onValue(ref(db, `rooms/${roomId}/lastWin`), (snap) => {
-                if (snap.exists()) {
-                    const winData = snap.val();
-                    if (Date.now() - winData.timestamp < 10000) {
-                        triggerFireworks(winData);
-                    }
-                }
-            });
-        } else {
-            renderHeader();
+            // تحديد القيمة المطلوب إضافتها بناءً على الإجراء
+            let delta = 1;
+            if (action === 'decrement') {
+                delta = -1;
+            }
+            
+            handleScoreUpdate(playerId, side, delta);
         }
-    }
+    });
 
-    initApp();
-  </script>
+    document.addEventListener('contextmenu', (e) => {
+        // التحقق من النقر بزر الماوس الأيمن على أحد أقسام النقاط الأربعة
+        if (e.target.classList.contains('quad-section')) {
+            e.preventDefault();
+            unlockSounds();
+            const playerId = e.target.dataset.playerId;
+            const side = e.target.dataset.side;
+            handleScoreUpdate(playerId, side, -1);
+        }
+    });
+
+    // ==============================
+    // 👇 الضغط المطوّل (ماوس + جوال)
+    // ==============================
+    let pressTimer;
+
+    // 🖱️ الماوس
+    document.addEventListener('mousedown', (e) => {
+      if (e.target.closest('.card') && isAdmin) {
+        pressTimer = setTimeout(() => {
+          unlockSounds();
+          clickSound.play().catch(() => {});
+          const card = e.target.closest('.card');
+          currentTargetPlayerId = card.dataset.playerId;
+          openModal(document.getElementById('deleteModal'));
+        }, 600); // 0.6 ثانية
+      }
+    });
+
+    document.addEventListener('mouseup', () => clearTimeout(pressTimer));
+    document.addEventListener('mouseleave', () => clearTimeout(pressTimer));
+
+    // 📱 الجوال
+    document.addEventListener('touchstart', (e) => {
+      if (e.target.closest('.card') && isAdmin) {
+        pressTimer = setTimeout(() => {
+          unlockSounds();
+          clickSound.play().catch(() => {});
+          const card = e.target.closest('.card');
+          currentTargetPlayerId = card.dataset.playerId;
+          openModal(document.getElementById('deleteModal'));
+        }, 600);
+      }
+    });
+
+    document.addEventListener('touchend', () => clearTimeout(pressTimer));
+    document.addEventListener('touchmove', () => clearTimeout(pressTimer)); // لو سحب إصبعه يلغي الضغط
+}
+
+// تهيئة التطبيق
+async function initApp() {
+    setRandomGradientBackground();
+    await ensureAdminStatus();
+    initializeStaticEventListeners();
+    initializeDynamicEventListeners();
+
+    if (roomId) {
+        localStorage.setItem("uno-room-id", roomId);
+        
+        // مراقبة تغييرات اللاعبين
+        onValue(ref(db, `rooms/${roomId}/players`), (snap) => {
+            const players = snap.exists() ? Object.entries(snap.val()).map(([id, data]) => ({ id, ...data })) : [];
+            players.sort((a, b) => (b.right || 0) - (a.right || 0) || (b.left || 0) - (a.left || 0));
+            renderPlayers(players);
+        });
+
+        // مراقبة الانتصارات للألعاب النارية
+        onValue(ref(db, `rooms/${roomId}/lastWin`), (snap) => {
+            if (snap.exists()) {
+                const winData = snap.val();
+                if (Date.now() - winData.timestamp < 10000) {
+                    triggerFireworks(winData);
+                }
+            }
+        });
+    } else {
+        renderHeader();
+    }
+}
+
+initApp();
+</script>
 </body>
 </html>
