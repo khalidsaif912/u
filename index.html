@@ -675,20 +675,26 @@
       }
     }
 
-        /* مخصص للهواتف الكبيرة جداً بدقة عالية مثل S24 Ultra */
-    @media screen and (max-width: 1080px) and (min-resolution: 3dppx) {
-      .card {
-        width: 340px;
-        height: 280px;
-      }
-      .avatar {
-        width: 140px;
-        height: 140px;
-      }
-      .player-name-section {
-        font-size: 18px;
-      }
-    }
+/* تصغير البطاقات على هواتف بدقة عالية مثل S24 Ultra */
+@media screen and (max-width: 1080px) and (min-resolution: 3dppx) {
+  .card {
+    width: 280px;
+    height: 240px;
+  }
+  .winner-card {
+    max-width: 600px;
+    height: 220px;
+  }
+  .avatar {
+    width: 110px;
+    height: 110px;
+  }
+  .player-name-section {
+    font-size: 15px;
+    max-width: 120px;
+  }
+}
+
 
     /* ===== تحسينات التفاعل ===== */
     @media (hover: hover) and (pointer: fine) {
