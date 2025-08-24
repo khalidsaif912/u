@@ -675,6 +675,21 @@
       }
     }
 
+        /* مخصص للهواتف الكبيرة جداً بدقة عالية مثل S24 Ultra */
+    @media screen and (max-width: 1080px) and (min-resolution: 3dppx) {
+      .card {
+        width: 340px;
+        height: 280px;
+      }
+      .avatar {
+        width: 140px;
+        height: 140px;
+      }
+      .player-name-section {
+        font-size: 18px;
+      }
+    }
+
     /* ===== تحسينات التفاعل ===== */
     @media (hover: hover) and (pointer: fine) {
       .score-card:hover {
