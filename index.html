@@ -675,21 +675,26 @@
       }
     }
 
-/* هواتف عالية الكثافة مثل S24 Ultra */
+/* عرض بطاقتين في الصف على الهواتف عالية الكثافة مثل S24 Ultra */
 @media screen and (max-width: 1080px) and (min-resolution: 3dppx) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px; /* مسافة بين البطاقات */
+  }
+
   .card {
-    width: clamp(160px, 40vw, 220px);
-    height: clamp(180px, 45vw, 240px);
+    width: 100%;
+    height: clamp(180px, 40vw, 220px);
   }
 
   .winner-card {
-    max-width: clamp(250px, 80vw, 500px);
-    height: clamp(200px, 50vw, 260px);
+    max-width: 100%;
+    height: clamp(200px, 45vw, 240px);
   }
 
   .avatar {
-    width: clamp(70px, 20vw, 100px);
-    height: clamp(70px, 20vw, 100px);
+    width: clamp(70px, 18vw, 100px);
+    height: clamp(70px, 18vw, 100px);
   }
 
   .player-name-section {
@@ -697,6 +702,7 @@
     max-width: clamp(80px, 25vw, 120px);
   }
 }
+
 
 
 
