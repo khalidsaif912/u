@@ -149,19 +149,20 @@
       margin-bottom: 20px;
     }
 
-    .winner-card {
-      border-radius: 12px; 
-      padding: 15px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-      position: relative; 
-      user-select: none; 
-      display: flex; 
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 165, 0, 0.1));
-      margin: 0 auto;
-      animation: winnerGlow 3s ease-in-out infinite alternate;
-    }
+.winner-card {
+    border-radius: 12px; 
+    padding: 15px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+    position: relative; 
+    user-select: none; 
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #FFD700, #DAA520) !important;
+      color: #000 !important; /* النص يطلع واضح */
+    margin: 0 auto;
+    animation: winnerGlow 3s ease-in-out infinite alternate;
+}
 
     @keyframes winnerGlow {
       0% {
@@ -276,7 +277,6 @@
     }
 
     .winner-card .score-card {
-      background: linear-gradient(to top, rgba(255,215,0,0.4), rgba(255,215,0,0.1)); 
       backdrop-filter: blur(15px);
       border-radius: 8px;
       padding: 8px 15px;
@@ -286,7 +286,11 @@
       box-shadow: 0 8px 32px rgba(255,215,0,0.2);
       transition: all 0.3s ease; 
       text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+      background: linear-gradient(135deg, #FFD700, #DAA520) !important;
+      border-color: #DAA520 !important;
+      color: #000 !important;
     }
+    
 
     /* ===== تنسيق الأيقونات السفلية (الميدالية والكأس) ===== */
     .bottom-icons {
@@ -334,9 +338,9 @@
 
     .winner-card .player-name-section {
       border-radius: 15px;
-      background: linear-gradient(to left, rgba(255,215,0,0.4), rgba(255,215,0,0.1));
       backdrop-filter: blur(10px);
-     
+      background: linear-gradient(135deg, #FFD700, #DAA520) !important;
+      color: #000 !important;
       text-shadow: 0 2px 4px rgba(0,0,0,0.5);
       position: relative;
       top: 15px;
@@ -1357,29 +1361,33 @@
     }
 
     // دالة عرض اللاعبين
-    function renderPlayers(list){
-      renderHeader();
-      
-      if (list.length === 0) {
-        winnerContainer.innerHTML = '';
-        playersEl.innerHTML = '';
-        return;
-      }
+function renderPlayers(list){
+  renderHeader();
+  
+  if (list.length === 0) {
+    winnerContainer.innerHTML = '';
+    playersEl.innerHTML = '';
+    return;
+  }
 
-      // فصل الفائز عن باقي اللاعبين
-      const winner = list[0]; // أول لاعب (أعلى الكؤوس)
-      const otherPlayers = list.slice(1); // باقي اللاعبين
-      
-      // عرض الفائز في الأعلى
-      if (winner && (winner.right > 0 || winner.left > 0)) {
-        winnerContainer.innerHTML = winnerCard(winner);
-      } else {
-        winnerContainer.innerHTML = '';
-      }
-      
-      // عرض باقي اللاعبين
-      playersEl.innerHTML = otherPlayers.map((p, i) => playerCard(p, i + 1)).join("");
-    }
+  // نبحث عن لاعب عنده نقاط (هو الفائز)
+  const winner = list.find(p => (p.right > 0 || p.left > 0));
+  
+  if (winner) {
+    // إذا فيه فائز حقيقي → نعرضه
+    winnerContainer.innerHTML = winnerCard(winner);
+    // البقية (حتى لو صفر) يبانوا كبطاقات عادية
+    const otherPlayers = list.filter(p => p.id !== winner.id);
+    playersEl.innerHTML = otherPlayers.map((p, i) => playerCard(p, i + 1)).join("");
+  } else {
+    // إذا ما فيه أي نقاط → كل اللاعبين كبطاقات عادية
+    winnerContainer.innerHTML = '';
+    playersEl.innerHTML = list.map((p, i) => playerCard(p, i)).join("");
+  }
+}
+
+
+
 
     // دالة تأثيرات الألعاب النارية
     function triggerFireworks(winData) {
